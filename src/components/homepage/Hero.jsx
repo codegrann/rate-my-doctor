@@ -18,7 +18,7 @@ const Hero = () => {
 
                 {/* Input Field */}
                 <div className="relative mt-6">
-                    <span className="absolute inset-y-0 left-3 flex items-center text-gray-900 text-2xl">
+                    <span className="absolute inset-y-0 left-3 md:left-10 flex items-center text-gray-900 text-2xl">
                         ❤️
                     </span>
                     <input
