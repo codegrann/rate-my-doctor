@@ -11,9 +11,9 @@ const Hero = () => {
 
             {/* Content */}
             <div className="relative z-10 text-white">
-                <h1 className="text-4xl font-bold md:text-6xl">Doctor Haus</h1>
+                <h1 className="text-4xl font-bold md:text-6xl">DOCTOR HAUS</h1>
                 <p className="mt-4 text-lg md:text-xl">
-                    Find the best hospitals and doctors near you with ease.
+                    Your own medical map completed with your story
                 </p>
 
                 {/* Input Field */}
