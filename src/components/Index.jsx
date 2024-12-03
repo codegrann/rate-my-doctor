@@ -1,0 +1,5 @@
+export {default as Login} from "./macro/Login"
+export {default as Signup} from "./macro/Signup"
+// export {default as Hero} from "./Hero"
+// export {default as About} from "./About"
+// export {default as WhyJoinUs} from "./WhyJoinUs"
