@@ -1,14 +1,19 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
+
 import {DoctorCard, HospitalCard} from "../components/Index";
 
-const ResultsPage = ({ searchResults, searchType }) => {
+const ResultsPage = () => {
+    const location = useLocation();
+    const { results, searchType } = location.state; 
+
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Search Results</h1>
-      {searchResults.length > 0 ? (
+      {results.length > 0 ? (
         <div className="grid gap-4">
           {searchType === "Doctor"
-            ? searchResults.map((doctor) => (
+            ? results.map((doctor) => (
                 <DoctorCard
                   key={doctor.id}
                   name={doctor.name}
@@ -16,7 +21,7 @@ const ResultsPage = ({ searchResults, searchType }) => {
                   rating={doctor.rating}
                 />
               ))
-            : searchResults.map((hospital) => (
+            : results.map((hospital) => (
                 <HospitalCard
                   key={hospital.id}
                   name={hospital.name}

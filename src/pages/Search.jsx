@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import {DoctorCard, HospitalCard} from "../components/Index";
 
-const SearchPage = () => {
-  const [searchType, setSearchType] = useState("Doctor");
-  const [items, setItems] = useState([]);
+const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, setSearchQuery, handleSearch}) => {
+//   const [searchType, setSearchType] = useState("Doctor");
+//   const [items, setItems] = useState([]);
+//   const [searchQuery, setSearchQuery] = useState("");
   const [showMoreCount, setShowMoreCount] = useState(5);
 
   const handleSearchTypeChange = (e) => {
@@ -16,8 +17,12 @@ const SearchPage = () => {
     setShowMoreCount((prev) => prev + 5);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value); // Update searchQuery with input value
+  };
+
   return (
-    <div className="p-4">
+    <div className="p-4 md:px-16">
       <div className="mb-4">
         {/* Dropdown */}
         <select
@@ -31,12 +36,25 @@ const SearchPage = () => {
       </div>
 
       {/* Search Input */}
-      <div className="mb-4">
-        <input
-          type="text"
-          placeholder={`Search ${searchType}`}
-          className="w-full p-2 border rounded"
-        />
+      <div className="flex border border-red-400">
+        <div className="mb-4">
+            <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            placeholder={`Search ${searchType}`}
+            className="w-full p-2 border rounded"
+            />
+        </div>
+
+        {/* Search Button */}
+        <button
+            onClick={handleSearch} // Call the search logic
+            className="p-2 bg-blue-500 text-white rounded"
+        >
+            Search
+        </button>
+
       </div>
 
       {/* List */}
