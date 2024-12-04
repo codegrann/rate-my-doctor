@@ -8,9 +8,9 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError(""); // Clear any previous errors
+    setError(""); 
 
-    // Placeholder for backend integration
+    
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;

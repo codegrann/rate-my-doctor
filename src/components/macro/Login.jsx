@@ -7,19 +7,16 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError(""); // Clear any previous errors
+    setError("");
 
-    // Placeholder for backend integration
     console.log("Login attempted with", { email, password });
 
-    // Example error handling (replace with actual response handling)
     if (!email || !password) {
       setError("Please fill out all fields");
     }
   };
 
   const handleSocialLogin = (provider) => {
-    // Placeholder for third-party login integration
     console.log(`Login with ${provider}`);
   };
 
