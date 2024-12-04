@@ -31,7 +31,7 @@ const Hero = () => {
 
                 {/* Link */}
                 <a
-                    href="#"
+                    href="/search"
                     className="block mt-4 text-sm text-blue-300 underline hover:text-blue-500"
                 >
                     Search by doctor name

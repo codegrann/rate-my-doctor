@@ -6,7 +6,9 @@ function Layout() {
   return (
     <div>
       <Navbar />
+      <div className='min-h-[80vh]'>
       <Outlet /> {/* This renders the nested route components */}
+      </div>
       <Footer />
     </div>
   );
