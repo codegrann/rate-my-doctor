@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaStethoscope } from 'react-icons/fa';
 
 const Hero = () => {
     return (
@@ -18,8 +19,8 @@ const Hero = () => {
 
                 {/* Input Field */}
                 <div className="relative mt-6">
-                    <span className="absolute inset-y-0 left-3 md:left-10 flex items-center text-gray-900 text-2xl">
-                        ❤️
+                    <span className="absolute inset-y-0 left-3 md:left-10 flex items-center text-gray-900 text-2xl w-[22px]">
+                        <FaStethoscope />
                     </span>
                     <input
                         type="text"
