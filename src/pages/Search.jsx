@@ -36,8 +36,8 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
       </div>
 
       {/* Search Input */}
-      <div className="flex border border-red-400">
-        <div className="mb-4">
+      <div className="flex gap-2">
+        <div className="mb-4 w-[60%]">
             <input
             type="text"
             value={searchQuery}
@@ -50,7 +50,7 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
         {/* Search Button */}
         <button
             onClick={handleSearch} // Call the search logic
-            className="p-2 bg-blue-500 text-white rounded"
+            className="px-2 h-10 bg-blue-500 text-white rounded"
         >
             Search
         </button>

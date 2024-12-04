@@ -23,7 +23,9 @@ function App() {
     const filteredResults = data.filter((item) =>
       item.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
+  //  if(results!=null) {
     navigate("/results", { state: { results: filteredResults, searchType } });
+  //  }
   };
   
 
@@ -33,7 +35,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
         <Route index element={<Homepage />}/>
-        <Route path="/login" element={<Login />} />
+        <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="results" element={<ResultsPage searchType={searchType} setSearchType={setSearchType}/>} />
         <Route path="search" element={<SearchPage searchType={searchType} setSearchType={setSearchType} items={items} setItems={setItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch}/>} />
