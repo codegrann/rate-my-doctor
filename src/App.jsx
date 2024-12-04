@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Outlet, useNavigate } from 'react-router-dom';
 
 
 import Homepage from './pages/Homepage'
@@ -10,6 +10,7 @@ import ResultsPage from './pages/Results';
 import SearchPage from './pages/Search';
 
 function App() {
+  // const navigate=useNavigate()
   // doctor or hospital
   const [searchType, setSearchType] = useState("Doctor");
   // Hospital data
