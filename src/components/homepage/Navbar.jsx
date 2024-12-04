@@ -45,7 +45,7 @@ const Navbar = () => {
       </div>
 
       {/* Right: Buttons */}
-      <div className="flex space-x-2">
+      <div className="flex space-x-2 hidden sm:shown">
         <Link
           to="/login"
           className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded hover:bg-gray-100"
