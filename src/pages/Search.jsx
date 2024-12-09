@@ -4,9 +4,6 @@ import {useNavigate } from 'react-router-dom';
 import {DoctorCard, HospitalCard} from "../components/Index";
 
 const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, setSearchQuery, data}) => {
-//   const [searchType, setSearchType] = useState("Doctor");
-//   const [items, setItems] = useState([]);
-//   const [searchQuery, setSearchQuery] = useState("");
   const [showMoreCount, setShowMoreCount] = useState(5);
   const navigate=useNavigate()
 
@@ -26,12 +23,19 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
   };
 
   const handleSearch = () => {
-    const filteredResults = data.filter((item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  //  if(results!=null) {
+    const filteredResults = doctorsData.filter((doctor) => {
+      if (searchType === "Doctor") {
+        return doctor.name.toLowerCase().includes(searchQuery.toLowerCase());
+      } else if (searchType === "Hospital") {
+        return doctor.hospitalName
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase());
+      }
+      return false; // Default fallback
+    });
+
+    // Navigate to results page with filtered results
     navigate("/results", { state: { results: filteredResults, searchType } });
-  //  }
   };
 
   return (
@@ -73,20 +77,20 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
       {/* List */}
       <div className="grid gap-4">
         {searchType === "Doctor"
-          ? items.slice(0, showMoreCount).map((doctor) => (
+          ? data.slice(0, showMoreCount).map((doctor) => (
               <DoctorCard
                 key={doctor.id}
                 name={doctor.name}
                 specialty={doctor.specialty}
-                rating={doctor.rating}
+                // rating={doctor.rating}
               />
             ))
-          : items.slice(0, showMoreCount).map((hospital) => (
+          : data.slice(0, showMoreCount).map((doctor) => (
               <HospitalCard
-                key={hospital.id}
-                name={hospital.name}
-                location={hospital.location}
-                rating={hospital.rating}
+                key={doctor.id}
+                name={doctor.hospitalName}
+                // location={hospital.location}
+                // rating={hospital.rating}
               />
             ))}
       </div>

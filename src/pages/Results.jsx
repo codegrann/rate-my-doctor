@@ -5,7 +5,7 @@ import {DoctorCard, HospitalCard} from "../components/Index";
 
 const ResultsPage = () => {
     const location = useLocation();
-    const { results, searchType } = location.state || {results: [], searchType:""}; 
+    const { results = [], searchType = "" } = location.state || {}; // Default values
 
   return (
     <div className="p-4">
@@ -18,15 +18,15 @@ const ResultsPage = () => {
                   key={doctor.id}
                   name={doctor.name}
                   specialty={doctor.specialty}
-                  rating={doctor.rating}
+                  // rating={doctor.rating}
                 />
               ))
             : results.map((hospital) => (
                 <HospitalCard
                   key={hospital.id}
                   name={hospital.name}
-                  location={hospital.location}
-                  rating={hospital.rating}
+                  // location={hospital.location}
+                  // rating={hospital.rating}
                 />
               ))}
         </div>

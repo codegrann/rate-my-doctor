@@ -13,7 +13,7 @@ function App() {
   // doctor or hospital
   const [searchType, setSearchType] = useState("Doctor");
   // Hospital data
-  const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
   // search quesry
   const [searchQuery, setSearchQuery] = useState("");
   // search result
@@ -67,16 +67,6 @@ function App() {
     },
   ];
   
-
-  // all dotors
-  const allDoctors = data.flatMap((hospital) =>
-    hospital.doctors.map((doctor) => ({
-      hospitalName: hospital.hospitalName,
-      ...doctor,
-    }))
-  );
-  
-  console.log(allDoctors);
   
 
 
@@ -88,7 +78,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="results" element={<ResultsPage searchType={searchType} setSearchType={setSearchType}/>} />
-        <Route path="search" element={<SearchPage data={data} searchType={searchType} setSearchType={setSearchType} items={items} setItems={setItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>} />
+        <Route path="search" element={<SearchPage data={data} searchType={searchType} setSearchType={setSearchType} filteredItems={filteredItems} setFilteredItems={setFilteredItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>} />
         {/* <Route path="contact" element={<Contact />}> */}
             {/* <Route path="email" element={<EmailContact />} /> */}
             {/* <Route path="phone" element={<PhoneContact />} /> */}
