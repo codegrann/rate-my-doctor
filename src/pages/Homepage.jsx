@@ -3,10 +3,10 @@ import axios from 'axios';
 
 import {Hero, WhyJoinUs, About} from '../components/homepage/Index';
 
-const Homepage = () => {
+const Homepage = ({searchType, setSearchType, searchQuery, setSearchQuery}) => {
     return(
         <>
-        <Hero />
+        <Hero searchType={searchType} setSearchType={setSearchType} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
         <WhyJoinUs />
         <About />
         </>

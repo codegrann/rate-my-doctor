@@ -85,7 +85,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Layout />}>
-        <Route index element={<Homepage />}/>
+        <Route index element={<Homepage searchType={searchType} setSearchType={setSearchType} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>}/>
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="results" element={<ResultsPage searchType={searchType} setSearchType={setSearchType}/>} />

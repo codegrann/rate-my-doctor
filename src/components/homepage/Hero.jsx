@@ -1,7 +1,19 @@
-import React from 'react';
-import { FaStethoscope } from 'react-icons/fa';
+import React, { useState } from "react";
+import { FaStethoscope } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-const Hero = () => {
+const Hero = ({searchType, setSearchType, searchQuery, setSearchQuery}) => {
+    const [query, setQuery] = useState(""); // State to store the search query
+    const navigate = useNavigate(); // Hook to navigate programmatically
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter" && query.trim()) {
+            setSearchType("Hospital")
+            setSearchQuery(query)
+            navigate(`/search?query=${encodeURIComponent(query.trim())}`);
+        }
+    };
+
     return (
         <section
             className="relative flex flex-col items-center justify-center h-[75vh] text-center bg-cover bg-center px-2"
@@ -26,6 +38,9 @@ const Hero = () => {
                         type="text"
                         placeholder="Enter the hospital name"
                         className="w-full px-10 py-3 text-gray-700 placeholder-gray-400 rounded-lg shadow-lg md:w-96 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)} // Update query on input change
+                        onKeyDown={handleKeyDown} // Trigger search on Enter key press
                     />
                 </div>
 
