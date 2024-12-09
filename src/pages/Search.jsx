@@ -81,6 +81,8 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
               <DoctorCard
                 key={doctor.id}
                 name={doctor.name}
+                hospitalName={doctor.hospitalName}
+                department={doctor.department}
                 specialty={doctor.specialty}
                 // rating={doctor.rating}
               />
