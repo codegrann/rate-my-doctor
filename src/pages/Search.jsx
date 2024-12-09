@@ -69,6 +69,14 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
     navigate("/results", { state: { results: filteredResults, searchType } });
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && query.trim()) {
+        setSearchType("Hospital")
+        setSearchQuery(query)
+        navigate("/results", { state: { results: filteredResults, searchType } });
+    }
+};
+
   return (
     <div className="p-4 md:px-20">
       <div className="mb-4">
@@ -92,6 +100,7 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
             onChange={handleSearchChange}
             placeholder={`Search ${searchType}`}
             className="w-full p-2 border rounded"
+            onKeyDown={handleKeyDown}
             />
         </div>
 
