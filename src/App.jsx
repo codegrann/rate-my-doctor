@@ -1,6 +1,7 @@
-﻿import { useState } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, Outlet} from 'react-router-dom';
-import XLSX from 'xlsx';
+import Papa from 'papaparse';
+import * as XLSX from 'xlsx';
 
 
 
@@ -12,6 +13,8 @@ import ResultsPage from './pages/Results';
 import SearchPage from './pages/Search';
 
 function App() {
+  const [ddata, setDdata] = useState([]);
+
   // doctor or hospital
   const [searchType, setSearchType] = useState("Doctor");
   // Hospital data
@@ -19,6 +22,22 @@ function App() {
   // search quesry
   const [searchQuery, setSearchQuery] = useState("");
 
+  useEffect(() => {
+    // Fetch the CSV file from the public folder
+    fetch('/data.csv')
+      .then((response) => response.text())
+      .then((csvText) => {
+        // Parse the CSV text into JSON
+        Papa.parse(csvText, {
+          header: true, // Use the first row as headers
+          skipEmptyLines: true,
+          complete: (results) => {
+            setDdata(results.data); // Save parsed data
+          },
+        });
+      });
+  }, []);
+  console.log(ddata)
   
   // My data
   const data = [
@@ -91,7 +110,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="results" element={<ResultsPage searchType={searchType} setSearchType={setSearchType}/>} />
-        <Route path="search" element={<SearchPage data={data} searchType={searchType} setSearchType={setSearchType} filteredItems={filteredItems} setFilteredItems={setFilteredItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>} />
+        <Route path="search" element={<SearchPage data={ddata} searchType={searchType} setSearchType={setSearchType} filteredItems={filteredItems} setFilteredItems={setFilteredItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>} />
         {/* <Route path="contact" element={<Contact />}> */}
             {/* <Route path="email" element={<EmailContact />} /> */}
             {/* <Route path="phone" element={<PhoneContact />} /> */}
