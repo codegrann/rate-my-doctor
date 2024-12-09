@@ -10,7 +10,7 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
 
   const handleSearchTypeChange = (e) => {
     setSearchType(e.target.value);
-    setItems([]); // Reset items when type changes
+    // setItems([]); // Reset items when type changes
     setShowMoreCount(5); // Reset showMoreCount
   };
 
@@ -22,17 +22,45 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
     setSearchQuery(e.target.value); // Update searchQuery with input value
   };
 
-  const handleSearch = () => {
-    const filteredResults = doctorsData.filter((doctor) => {
-      if (searchType === "Doctor") {
-        return doctor.name.toLowerCase().includes(searchQuery.toLowerCase());
-      } else if (searchType === "Hospital") {
-        return doctor.hospitalName
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase());
+
+  const getHospitalsFromDoctors = (doctors) => {
+    const hospitalSet = new Set();
+  
+    // Create a unique list of hospitals
+    const hospitals = doctors.reduce((acc, doctor) => {
+      if (!hospitalSet.has(doctor.hospitalName)) {
+        hospitalSet.add(doctor.hospitalName);
+        acc.push({
+          name: doctor.hospitalName,
+          location: doctor.location || "Unknown",
+          rating: doctor.rating || "Not Rated",
+        });
       }
-      return false; // Default fallback
-    });
+      return acc;
+    }, []);
+  
+    return hospitals;
+  };
+
+   // Extract unique hospitals
+   const hospitalsData = getHospitalsFromDoctors(data);
+  
+
+  const handleSearch = () => {
+    let filteredResults;
+
+  if (searchType === "Doctor") {
+    // Filter doctors by name
+    filteredResults = data.filter((doctor) =>
+      doctor.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  } else if (searchType === "Hospital") {
+
+    // Filter hospitals by name
+    filteredResults = hospitalsData.filter((hospital) =>
+      hospital.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }
 
     // Navigate to results page with filtered results
     navigate("/results", { state: { results: filteredResults, searchType } });
@@ -87,14 +115,15 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
                 // rating={doctor.rating}
               />
             ))
-          : data.slice(0, showMoreCount).map((doctor) => (
-              <HospitalCard
-                key={doctor.id}
-                name={doctor.hospitalName}
-                // location={hospital.location}
-                // rating={hospital.rating}
-              />
-            ))}
+          : hospitalsData.slice(0, showMoreCount).map((hospital) => (
+            <HospitalCard
+              key={hospital.hospitalName} // Using hospitalName as a unique key
+              name={hospital.hospitalName}
+              // location={doctor.location || "N/A"} // Default fallback if location is not available
+              // rating={doctor.rating || "N/A"}   // Default fallback for rating
+            />
+          ))}
+    
       </div>
 
       {/* Show More Button */}
