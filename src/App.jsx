@@ -10,7 +10,7 @@ import ResultsPage from './pages/Results';
 import SearchPage from './pages/Search';
 
 function App() {
-  // const navigate=useNavigate()
+  const navigate=useNavigate()
   // doctor or hospital
   const [searchType, setSearchType] = useState("Doctor");
   // Hospital data
@@ -20,14 +20,14 @@ function App() {
   // search result
   // const  [searchResults, setSearchResults] = useState();
   // handle search
-  const handleSearch = () => {
-    const filteredResults = data.filter((item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  //  if(results!=null) {
-    navigate("/results", { state: { results: filteredResults, searchType } });
-  //  }
-  };
+  // const handleSearch = () => {
+  //   const filteredResults = data.filter((item) =>
+  //     item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  //   );
+  // //  if(results!=null) {
+  //   navigate("/results", { state: { results: filteredResults, searchType } });
+  // //  }
+  // };
   
 
 
@@ -39,7 +39,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="results" element={<ResultsPage searchType={searchType} setSearchType={setSearchType}/>} />
-        <Route path="search" element={<SearchPage searchType={searchType} setSearchType={setSearchType} items={items} setItems={setItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch}/>} />
+        <Route path="search" element={<SearchPage searchType={searchType} setSearchType={setSearchType} items={items} setItems={setItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>} />
         {/* <Route path="contact" element={<Contact />}> */}
             {/* <Route path="email" element={<EmailContact />} /> */}
             {/* <Route path="phone" element={<PhoneContact />} /> */}

@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+import {useNavigate } from 'react-router-dom';
+
 import {DoctorCard, HospitalCard} from "../components/Index";
 
-const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, setSearchQuery, handleSearch}) => {
+const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, setSearchQuery}) => {
 //   const [searchType, setSearchType] = useState("Doctor");
 //   const [items, setItems] = useState([]);
 //   const [searchQuery, setSearchQuery] = useState("");
   const [showMoreCount, setShowMoreCount] = useState(5);
+  const navigate=useNavigate()
+
 
   const handleSearchTypeChange = (e) => {
     setSearchType(e.target.value);
@@ -19,6 +23,15 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value); // Update searchQuery with input value
+  };
+
+  const handleSearch = () => {
+    const filteredResults = data.filter((item) =>
+      item.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  //  if(results!=null) {
+    navigate("/results", { state: { results: filteredResults, searchType } });
+  //  }
   };
 
   return (

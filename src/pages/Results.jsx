@@ -5,7 +5,7 @@ import {DoctorCard, HospitalCard} from "../components/Index";
 
 const ResultsPage = () => {
     const location = useLocation();
-    const { results, searchType } = location.state; 
+    const { results, searchType } = location.state || {results: [], searchType:""}; 
 
   return (
     <div className="p-4">
