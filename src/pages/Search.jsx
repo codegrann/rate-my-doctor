@@ -70,10 +70,8 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter" && query.trim()) {
-        setSearchType("Hospital")
-        setSearchQuery(query)
-        navigate("/results", { state: { results: filteredResults, searchType } });
+    if (event.key === "Enter") {
+        handleSearch();
     }
 };
 
