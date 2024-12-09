@@ -16,17 +16,7 @@ function App() {
   const [filteredItems, setFilteredItems] = useState([]);
   // search quesry
   const [searchQuery, setSearchQuery] = useState("");
-  // search result
-  // const  [searchResults, setSearchResults] = useState();
-  // handle search
-  // const handleSearch = () => {
-  //   const filteredResults = data.filter((item) =>
-  //     item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  //   );
-  // //  if(results!=null) {
-  //   navigate("/results", { state: { results: filteredResults, searchType } });
-  // //  }
-  // };
+
   
   // My data
   const data = [
@@ -64,6 +54,27 @@ function App() {
       hospitalName: "Green Valley Medical Center",
       department: "Dermatology",
       specialty: "Skin Conditions",
+    },
+    {
+      id: 6,
+      name: "Dr. John Day",
+      hospitalName: "City General Hospital",
+      department: "Cardiology",
+      specialty: "Heart Surgery",
+    },
+    {
+      id: 7,
+      name: "Dr. Jane Smiles",
+      hospitalName: "Green Valley Medical Center",
+      department: "Neurology",
+      specialty: "Brain and Spine",
+    },
+    {
+      id: 8,
+      name: "Dr. Albert Dickson",
+      hospitalName: "Downtown Medical Hub",
+      department: "Orthopedics",
+      specialty: "Joint Replacement",
     },
   ];
   
