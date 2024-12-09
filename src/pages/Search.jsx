@@ -117,7 +117,7 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
         {searchType === "Doctor"
           ? data.slice(0, showMoreCount).map((doctor) => (
               <DoctorCard
-                key={doctor.id}
+                key={uuidv4()}
                 name={doctor.name}
                 hospitalName={doctor.hospitalName}
                 department={doctor.department}

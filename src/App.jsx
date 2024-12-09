@@ -37,7 +37,7 @@ function App() {
         });
       });
   }, []);
-  console.log(ddata)
+  // console.log(ddata)
   
   // My data
   const data = [

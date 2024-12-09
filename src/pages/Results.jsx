@@ -18,7 +18,7 @@ const ResultsPage = () => {
           {searchType === "Doctor"
             ? results.map((doctor) => (
                 <DoctorCard
-                key={doctor.id}
+                key={uuidv4()}
                 name={doctor.name}
                 hospitalName={doctor.hospitalName}
                 department={doctor.department}
