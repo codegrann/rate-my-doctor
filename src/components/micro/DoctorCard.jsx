@@ -1,6 +1,6 @@
 const DoctorCard = ({ name, specialty, rating, hospitalName, department }) => {
     return (
-      <div className="p-4 border rounded shadow-md">
+      <div className="p-4 border rounded shadow-md md:w-[700px]">
         <h3 className="text-lg font-bold">{name}</h3>
         <p className="text-sm text-gray-600">Hospital: {hospitalName}</p>
         <p className="text-sm text-gray-600">Department: {department}</p>

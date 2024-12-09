@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import {useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+
 
 import {DoctorCard, HospitalCard} from "../components/Index";
 
@@ -32,7 +34,6 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
         hospitalSet.add(doctor.hospitalName);
         acc.push({
           name: doctor.hospitalName,
-          location: doctor.location || "Unknown",
           rating: doctor.rating || "Not Rated",
         });
       }
@@ -44,6 +45,8 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
 
    // Extract unique hospitals
    const hospitalsData = getHospitalsFromDoctors(data);
+
+  //  console.log(hospitalsData)
   
 
   const handleSearch = () => {
@@ -67,7 +70,7 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
   };
 
   return (
-    <div className="p-4 md:px-16">
+    <div className="p-4 md:px-20">
       <div className="mb-4">
         {/* Dropdown */}
         <select
@@ -117,10 +120,9 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
             ))
           : hospitalsData.slice(0, showMoreCount).map((hospital) => (
             <HospitalCard
-              key={hospital.hospitalName} // Using hospitalName as a unique key
-              name={hospital.hospitalName}
-              // location={doctor.location || "N/A"} // Default fallback if location is not available
-              // rating={doctor.rating || "N/A"}   // Default fallback for rating
+              key={uuidv4()} // Using hospitalName as a unique key
+              name={hospital.name}
+              rating={hospital.rating || "N/A"}   // Default fallback for rating
             />
           ))}
     
