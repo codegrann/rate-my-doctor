@@ -9,7 +9,7 @@ const ResultsPage = () => {
   const navigate=useNavigate()
     const location = useLocation();
     const { results = [], searchType = "" } = location.state || {}; // Default values
-
+console.log(results)
   return (
     <div className="p-4 md:px-20">
       <h1 className="flex gap-4 items-center text-2xl font-bold mb-4">Search Results <a href="/search"><FaSearch className="text-gray-500 w-6 h-6 cursor-pointer"/></a></h1>
