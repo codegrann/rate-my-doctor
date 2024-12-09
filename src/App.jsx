@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, Outlet, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Outlet} from 'react-router-dom';
 
 
 import Homepage from './pages/Homepage'
@@ -10,7 +10,6 @@ import ResultsPage from './pages/Results';
 import SearchPage from './pages/Search';
 
 function App() {
-  const navigate=useNavigate()
   // doctor or hospital
   const [searchType, setSearchType] = useState("Doctor");
   // Hospital data
@@ -29,6 +28,56 @@ function App() {
   // //  }
   // };
   
+  // My data
+  const data = [
+    {
+      id: 1,
+      name: "Dr. John Doe",
+      hospitalName: "City General Hospital",
+      department: "Cardiology",
+      specialty: "Heart Surgery",
+    },
+    {
+      id: 2,
+      name: "Dr. Jane Smith",
+      hospitalName: "Green Valley Medical Center",
+      department: "Neurology",
+      specialty: "Brain and Spine",
+    },
+    {
+      id: 3,
+      name: "Dr. Albert Johnson",
+      hospitalName: "Downtown Medical Hub",
+      department: "Orthopedics",
+      specialty: "Joint Replacement",
+    },
+    {
+      id: 4,
+      name: "Dr. Emily Davis",
+      hospitalName: "City General Hospital",
+      department: "Pediatrics",
+      specialty: "Child Care",
+    },
+    {
+      id: 5,
+      name: "Dr. Michael Lee",
+      hospitalName: "Green Valley Medical Center",
+      department: "Dermatology",
+      specialty: "Skin Conditions",
+    },
+  ];
+  
+
+  // all dotors
+  const allDoctors = data.flatMap((hospital) =>
+    hospital.doctors.map((doctor) => ({
+      hospitalName: hospital.hospitalName,
+      ...doctor,
+    }))
+  );
+  
+  console.log(allDoctors);
+  
 
 
   return (
@@ -39,7 +88,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="results" element={<ResultsPage searchType={searchType} setSearchType={setSearchType}/>} />
-        <Route path="search" element={<SearchPage searchType={searchType} setSearchType={setSearchType} items={items} setItems={setItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>} />
+        <Route path="search" element={<SearchPage data={data} searchType={searchType} setSearchType={setSearchType} items={items} setItems={setItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>} />
         {/* <Route path="contact" element={<Contact />}> */}
             {/* <Route path="email" element={<EmailContact />} /> */}
             {/* <Route path="phone" element={<PhoneContact />} /> */}

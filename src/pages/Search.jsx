@@ -3,7 +3,7 @@ import {useNavigate } from 'react-router-dom';
 
 import {DoctorCard, HospitalCard} from "../components/Index";
 
-const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, setSearchQuery}) => {
+const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, setSearchQuery, data}) => {
 //   const [searchType, setSearchType] = useState("Doctor");
 //   const [items, setItems] = useState([]);
 //   const [searchQuery, setSearchQuery] = useState("");
