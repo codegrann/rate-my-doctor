@@ -14,9 +14,9 @@ function WhyJoinUs() {
                     Your story and experience will become a new standard for medical care in Korea.
                 </p>
                 <button  className="mt-6 px-6 py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600">
-                <Link to={'/signup'}>
-                    Join the Membership
-                </Link>
+                    <Link to={'/signup'}>
+                        Join the Membership
+                    </Link>
                 </button>
             </div>
 
