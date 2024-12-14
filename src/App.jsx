@@ -11,6 +11,8 @@ import NotFound from './pages/Notfound';
 import { Login, Signup } from './components/Index';
 import ResultsPage from './pages/Results';
 import SearchPage from './pages/Search';
+import HospitalDetails from './pages/HospitalDetails';
+import DoctorDetails from './pages/DoctorDetails';
 
 function App() {
   const [ddata, setDdata] = useState([]);
@@ -37,67 +39,7 @@ function App() {
         });
       });
   }, []);
-  // console.log(ddata)
-  
-  // My data
-  const data = [
-    {
-      id: 1,
-      name: "Dr. John Doe",
-      hospitalName: "City General Hospital",
-      department: "Cardiology",
-      specialty: "Heart Surgery",
-    },
-    {
-      id: 2,
-      name: "Dr. Jane Smith",
-      hospitalName: "Green Valley Medical Center",
-      department: "Neurology",
-      specialty: "Brain and Spine",
-    },
-    {
-      id: 3,
-      name: "Dr. Albert Johnson",
-      hospitalName: "Downtown Medical Hub",
-      department: "Orthopedics",
-      specialty: "Joint Replacement",
-    },
-    {
-      id: 4,
-      name: "Dr. Emily Davis",
-      hospitalName: "City General Hospital",
-      department: "Pediatrics",
-      specialty: "Child Care",
-    },
-    {
-      id: 5,
-      name: "Dr. Michael Lee",
-      hospitalName: "Green Valley Medical Center",
-      department: "Dermatology",
-      specialty: "Skin Conditions",
-    },
-    {
-      id: 6,
-      name: "Dr. John Day",
-      hospitalName: "City General Hospital",
-      department: "Cardiology",
-      specialty: "Heart Surgery",
-    },
-    {
-      id: 7,
-      name: "Dr. Jane Smiles",
-      hospitalName: "Green Valley Medical Center",
-      department: "Neurology",
-      specialty: "Brain and Spine",
-    },
-    {
-      id: 8,
-      name: "Dr. Albert Dickson",
-      hospitalName: "Downtown Medical Hub",
-      department: "Orthopedics",
-      specialty: "Joint Replacement",
-    },
-  ];
+ 
   
   
 
@@ -111,6 +53,8 @@ function App() {
         <Route path="signup" element={<Signup />} />
         <Route path="results" element={<ResultsPage searchType={searchType} setSearchType={setSearchType}/>} />
         <Route path="search" element={<SearchPage data={ddata} searchType={searchType} setSearchType={setSearchType} filteredItems={filteredItems} setFilteredItems={setFilteredItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>} />
+        <Route path="hospital/:hospitalName" element={<HospitalDetails data={ddata} />} />
+        <Route path="doctor/:doctorName" element={<DoctorDetails data={ddata} />} />
         {/* <Route path="contact" element={<Contact />}> */}
             {/* <Route path="email" element={<EmailContact />} /> */}
             {/* <Route path="phone" element={<PhoneContact />} /> */}
