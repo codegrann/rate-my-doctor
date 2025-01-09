@@ -6,11 +6,10 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError(""); 
 
-    
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -21,6 +20,23 @@ const Signup = () => {
     // Example error handling (replace with actual response handling)
     if (!email || !password) {
       setError("Please fill out all fields");
+      return;
+    }
+// handle signup
+    try {
+      const response = await fetch('http://localhost:5000/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert('Sign-up successful!');
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
