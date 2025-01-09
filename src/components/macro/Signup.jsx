@@ -6,8 +6,8 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (email, password) => {
+    // e.preventDefault();
     setError(""); 
 
     if (password !== confirmPassword) {
@@ -50,7 +50,7 @@ const Signup = () => {
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={()=>handleSubmit(email, password)}>
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
             <input

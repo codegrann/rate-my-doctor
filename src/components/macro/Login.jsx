@@ -5,15 +5,33 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (email, password) => {
+    // e.preventDefault();
     setError("");
 
     console.log("Login attempted with", { email, password });
 
     if (!email || !password) {
       setError("Please fill out all fields");
+      return;
     }
+
+    try {
+      const response = await fetch('http://localhost:5000/auth/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert('Sign-in successful!');
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    
   };
 
   const handleSocialLogin = (provider) => {
@@ -25,7 +43,7 @@ const Login = () => {
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={()=>handleSubmit(email, password)}>
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
             <input
