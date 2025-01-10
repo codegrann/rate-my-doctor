@@ -1,10 +1,13 @@
+require('dotenv').config();
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const router = express.Router();
-const SECRET_KEY = 'your_secret_key';  // Use an environment variable in production
+const SECRET_KEY = process.env.SECRET_KEY;  // Use an environment variable in production
+// node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+
 
 // Sign Up
 router.post('/signup', async (req, res) => {
