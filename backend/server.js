@@ -11,10 +11,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(CONNECTION_STRING, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(CONNECTION_STRING)
+.then(() => console.log('Connected to MongoDB Atlas'))
+.catch((error) => console.error('Error connecting to MongoDB Atlas:', error));
 
 app.use('/auth', authRoutes);
 
