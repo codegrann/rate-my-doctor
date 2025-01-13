@@ -24,6 +24,9 @@ function App() {
   // search quesry
   const [searchQuery, setSearchQuery] = useState("");
 
+  // API Base URL
+  const BASE_URL= process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
   useEffect(() => {
     // Fetch the CSV file from the public folder
     fetch('/data.csv')
@@ -49,8 +52,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
         <Route index element={<Homepage searchType={searchType} setSearchType={setSearchType} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>}/>
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
+        <Route path="login" element={<Login BASE_URL={BASE_URL}/>} />
+        <Route path="signup" element={<Signup BASE_URL={BASE_URL}/>} />
         <Route path="results" element={<ResultsPage searchType={searchType} setSearchType={setSearchType}/>} />
         <Route path="search" element={<SearchPage data={ddata} searchType={searchType} setSearchType={setSearchType} filteredItems={filteredItems} setFilteredItems={setFilteredItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>} />
         <Route path="hospital/:hospitalName" element={<HospitalDetails data={ddata} />} />

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+const navigate = useNavigate();
 
-const Signup = () => {
+const Signup = ({BASE_URL}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -27,19 +29,22 @@ const Signup = () => {
       setError("Password must be at least 8 characters long");
       return;
     }
-    
+
 // handle signup
     try {
-      const response = await fetch('http://localhost:5000/auth/signup', {
+      const response = await fetch(`${BASE_URL}/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
       if (response.ok) {
-        alert('Sign-up successful!');
+        toast.success('Sign-up successful!');
+        navigate('/login')
+        // alert('Sign-up successful!');
       } else {
         setError(data.message);
+        toast.success(data.message);
       }
     } catch (error) {
       console.error('Error:', error);

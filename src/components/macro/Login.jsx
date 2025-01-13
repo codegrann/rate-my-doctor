@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+const navigate = useNavigate();
 
-const Login = () => {
+const Login = ({BASE_URL}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -17,21 +19,24 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/auth/signin', {
+      const response = await fetch(`${BASE_URL}/auth/signin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
       console.log(data);
-      
+
       if (response.ok) {
         const { token, userId } = data;
         localStorage.setItem('authToken', token);
         localStorage.setItem('userId', userId); 
-        alert('Sign-in successful!');
+        // alert('Sign-in successful!');
+        toast.success('Sign-in successful!');
+        navigate('/')
       } else {
         setError(data.message);
+        toast.success(data.message);
       }
     } catch (error) {
       console.error('Error:', error);
