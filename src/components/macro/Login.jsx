@@ -31,10 +31,13 @@ const Login = ({BASE_URL}) => {
       console.log(data);
 
       if (response.ok) {
-        const { token } = data;
+        const { token, email, userId } = data;
         localStorage.setItem('authToken', token);
-        // localStorage.setItem('userId', userId); 
+        localStorage.setItem('userEmail', email); 
+        localStorage.setItem('userId', userId); 
         console.log(localStorage.getItem('authToken'))
+        console.log(localStorage.getItem('userEmail'))
+        console.log(localStorage.getItem('userId'))
         alert('Sign-in successful!');
         toast.success('Sign-in successful!');
         navigate('/')
