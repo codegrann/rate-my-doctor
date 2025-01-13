@@ -40,11 +40,15 @@ const Signup = ({BASE_URL}) => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
+
+      console.log(response)
+      console.log(data)
       if (response.ok) {
-        toast.success('Sign-up successful!');
-        navigate('/login')
         // alert('Sign-up successful!');
+        // navigate('/login')
       } else {
+        alert('Sign-up successful!');
+        navigate('/login')
         setError(data.message);
       }
     } catch (error) {
@@ -71,6 +75,7 @@ const Signup = ({BASE_URL}) => {
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onClick={()=>setError('')}
             />
           </div>
           <div className="mb-4">
@@ -81,6 +86,7 @@ const Signup = ({BASE_URL}) => {
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onClick={()=>setError('')}
             />
           </div>
           <div className="mb-4">
@@ -91,6 +97,7 @@ const Signup = ({BASE_URL}) => {
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              onClick={()=>setError('')}
             />
           </div>
           <button

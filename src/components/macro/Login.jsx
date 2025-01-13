@@ -65,6 +65,7 @@ const Login = ({BASE_URL}) => {
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onClick={()=>setError('')}
             />
           </div>
           <div className="mb-4">
@@ -75,6 +76,7 @@ const Login = ({BASE_URL}) => {
               className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-300"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onClick={()=>setError('')}
             />
           </div>
           <button
