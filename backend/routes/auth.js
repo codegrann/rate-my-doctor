@@ -3,6 +3,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+
 const router = express.Router();
 
 const SECRET_KEY = process.env.SECRET_KEY;
@@ -16,9 +17,14 @@ router.post('/signup', async (req, res) => {
 
     const newUser = new User({ email, password });
     await newUser.save();
-    res.status(201).json({ message: 'User created successfully' });
+
+    // Generate token
+    const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: '1h' });
+
+    // res.status(201).json({ message: 'User created successfully' });
+    res.status(201).json({ token });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error });
   }
 });
 
@@ -35,7 +41,7 @@ router.post('/signin', async (req, res) => {
     const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: '1h' });
     res.json({ token });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error', error });
   }
 });
 
