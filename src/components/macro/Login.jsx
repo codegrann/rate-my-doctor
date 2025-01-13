@@ -1,17 +1,19 @@
 import React, { useState } from "react";
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-const navigate = useNavigate();
 
 const Login = ({BASE_URL}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
-    console.log("Login attempted with", { email, password });
+    // console.log("Login attempted with", { email, password });
 
     if (!email || !password) {
       setError("Please fill out all fields");
@@ -25,18 +27,19 @@ const Login = ({BASE_URL}) => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
+      console.log(response)
       console.log(data);
 
       if (response.ok) {
-        const { token, userId } = data;
+        const { token } = data;
         localStorage.setItem('authToken', token);
-        localStorage.setItem('userId', userId); 
-        // alert('Sign-in successful!');
+        // localStorage.setItem('userId', userId); 
+        console.log(localStorage.getItem('authToken'))
+        alert('Sign-in successful!');
         toast.success('Sign-in successful!');
         navigate('/')
       } else {
         setError(data.message);
-        toast.success(data.message);
       }
     } catch (error) {
       console.error('Error:', error);

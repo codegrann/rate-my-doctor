@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-const navigate = useNavigate();
 
 const Signup = ({BASE_URL}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +19,7 @@ const Signup = ({BASE_URL}) => {
       return;
     }
 
-    console.log("Sign-Up attempted with", { email, password });
+    // console.log("Sign-Up attempted with", { email, password });
 
     
     if (!email || !password) {
@@ -44,7 +46,6 @@ const Signup = ({BASE_URL}) => {
         // alert('Sign-up successful!');
       } else {
         setError(data.message);
-        toast.success(data.message);
       }
     } catch (error) {
       console.error('Error:', error);
