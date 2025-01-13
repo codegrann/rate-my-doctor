@@ -6,8 +6,8 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (email, password) => {
-    // e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setError(""); 
 
     if (password !== confirmPassword) {
@@ -17,11 +17,17 @@ const Signup = () => {
 
     console.log("Sign-Up attempted with", { email, password });
 
-    // Example error handling (replace with actual response handling)
+    
     if (!email || !password) {
       setError("Please fill out all fields");
       return;
     }
+
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters long");
+      return;
+    }
+    
 // handle signup
     try {
       const response = await fetch('http://localhost:5000/auth/signup', {
@@ -33,7 +39,7 @@ const Signup = () => {
       if (response.ok) {
         alert('Sign-up successful!');
       } else {
-        alert(data.message);
+        setError(data.message);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -50,7 +56,7 @@ const Signup = () => {
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-        <form onSubmit={()=>handleSubmit(email, password)}>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
             <input

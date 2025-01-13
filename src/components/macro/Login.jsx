@@ -5,8 +5,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (email, password) => {
-    // e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setError("");
 
     console.log("Login attempted with", { email, password });
@@ -23,10 +23,15 @@ const Login = () => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
+      console.log(data);
+      
       if (response.ok) {
+        const { token, userId } = data;
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('userId', userId); 
         alert('Sign-in successful!');
       } else {
-        alert(data.message);
+        setError(data.message);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -43,7 +48,7 @@ const Login = () => {
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-        <form onSubmit={()=>handleSubmit(email, password)}>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
             <input
