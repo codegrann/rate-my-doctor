@@ -27,6 +27,10 @@ function App() {
   // API Base URL
   const BASE_URL= import.meta.env.REACT_APP_API_URL || 'http://localhost:5000';
 
+  // Authentication state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
   useEffect(() => {
     // Fetch the CSV file from the public folder
     fetch('/data.csv')
@@ -42,17 +46,30 @@ function App() {
         });
       });
   }, []);
- 
-  
-  
 
+  // const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
+    } 
+    // else{
+      // setIsLoggedIn(false);
+    // }
+  }, []);
+  
+  // const handleLogout = () => {
+  //   localStorage.removeItem('token'); // Clear token
+  //   setIsLoggedIn(false);
+  // };
 
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Layout />}>
+        <Route path='/' element={<Layout setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>}>
         <Route index element={<Homepage searchType={searchType} setSearchType={setSearchType} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>}/>
-        <Route path="login" element={<Login BASE_URL={BASE_URL}/>} />
+        <Route path="login" element={<Login BASE_URL={BASE_URL} setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="signup" element={<Signup BASE_URL={BASE_URL}/>} />
         <Route path="results" element={<ResultsPage searchType={searchType} setSearchType={setSearchType}/>} />
         <Route path="search" element={<SearchPage data={ddata} searchType={searchType} setSearchType={setSearchType} filteredItems={filteredItems} setFilteredItems={setFilteredItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>} />

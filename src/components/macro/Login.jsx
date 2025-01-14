@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({BASE_URL}) => {
+const Login = ({BASE_URL, setIsLoggedIn}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -38,6 +38,7 @@ const Login = ({BASE_URL}) => {
         console.log(localStorage.getItem('authToken'))
         console.log(localStorage.getItem('userEmail'))
         console.log(localStorage.getItem('userId'))
+        setIsLoggedIn(true)
         alert('Sign-in successful!');
         toast.success('Sign-in successful!');
         navigate('/')

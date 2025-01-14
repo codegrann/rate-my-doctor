@@ -1,12 +1,22 @@
 import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { IoLogOut } from "react-icons/io5";
+
 
 import { FaInstagram, FaTwitter, FaTiktok } from "react-icons/fa";
 import { HiMenu } from "react-icons/hi";
 
-const Navbar = () => {
-  // const navigate = useNavigate();
+const Navbar = ({setIsLoggedIn, isLoggedIn}) => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    setIsMenuOpen(false)
+    navigate('/')
+    console.log('User logged out');
+  };
 
   return (
     <nav className="flex items-center justify-between p-4 bg-white shadow-md">
@@ -49,20 +59,30 @@ const Navbar = () => {
       </div>
 
       {/* Right: Buttons */}
+      { isLoggedIn ? 
+         <div className="hidden sm:flex space-x-2 hover:cursor-pointer">
+         <IoLogOut className="my-auto" size={24} onClick={handleLogout}/>
+ 
+       </div>
+       :
       <div className="hidden sm:flex space-x-2">
-        <Link
-          to="/login"
-          className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded hover:bg-gray-100"
-        >
-          Log In
-        </Link>
-        <Link
-          to="/signup"
-          className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600"
-        >
-          Join the Membership
-        </Link>
+      <Link
+        to="/login"
+        className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded hover:bg-gray-100"
+      >
+        Log In
+      </Link>
+      <Link
+        to="/signup"
+        className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600"
+      >
+        Join the Membership
+      </Link>
       </div>
+      
+      }
+  
+        
       {/* Hamburger Menu (visible on small screens only) */}
       <div className="sm:hidden">
         <button
@@ -73,6 +93,11 @@ const Navbar = () => {
         </button>
         {/* Dropdown menu (toggle visibility) */}
         {isMenuOpen && (
+          isLoggedIn ?
+          <div className="absolute right-0 top-16 z-[100] flex flex-col gap-4 bg-white shadow-lg rounded p-4">
+          <IoLogOut className="my-auto" size={24} onClick={handleLogout}/>
+          </div>
+          :
           <div className="absolute right-0 top-16 z-[100] flex flex-col gap-4 bg-white shadow-lg rounded p-4">
             <Link
               to="/login"
@@ -88,6 +113,7 @@ const Navbar = () => {
             >
               Join the Membership
             </Link>
+            
           </div>
         )}
       </div>
