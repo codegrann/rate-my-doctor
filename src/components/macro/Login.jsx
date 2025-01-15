@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import GoogleAuth from "./GoogleAuth";
+import { GoogleLogin } from '@react-oauth/google';
+
 
 const Login = ({BASE_URL, setIsLoggedIn}) => {
   const [email, setEmail] = useState("");
@@ -99,7 +100,16 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
           >
             Login with Google
           </button>
-          <GoogleAuth setIsLoggedIn={setIsLoggedIn}/>
+          <GoogleLogin
+            onSuccess={credentialResponse => {
+              handleGoogleSuccess(credentialResponse);
+            }}
+            onError={() => {
+              console.error('Login Failed');
+            }}
+          />
+
+
           {/* Kakao login */}
           <button
             onClick={() => handleSocialLogin("Kakao")}

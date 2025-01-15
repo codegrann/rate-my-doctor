@@ -2,6 +2,8 @@
 import { BrowserRouter as Router, Routes, Route, Link, Outlet} from 'react-router-dom';
 import Papa from 'papaparse';
 import * as XLSX from 'xlsx';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 
 
 
@@ -65,6 +67,8 @@ function App() {
   // };
 
   return (
+    <GoogleOAuthProvider clientId={import.meta.env.GOOGLE_CLIENT_ID}>
+
     <Router>
       <Routes>
         <Route path='/' element={<Layout setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>}>
@@ -85,6 +89,7 @@ function App() {
         </Route>
       </Routes>
     </Router>
+    </GoogleOAuthProvider>
   )
 }
 
