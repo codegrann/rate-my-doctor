@@ -74,14 +74,14 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
         localStorage.setItem('userId', data.userId);
         setIsLoggedIn(true);
         navigate('/');
-        toast.success('Sign-in successful!');
+        console.log('Sign-in successful!');
       } else {
-        toast.error('Google Sign-in failed');
+        console.log('Google Sign-in failed');
       }
     })
     .catch((error) => {
       console.error('Error:', error);
-      toast.error('An error occurred');
+      console.log('An error occurred', error);
     });
   };
   
@@ -129,12 +129,12 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
         <div className="mt-6">
           {/* Google login */}
           <button
-            onClick={() => handleSocialLogin("Google")}
-            className="w-full flex items-center justify-center border py-2 mb-2 rounded-md hover:bg-gray-100"
+            // onClick={() => handleSocialLogin("Google")}
+            className="w-full flex items-center justify-even border py-2 mb-2 rounded-md hover:bg-gray-100"
           >
-            Login with google
-          </button>
+            
           <GoogleLogin
+          // style={{width: "100%"}}
           onSuccess={credentialResponse => {
               handleGoogleSuccess(credentialResponse);
             }}
@@ -143,6 +143,7 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
               toast.error('Google login failed');
             }}
           />
+          </button>
 
 
           {/* Kakao login */}
