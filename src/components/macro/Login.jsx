@@ -10,7 +10,7 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-
+// handle auth with email and password
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -52,6 +52,40 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
     }
     
   };
+
+  // handle auth with google
+  const handleGoogleSuccess = (credentialResponse) => {
+    console.log('Google login successful', credentialResponse);
+    const { credential } = credentialResponse;
+  
+    // You can use this credential to send to your backend for verification
+    fetch(`${BASE_URL}/auth/signin`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ credential }),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.token) {
+        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('userEmail', data.email);
+        localStorage.setItem('userId', data.userId);
+        setIsLoggedIn(true);
+        navigate('/');
+        toast.success('Sign-in successful!');
+      } else {
+        toast.error('Google Sign-in failed');
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      toast.error('An error occurred');
+    });
+  };
+  
+
 
   const handleSocialLogin = (provider) => {
     console.log(`Login with ${provider}`);
@@ -98,14 +132,15 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
             onClick={() => handleSocialLogin("Google")}
             className="w-full flex items-center justify-center border py-2 mb-2 rounded-md hover:bg-gray-100"
           >
-            Login with Google
+            Login with google
           </button>
           <GoogleLogin
-            onSuccess={credentialResponse => {
+          onSuccess={credentialResponse => {
               handleGoogleSuccess(credentialResponse);
             }}
             onError={() => {
               console.error('Login Failed');
+              toast.error('Google login failed');
             }}
           />
 
