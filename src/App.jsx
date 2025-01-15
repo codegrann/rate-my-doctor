@@ -27,7 +27,11 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
 
   // API Base URL
-  const BASE_URL= import.meta.env.REACT_APP_API_URL || 'http://localhost:5000';
+  const BASE_URL = import.meta.env.REACT_APP_API_URL || 'http://localhost:5000';
+  // Client ID
+  // const GOOGLE_CLIENT_ID = import.meta.env.GOOGLE_CLIENT_ID;
+  const GOOGLE_CLIENT_ID='433554555492-rrbsfe7d5cg6l9ne7016rah47b1esnv5.apps.googleusercontent.com';
+  // console.log(import.meta.env.GOOGLE_CLIENT_ID);
 
   // Authentication state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -67,7 +71,7 @@ function App() {
   // };
 
   return (
-    <GoogleOAuthProvider clientId={import.meta.env.GOOGLE_CLIENT_ID}>
+    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
 
     <Router>
       <Routes>
