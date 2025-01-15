@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import GoogleAuth from "./GoogleAuth";
 
 const Login = ({BASE_URL, setIsLoggedIn}) => {
   const [email, setEmail] = useState("");
@@ -91,18 +92,22 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
           </button>
         </form>
         <div className="mt-6">
+          {/* Google login */}
           <button
             onClick={() => handleSocialLogin("Google")}
             className="w-full flex items-center justify-center border py-2 mb-2 rounded-md hover:bg-gray-100"
           >
             Login with Google
           </button>
+          <GoogleAuth setIsLoggedIn={setIsLoggedIn}/>
+          {/* Kakao login */}
           <button
             onClick={() => handleSocialLogin("Kakao")}
             className="w-full flex items-center justify-center border py-2 mb-2 bg-yellow-400 rounded-md hover:bg-yellow-500"
           >
             Login with Kakao
           </button>
+          {/* Naver Login */}
           <button
             onClick={() => handleSocialLogin("Naver")}
             className="w-full flex items-center justify-center border py-2 rounded-md bg-green-500 text-white hover:bg-green-600"
