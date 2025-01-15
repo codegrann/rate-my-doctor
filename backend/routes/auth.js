@@ -1,3 +1,4 @@
+const { OAuth2Client } = require('google-auth-library');
 require('dotenv').config();
 const express = require('express');
 const bcrypt = require('bcryptjs');
@@ -7,6 +8,10 @@ const User = require('../models/User');
 const router = express.Router();
 
 const SECRET_KEY = process.env.SECRET_KEY;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+
+const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
+
 
 // Sign-up Route
 router.post('/signup', async (req, res) => {
@@ -47,6 +52,39 @@ router.post('/signin', async (req, res) => {
      });
   } catch (error) {
     res.status(500).json({ message: 'Server error', error });
+  }
+});
+
+// Google Auth Route
+router.post('/google', async (req, res) => {
+  const { token } = req.body;
+
+  try {
+    const ticket = await googleClient.verifyIdToken({
+      idToken: token,
+      audience: GOOGLE_CLIENT_ID,
+    });
+    const payload = ticket.getPayload();
+    const { sub: googleId, email, name, picture } = payload;
+
+    let user = await User.findOne({ googleId });
+    if (!user) {
+      user = await User.findOne({ email });
+      if (!user) {
+        user = new User({ googleId, email, name, picture });
+        await user.save();
+      }
+    }
+
+    const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: '1h' });
+    res.status(200).json({ 
+      token: jwtToken,
+      email: user.email,
+      userId: user._id
+    });
+  } catch (error) {
+    console.error('Google auth error:', error);
+    res.status(401).json({ message: 'Invalid Google token' });
   }
 });
 
