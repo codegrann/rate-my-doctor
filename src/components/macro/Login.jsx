@@ -54,38 +54,46 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
   };
 
   // handle auth with google
-  const handleGoogleSuccess = (credentialResponse) => {
-    console.log('Google login successful', credentialResponse);
-    const { credential } = credentialResponse;
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      console.log('Google login successful', credentialResponse);
+      const { credential } = credentialResponse;
   
-    // You can use this credential to send to your backend for verification
-    fetch(`${BASE_URL}/auth/signin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ credential }),
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.token) {
+      if (!credential) {
+        console.log('Google login failed: No credential found');
+        return;
+      }
+  
+      // Send the credential (ID token) to your backend for verification
+      const response = await fetch(`${BASE_URL}/auth/signin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ credential }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok && data.token) {
+        // Handle successful login
         localStorage.setItem('authToken', data.token);
         localStorage.setItem('userEmail', data.email);
         localStorage.setItem('userId', data.userId);
         setIsLoggedIn(true);
         navigate('/');
         console.log('Sign-in successful!');
+        toast.success('Sign-in successful!');
       } else {
+        // Handle failure
         console.log('Google Sign-in failed');
       }
-    })
-    .catch((error) => {
+    } catch (error) {
       console.error('Error:', error);
-      console.log('An error occurred', error);
-    });
+      console.log('An error occurred');
+    }
   };
   
-
 
   const handleSocialLogin = (provider) => {
     console.log(`Login with ${provider}`);
