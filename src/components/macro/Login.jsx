@@ -65,17 +65,18 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
       }
   
       // Send the credential (ID token) to your backend for verification
-      const response = await fetch(`${BASE_URL}/auth/signin`, {
+      const response = await fetch(`${BASE_URL}/auth/google`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ credential }),
+        body: JSON.stringify({ token: credential }),
       });
   
       const data = await response.json();
       console.log(response);
-      console.log(data, data.token)
+      console.log(data)
+      console.log(data.token)
   
       if (response.ok && data.token) {
         // Handle successful login

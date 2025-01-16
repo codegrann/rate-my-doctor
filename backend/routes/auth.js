@@ -58,33 +58,43 @@ router.post('/signin', async (req, res) => {
 // Google Auth Route
 router.post('/google', async (req, res) => {
   const { token } = req.body;
+  if (!token) {
+    return res.status(400).json({ message: 'No token provided' });
+  }
+  console.log('Received token:', token); // Debugging
+
 
   try {
     const ticket = await googleClient.verifyIdToken({
       idToken: token,
       audience: GOOGLE_CLIENT_ID,
     });
+    console.log('Ticket payload:', ticket.getPayload()); // Debugging
+
     const payload = ticket.getPayload();
     const { sub: googleId, email, name, picture } = payload;
 
     let user = await User.findOne({ googleId });
     if (!user) {
-      user = await User.findOne({ email });
+      user = await User.findOne({ email, googleId: { $exists: false } });
       if (!user) {
         user = new User({ googleId, email, name, picture });
-        await user.save();
+      } else {
+        user.googleId = googleId; // Link existing email to Google account
       }
+      await user.save();
+
     }
 
-    const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: '1h' });
+    const authToken = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: '1h' });
     res.status(200).json({ 
-      token,
+      token: authToken,
       email: user.email,
       userId: user._id
     });
   } catch (error) {
-    console.error('Google auth error:', error);
-    res.status(401).json({ message: 'Invalid Google token' });
+    console.log('Google auth error:', error);
+    res.status(401).json({ message: error });
   }
 });
 
