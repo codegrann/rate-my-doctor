@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 
-const Signup = ({BASE_URL}) => {
+
+const Signup = ({BASE_URL, setIsLoggedIn}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -32,7 +34,7 @@ const Signup = ({BASE_URL}) => {
       return;
     }
 
-// handle signup
+// handle signup with email and password
     try {
       const response = await fetch(`${BASE_URL}/auth/signup`, {
         method: 'POST',
@@ -53,6 +55,50 @@ const Signup = ({BASE_URL}) => {
       }
     } catch (error) {
       console.error('Error:', error);
+    }
+  };
+
+   // handle auth with google
+   const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      console.log('Google login successful', credentialResponse);
+      const { credential } = credentialResponse;
+  
+      if (!credential) {
+        console.log('Google login failed: No credential found');
+        return;
+      }
+  
+      // Send the credential (ID token) to your backend for verification
+      const response = await fetch(`${BASE_URL}/auth/google`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: credential }),
+      });
+  
+      const data = await response.json();
+      console.log(response);
+      console.log(data)
+      console.log(data.token)
+  
+      if (response.ok && data.token) {
+        // Handle successful login
+        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('userEmail', data.email);
+        localStorage.setItem('userId', data.userId);
+        setIsLoggedIn(true);
+        navigate('/');
+        console.log('Sign-in successful!');
+        toast.success('Sign-in successful!');
+      } else {
+        // Handle failure
+        console.log('Google Sign-in failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      console.log('An error occurred');
     }
   };
 
@@ -109,19 +155,30 @@ const Signup = ({BASE_URL}) => {
         </form>
 
         <div className="my-6">
-          <p className="text-center text-gray-500">Or sign up with</p>
+          <p className="text-center text-gray-500">Or continue with</p>
+          {/* Google */}
           <button
-            onClick={() => handleSocialSignUp("Google")}
             className="w-full flex items-center justify-center border py-2 mb-2 rounded-md hover:bg-gray-100"
           >
-            Sign Up with Google
+             <GoogleLogin
+          // style={{width: "100%"}}
+          onSuccess={credentialResponse => {
+              handleGoogleSuccess(credentialResponse);
+            }}
+            onError={() => {
+              console.error('Login Failed');
+              toast.error('Google login failed');
+            }}
+          />
           </button>
+          {/* Kakao */}
           <button
             onClick={() => handleSocialSignUp("Kakao")}
             className="w-full flex items-center justify-center border py-2 mb-2 bg-yellow-400 rounded-md hover:bg-yellow-500"
           >
             Sign Up with Kakao
           </button>
+          {/* Naver */}
           <button
             onClick={() => handleSocialSignUp("Naver")}
             className="w-full flex items-center justify-center border py-2 rounded-md bg-green-500 text-white hover:bg-green-600"

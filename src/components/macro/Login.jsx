@@ -138,10 +138,11 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
           </button>
         </form>
         <div className="mt-6">
+        <p className="text-center text-gray-500">Or continue with</p>
+
           {/* Google login */}
           <button
-            // onClick={() => handleSocialLogin("Google")}
-            className="w-full flex items-center justify-even border py-2 mb-2 rounded-md hover:bg-gray-100"
+            className="w-full flex items-center justify-center border py-2 mb-2 rounded-md hover:bg-gray-100"
           >
             
           <GoogleLogin

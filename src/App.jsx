@@ -78,7 +78,7 @@ function App() {
         <Route path='/' element={<Layout setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>}>
         <Route index element={<Homepage searchType={searchType} setSearchType={setSearchType} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>}/>
         <Route path="login" element={<Login BASE_URL={BASE_URL} setIsLoggedIn={setIsLoggedIn}/>} />
-        <Route path="signup" element={<Signup BASE_URL={BASE_URL}/>} />
+        <Route path="signup" element={<Signup BASE_URL={BASE_URL} setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="results" element={<ResultsPage searchType={searchType} setSearchType={setSearchType}/>} />
         <Route path="search" element={<SearchPage data={ddata} searchType={searchType} setSearchType={setSearchType} filteredItems={filteredItems} setFilteredItems={setFilteredItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>} />
         <Route path="hospital/:hospitalName" element={<HospitalDetails data={ddata} />} />
