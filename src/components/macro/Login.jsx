@@ -74,6 +74,8 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
       });
   
       const data = await response.json();
+      console.log(response);
+      console.log(data, data.token)
   
       if (response.ok && data.token) {
         // Handle successful login
