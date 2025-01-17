@@ -10,7 +10,7 @@ const router = express.Router();
 
 const SECRET_KEY = process.env.SECRET_KEY;
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-const KAKAO_CLIENT_ID = process.env.KAKAO_CLIENT_ID;
+const KAKAO_CLIENT_ID = process.env.KAKAO_JAVASCRIPT_KEY;
 const KAKAO_REDIRECT_URI = process.env.KAKAO_REDIRECT_URI;
 
 const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
@@ -105,7 +105,9 @@ module.exports = router;
 
 // Kakao auth route
 router.post('/kakao', async (req, res) => {
-  const { code } = req.body;
+  const { tokenCode } = req.body;
+  console.log('Received tokenCode:', tokenCode);
+
 
   try {
     // Exchange code for access token
@@ -114,10 +116,15 @@ router.post('/kakao', async (req, res) => {
         grant_type: 'authorization_code',
         client_id: KAKAO_CLIENT_ID,
         redirect_uri: KAKAO_REDIRECT_URI,
-        code,
+        code: tokenCode,
       },
     });
+
+    console.log('Token Response:', tokenResponse);
+
     const accessToken = tokenResponse.data.access_token;
+    console.log('Access token:', accessToken);
+
 
     // Get user info from Kakao
     const userResponse = await axios.get('https://kapi.kakao.com/v2/user/me', {
@@ -141,7 +148,8 @@ router.post('/kakao', async (req, res) => {
     res.status(200).json({ token, email: user.email, userId: user._id });
 
   } catch (error) {
-    console.error('Kakao auth error:', error.response ? error.response.data : error.message);
+    // console.error('Kakao auth error:', error.response ? error.response.data : error.message);
+    console.log('Kakao auth error:', error.response ? error.response.data : error.message);
     res.status(401).json({ message: 'Invalid Kakao token' });
   }
 });

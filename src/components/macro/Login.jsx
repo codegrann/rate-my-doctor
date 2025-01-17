@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
+import KakaoLogin from 'react-kakao-login';
 
 
 const Login = ({BASE_URL, setIsLoggedIn}) => {
@@ -96,6 +97,56 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
       console.log('An error occurred');
     }
   };
+
+// handle auth with kakao
+const handleKakaoSuccess = async (response) => {
+  try {
+    console.log('Kakao login successful', response);
+    
+    // Extract the access token from the response
+    const { response: kakaoResponse } = response;
+    const accessToken = kakaoResponse?.access_token;
+
+    if (!accessToken) {
+      console.log('Failed to retrieve access token.');
+      return;
+    }
+    
+    console.log('Access Token:', accessToken);
+    
+    // Send the access token to your backend for verification
+    const res = await fetch(`${BASE_URL}/auth/kakao`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ tokenCode: accessToken }),
+    });
+
+    const data = await res.json();
+    console.log("res", res)
+    console.log("data", data)
+    if (res.ok && data.token) {
+      localStorage.setItem('authToken', data.token);
+      localStorage.setItem('userEmail', data.email);
+      localStorage.setItem('userId', data.userId);
+      setIsLoggedIn(true);
+      navigate('/');
+      toast.success('Sign-in successful!');
+    } else {
+      toast.error(data.message || 'Kakao Sign-in failed.');
+    }
+  } catch (error) {
+    console.error('Kakao login error:', error);
+    toast.error('Kakao login error.');
+  }
+};
+
+  
+  const handleKakaoFailure = (error) => {
+    console.log('Kakao login failed:', error);
+    toast.error('Kakao login failed');
+  };
   
 
   const handleSocialLogin = (provider) => {
@@ -159,12 +210,20 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
 
 
           {/* Kakao login */}
-          <button
+          {/* <button
             onClick={() => handleSocialLogin("Kakao")}
             className="w-full flex items-center justify-center border py-2 mb-2 bg-yellow-400 rounded-md hover:bg-yellow-500"
           >
             Login with Kakao
-          </button>
+          </button> */}
+          <KakaoLogin
+            token="6ec9fb4811670e4bd219a26028bb3e5e"
+            onSuccess={handleKakaoSuccess}
+            onFail={handleKakaoFailure}
+            onLogout={() => console.log('Logged out')}
+            className="w-full flex items-center justify-center border py-2 mb-2 bg-yellow-400 rounded-md hover:bg-yellow-500"
+            buttonText="Login with Kakao"
+          />
           {/* Naver Login */}
           <button
             className="w-full flex items-center justify-center border py-2 rounded-md bg-green-500 text-white hover:bg-green-600"
