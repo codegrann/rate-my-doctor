@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link, Outlet} from 'react-route
 import Papa from 'papaparse';
 import * as XLSX from 'xlsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import Kakao from 'kakao-js-sdk'
+// import * as Kakao from 'kakao-js-sdk'
 
 Kakao.init('6ec9fb4811670e4bd219a26028bb3e5e');
 console.log('Kakao is inititialized:', Kakao.isInitialized())
