@@ -167,7 +167,6 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
           </button>
           {/* Naver Login */}
           <button
-            onClick={() => handleSocialLogin("Naver")}
             className="w-full flex items-center justify-center border py-2 rounded-md bg-green-500 text-white hover:bg-green-600"
           >
             Login with Naver

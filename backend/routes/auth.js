@@ -1,6 +1,7 @@
 const { OAuth2Client } = require('google-auth-library');
 require('dotenv').config();
 const express = require('express');
+const axios = require('axios');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
@@ -9,6 +10,8 @@ const router = express.Router();
 
 const SECRET_KEY = process.env.SECRET_KEY;
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const KAKAO_CLIENT_ID = process.env.KAKAO_CLIENT_ID;
+const KAKAO_REDIRECT_URI = process.env.KAKAO_REDIRECT_URI;
 
 const googleClient = new OAuth2Client(GOOGLE_CLIENT_ID);
 
@@ -99,3 +102,46 @@ router.post('/google', async (req, res) => {
 });
 
 module.exports = router;
+
+// Kakao auth route
+router.post('/kakao', async (req, res) => {
+  const { code } = req.body;
+
+  try {
+    // Exchange code for access token
+    const tokenResponse = await axios.post('https://kauth.kakao.com/oauth/token', null, {
+      params: {
+        grant_type: 'authorization_code',
+        client_id: KAKAO_CLIENT_ID,
+        redirect_uri: KAKAO_REDIRECT_URI,
+        code,
+      },
+    });
+    const accessToken = tokenResponse.data.access_token;
+
+    // Get user info from Kakao
+    const userResponse = await axios.get('https://kapi.kakao.com/v2/user/me', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const { id: kakaoId, properties: { nickname, profile_image }, kakao_account: { email } } = userResponse.data;
+
+    // Check if user exists or create a new one
+    let user = await User.findOne({ kakaoId });
+    if (!user) {
+      user = await User.findOne({ email });
+      if (!user) {
+        user = new User({ kakaoId, email, name: nickname, picture: profile_image });
+        await user.save();
+      }
+    }
+
+    const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: '1h' });
+    res.status(200).json({ token, email: user.email, userId: user._id });
+
+  } catch (error) {
+    console.error('Kakao auth error:', error.response ? error.response.data : error.message);
+    res.status(401).json({ message: 'Invalid Kakao token' });
+  }
+});
