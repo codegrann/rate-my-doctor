@@ -120,7 +120,7 @@ const handleKakaoSuccess = async (response) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ tokenCode: accessToken }),
+      body: JSON.stringify({ accessToken }),
     });
 
     const data = await res.json();

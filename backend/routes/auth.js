@@ -105,34 +105,47 @@ module.exports = router;
 
 // Kakao auth route
 router.post('/kakao', async (req, res) => {
-  const { tokenCode } = req.body;
-  console.log('Received tokenCode:', tokenCode);
+  const { accessToken } = req.body;
+  console.log('Received access token:', accessToken);
 
 
   try {
     // Exchange code for access token
-    const tokenResponse = await axios.post('https://kauth.kakao.com/oauth/token', null, {
-      params: {
-        grant_type: 'authorization_code',
-        client_id: KAKAO_CLIENT_ID,
-        redirect_uri: KAKAO_REDIRECT_URI,
-        code: tokenCode,
-      },
-    });
+    // const tokenResponse = await axios.post('https://kauth.kakao.com/oauth/token', null, {
+    //   params: {
+    //     grant_type: 'authorization_code',
+    //     client_id: KAKAO_CLIENT_ID,
+    //     redirect_uri: KAKAO_REDIRECT_URI,
+    //     code: tokenCode,
+    //   },
+    // });
 
-    console.log('Token Response:', tokenResponse);
+    // console.log('Token Response:', tokenResponse);
 
-    const accessToken = tokenResponse.data.access_token;
-    console.log('Access token:', accessToken);
+    // const accessToken = tokenResponse.data.access_token;
+    // console.log('Access token:', accessToken);
 
 
     // Get user info from Kakao
     const userResponse = await axios.get('https://kapi.kakao.com/v2/user/me', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
+
       },
     });
-    const { id: kakaoId, properties: { nickname, profile_image }, kakao_account: { email } } = userResponse.data;
+    console.log('user response', userResponse)
+    const userData = userResponse.data;
+    console.log('user data', userData)
+    const kakaoId = userData.id;
+    console.log("kakaoId", kakaoId)
+    const profile = userData.kakao_account.profile;
+    console.log('profile', profile)
+    const nickname = profile?.nickname || userData?.properties?.nickname || 'Unknown';
+    console.log('nickname', nickname)
+    const profile_image = profile?.profile_image_url || '';
+    const email = userData.kakao_account.email || `user_${kakaoId}@kakao.com`;
+    console.log('email', email)
+
 
     // Check if user exists or create a new one
     let user = await User.findOne({ kakaoId });
