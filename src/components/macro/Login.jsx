@@ -210,13 +210,7 @@ const handleKakaoSuccess = async (response) => {
 
 
           {/* Kakao login */}
-          {/* <button
-            onClick={() => handleSocialLogin("Kakao")}
-            className="w-full flex items-center justify-center border py-2 mb-2 bg-yellow-400 rounded-md hover:bg-yellow-500"
-          >
-            Login with Kakao
-          </button> */}
-          <KakaoLogin
+            <KakaoLogin
             token="6ec9fb4811670e4bd219a26028bb3e5e"
             onSuccess={handleKakaoSuccess}
             onFail={handleKakaoFailure}
