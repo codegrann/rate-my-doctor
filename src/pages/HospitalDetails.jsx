@@ -8,6 +8,7 @@ const HospitalDetails = ({ data }) => {
   const { hospitalName } = useParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleDoctorsCount, setVisibleDoctorsCount] = useState(5);
+  const [activity, setActivity]=useState('ratings')
 
   // Filter doctors by hospital and search query
   const filteredDoctors = data.filter(
@@ -20,10 +21,32 @@ const HospitalDetails = ({ data }) => {
     setVisibleDoctorsCount((prevCount) => prevCount + 5); // Show 5 more doctors
   };
 
+  const changePageView=(activity)=>{
+    if(activity=='ratings'){
+      setActivity('ratings');
+    } else if(activity=='doctors'){
+      setActivity('doctors');
+    }
+  }
+
   return (
     <div className="p-4 md:px-20">
       <h1 className="text-2xl font-bold mb-4">{hospitalName}</h1>
-      <button>Rate</button>
+      <button className='block border px-8 py-1 rounded-3xl bg-blue-500 text-white'>Rate</button>
+      <div className='flex gap-6 my-4'>
+        {activity=='ratings' ?
+        <p className='underline text-sm hover:cursor-pointer' onClick={()=>changePageView('doctors')}>View all doctors</p> :
+        <p className='underline text-sm hover:cursor-pointer' onClick={()=>changePageView('ratings')}>View ratings</p>
+        }
+  
+      </div>
+
+      {activity=='ratings' && 
+      <p>These are the ratings</p>
+      }
+
+    {activity=='doctors' &&  (
+      <>
       <input
         type="text"
         value={searchQuery}
@@ -56,6 +79,9 @@ const HospitalDetails = ({ data }) => {
       ) : (
         <p className="text-gray-600">No doctors found.</p>
       )}
+      </>
+  )}
+
     </div>
   );
 };
