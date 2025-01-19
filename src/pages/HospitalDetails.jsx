@@ -4,7 +4,7 @@ import {DoctorCard} from "../components/Index";
 import { v4 as uuidv4 } from 'uuid';
 
 
-const HospitalDetails = ({ data, isLoggedIn }) => {
+const HospitalDetails = ({ data, isLoggedIn, BASE_URL }) => {
   const { hospitalName } = useParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleDoctorsCount, setVisibleDoctorsCount] = useState(5);
@@ -67,6 +67,7 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
     e.preventDefault();
     // Capture form data here
     const formData = new FormData(e.target);
+    
     const ratingData = {
       hospitalName,    
       facilities: formData.get('facilities'),
@@ -77,29 +78,36 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
       comments: formData.get('comments'),
       overallRating,
     };
+
+    console.log('form data', formData)
+    console.log('rating data', ratingData)
   
-    fetch('/api/ratings', {
+    fetch(`${BASE_URL}/api/ratings`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ ratingData }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        response.json()
+  })
       .then((data) => {
         console.log('Submitted rating:', data);
         closeModal();
-        refreshRatings();      })
+        // refreshRatings();
+      })
       .catch((error) => console.error('Error submitting rating:', error));
   };
   
   // Calculating overal rating
   const calculateOverallRating = () => {
-    const facilities = parseInt(document.querySelector('input[name="facilities"]').value) || 0;
-    const location = parseInt(document.querySelector('input[name="location"]').value) || 0;
-    const safety = parseInt(document.querySelector('input[name="safety"]').value) || 0;
-    const staff = parseInt(document.querySelector('input[name="staff"]').value) || 0;
-    const cleanliness = parseInt(document.querySelector('input[name="cleanliness"]').value) || 0;
+    const facilities = parseInt(document.querySelector('input[name="facilities"]')?.value) || 0;
+    const location = parseInt(document.querySelector('input[name="location"]')?.value) || 0;
+    const safety = parseInt(document.querySelector('input[name="safety"]')?.value) || 0;
+    const staff = parseInt(document.querySelector('input[name="staff"]')?.value) || 0;
+    const cleanliness = parseInt(document.querySelector('input[name="cleanliness"]')?.value) || 0;
   
     const average = (facilities + location + safety + staff + cleanliness) / 5;
     setOverallRating(parseFloat(average.toFixed(1))); // Rounded to one decimal
@@ -209,6 +217,7 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
         <label className="block mb-3">
           <span className="text-gray-700">Facilities (1-5)</span>
           <input
+          name="facilities"
             type="number"
             min="1"
             max="5"
@@ -220,6 +229,7 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
         <label className="block mb-3">
           <span className="text-gray-700">Location (1-5)</span>
           <input
+          name="location"
             type="number"
             min="1"
             max="5"
@@ -231,6 +241,7 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
         <label className="block mb-3">
           <span className="text-gray-700">Safety (1-5)</span>
           <input
+          name="safety"
             type="number"
             min="1"
             max="5"
@@ -266,6 +277,7 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
         <label className="block mb-2">
           <span className="text-gray-700">Comments</span>
           <textarea
+            name="comments"
             className="w-full p-2 border rounded text-sm"
             rows="4"
           ></textarea>
