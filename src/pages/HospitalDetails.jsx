@@ -23,6 +23,7 @@ const HospitalDetails = ({ data }) => {
   return (
     <div className="p-4 md:px-20">
       <h1 className="text-2xl font-bold mb-4">{hospitalName}</h1>
+      <button>Rate</button>
       <input
         type="text"
         value={searchQuery}
