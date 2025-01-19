@@ -112,15 +112,16 @@ const HospitalDetails = ({ data, isLoggedIn, BASE_URL }) => {
     const average = (facilities + location + safety + staff + cleanliness) / 5;
     setOverallRating(parseFloat(average.toFixed(1))); // Rounded to one decimal
   };
-
+console.log(isLoggedIn)
   return (
     <div className="p-4 md:px-20">
       <h1 className="text-2xl font-bold mb-4">{hospitalName}</h1>
-      {isLoggedIn &&
+      <p>fhgh {isLoggedIn}</p>
+      {/* {isLoggedIn && */}
       <button
       onClick={openModal}
       className='block border px-8 py-1 rounded-3xl bg-blue-500 text-white'>Rate</button>
-      }
+      {/* } */}
       <div className='flex gap-6 my-4'>
         {activity=='ratings' ?
         <p className='underline text-sm hover:cursor-pointer' onClick={()=>changePageView('doctors')}>View all doctors</p> :
