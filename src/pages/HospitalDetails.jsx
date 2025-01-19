@@ -11,6 +11,7 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
   const [activity, setActivity]=useState('ratings')
   const [ratings, setRatings] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [overallRating, setOverallRating] = useState(0);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -59,11 +60,14 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
     // Capture form data here
     const formData = new FormData(e.target);
     const ratingData = {
-      overallRating: formData.get('overallRating'),
+      hospitalName,    
       facilities: formData.get('facilities'),
       location: formData.get('location'),
       safety: formData.get('safety'),
+      staff: formData.get('staff'),
+      cleanliness: formData.get('cleanliness'),
       comments: formData.get('comments'),
+      overallRating,
     };
   
     fetch('/api/ratings', {
@@ -71,7 +75,7 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ hospitalName, ...ratingData }),
+      body: JSON.stringify({ ratingData }),
     })
       .then((response) => response.json())
       .then(() => {
@@ -81,6 +85,17 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
       .catch((error) => console.error('Error submitting rating:', error));
   };
   
+  // Calculating overal rating
+  const calculateOverallRating = () => {
+    const facilities = parseInt(document.querySelector('input[name="facilities"]').value) || 0;
+    const location = parseInt(document.querySelector('input[name="location"]').value) || 0;
+    const safety = parseInt(document.querySelector('input[name="safety"]').value) || 0;
+    const staff = parseInt(document.querySelector('input[name="staff"]').value) || 0;
+    const cleanliness = parseInt(document.querySelector('input[name="cleanliness"]').value) || 0;
+  
+    const average = (facilities + location + safety + staff + cleanliness) / 5;
+    setOverallRating(parseFloat(average.toFixed(1))); // Rounded to one decimal
+  };
 
   return (
     <div className="p-4 md:px-20">
@@ -121,6 +136,8 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
               <p><strong>Facilities:</strong> {rating.facilities} / 5</p>
               <p><strong>Location:</strong> {rating.location} / 5</p>
               <p><strong>Safety:</strong> {rating.safety} / 5</p>
+              <p><strong>Staff:</strong> {rating.staff} / 5</p>
+              <p><strong>Cleanliness:</strong> {rating.cleanliness} / 5</p>
             </div>
           ))}
         </div>
@@ -168,57 +185,84 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
 {/* Modal:form for submitting ratings  */}
 {isModalOpen && (
   <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
-    <div className="bg-white rounded-lg shadow-lg px-6 pt-3 w-[90%] h-[95vh] md:w-[600px] overflow-y-scroll">
-      <h2 className="text-xl font-bold mb-4">Rate Hospital</h2>
+    <div className="bg-white rounded-lg shadow-lg px-6 pt-4 w-[90%] h-[97vh] md:w-[600px] overflow-y-scroll">
+      <h2 className="text-xl font-bold mb-2">Rate Hospital</h2>
       <form onSubmit={handleSubmit}>
-        <label className="block mb-2">
-          <span className="text-gray-700">Overall Rating (1-5)</span>
+        {/* <label className="block mb-2">
+          <span className="text-gray-700">Overall Rating</span>
           <input
             type="number"
             min="1"
             max="5"
-            className="w-full p-2 border rounded mb-4"
+            className="w-full p-2 border rounded mb-3"
+            required
+          />
+        </label> */}
+        <label className="block mb-3">
+          <span className="text-gray-700">Facilities (1-5)</span>
+          <input
+            type="number"
+            min="1"
+            max="5"
+            className="w-full p-2 border rounded"
+            onChange={calculateOverallRating}
             required
           />
         </label>
-        <label className="block mb-2">
-          <span className="text-gray-700">Facilities</span>
+        <label className="block mb-3">
+          <span className="text-gray-700">Location (1-5)</span>
           <input
             type="number"
             min="1"
             max="5"
-            className="w-full p-2 border rounded mb-4"
+            className="w-full p-2 border rounded"
+            onChange={calculateOverallRating}
             required
           />
         </label>
-        <label className="block mb-2">
-          <span className="text-gray-700">Location</span>
+        <label className="block mb-3">
+          <span className="text-gray-700">Safety (1-5)</span>
           <input
             type="number"
             min="1"
             max="5"
-            className="w-full p-2 border rounded mb-4"
+            className="w-full p-2 border rounded"
+            onChange={calculateOverallRating}
             required
           />
         </label>
-        <label className="block mb-2">
-          <span className="text-gray-700">Safety</span>
+        <label className="block mb-3">
+          <span className="text-gray-700">Staff (1-5)</span>
           <input
+            name="staff"
             type="number"
             min="1"
             max="5"
-            className="w-full p-2 border rounded mb-4"
+            className="w-full p-2 border rounded"
+            onChange={calculateOverallRating}
+            required
+          />
+        </label>
+        <label className="block mb-3">
+          <span className="text-gray-700">Cleanliness (1-5)</span>
+          <input
+            name="cleanliness"
+            type="number"
+            min="1"
+            max="5"
+            className="w-full p-2 border rounded"
+            onChange={calculateOverallRating}
             required
           />
         </label>
         <label className="block mb-2">
           <span className="text-gray-700">Comments</span>
           <textarea
-            className="w-full p-2 border rounded mb-4"
+            className="w-full p-2 border rounded text-sm"
             rows="4"
           ></textarea>
         </label>
-        <div className="flex justify-end gap-4">
+        <div className="flex justify-end gap-4 mb-2">
           <button
             type="button"
             onClick={closeModal}
