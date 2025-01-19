@@ -16,7 +16,15 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-
+  // const refreshRatings = () => {
+  //   fetch(`/api/ratings?hospitalName=${hospitalName}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       const sortedRatings = data.sort((a, b) => new Date(b.date) - new Date(a.date));  // Sort by latest date first
+  //       setRatings(sortedRatings); 
+  //     })
+  //     .catch((error) => console.error('Error fetching ratings:', error));
+  // };
 // fetching ratings when page loads
   useEffect(() => {
     fetch(`/api/ratings/${hospitalName}`)
@@ -78,10 +86,10 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
       body: JSON.stringify({ ratingData }),
     })
       .then((response) => response.json())
-      .then(() => {
+      .then((data) => {
+        console.log('Submitted rating:', data);
         closeModal();
-        // Optionally fetch and update ratings here
-      })
+        refreshRatings();      })
       .catch((error) => console.error('Error submitting rating:', error));
   };
   
@@ -131,13 +139,13 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
           {ratings.map((rating, index) => (
             <div key={index} className="border p-4 mb-4">
               <p><strong>Overall Rating:</strong> {rating.overallRating} / 5</p>
-              <p><strong>Comment:</strong> {rating.comments}</p>
               <p><strong>Date:</strong> {new Date(rating.dateAdded).toLocaleDateString()}</p>
               <p><strong>Facilities:</strong> {rating.facilities} / 5</p>
               <p><strong>Location:</strong> {rating.location} / 5</p>
               <p><strong>Safety:</strong> {rating.safety} / 5</p>
               <p><strong>Staff:</strong> {rating.staff} / 5</p>
               <p><strong>Cleanliness:</strong> {rating.cleanliness} / 5</p>
+              <p><strong>Comment:</strong> {rating.comments}</p>
             </div>
           ))}
         </div>
