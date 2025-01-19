@@ -45,12 +45,13 @@ const Hero = ({searchType, setSearchType, searchQuery, setSearchQuery}) => {
                 </div>
 
                 {/* Link */}
-                <a
-                    href="/search"
-                    className="block mt-4 text-sm text-blue-300 underline hover:text-blue-500"
+                <p
+                    // href="/search"
+                    onClick={()=>navigate('/search')}
+                    className="block mt-4 text-sm text-blue-300 hover:cursor-pointer underline hover:text-blue-400"
                 >
                     Search by doctor name
-                </a>
+                </p>
             </div>
         </section>
     );

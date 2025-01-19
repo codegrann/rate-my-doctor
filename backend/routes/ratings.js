@@ -9,7 +9,7 @@ app.get('/api/ratings/:hospitalName', async (req, res) => {
   });
   
 //   Adding a new rating
-  app.post('/api/ratings', async (req, res) => {
+  app.post('/ratings', async (req, res) => {
     console.log('Rating API called');
     const { hospitalName, overallRating, facilities, location, safety, staff, cleanliness, comments } = req.body;
     try {

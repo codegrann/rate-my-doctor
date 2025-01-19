@@ -82,12 +82,12 @@ const HospitalDetails = ({ data, isLoggedIn, BASE_URL }) => {
     console.log('form data', formData)
     console.log('rating data', ratingData)
   
-    fetch(`${BASE_URL}/api/ratings`, {
+    fetch(`${BASE_URL}/ratings`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ratingData }),
+      body: JSON.stringify(ratingData),
     })
       .then((response) => {
         console.log(response);
