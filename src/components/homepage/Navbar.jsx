@@ -11,7 +11,8 @@ const Navbar = ({setIsLoggedIn, isLoggedIn}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    // localStorage.removeItem('token');
+    localStorage.clear();
     setIsLoggedIn(false);
     setIsMenuOpen(false)
     navigate('/')

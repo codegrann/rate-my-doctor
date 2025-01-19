@@ -42,7 +42,7 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
         console.log(localStorage.getItem('userEmail'))
         console.log(localStorage.getItem('userId'))
         setIsLoggedIn(true)
-        alert('Sign-in successful!');
+        // alert('Sign-in successful!');
         toast.success('Sign-in successful!');
         navigate('/')
       } else {

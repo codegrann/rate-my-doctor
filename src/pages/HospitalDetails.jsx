@@ -4,7 +4,7 @@ import {DoctorCard} from "../components/Index";
 import { v4 as uuidv4 } from 'uuid';
 
 
-const HospitalDetails = ({ data }) => {
+const HospitalDetails = ({ data, isLoggedIn }) => {
   const { hospitalName } = useParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleDoctorsCount, setVisibleDoctorsCount] = useState(5);
@@ -32,7 +32,9 @@ const HospitalDetails = ({ data }) => {
   return (
     <div className="p-4 md:px-20">
       <h1 className="text-2xl font-bold mb-4">{hospitalName}</h1>
+      {isLoggedIn &&
       <button className='block border px-8 py-1 rounded-3xl bg-blue-500 text-white'>Rate</button>
+      }
       <div className='flex gap-6 my-4'>
         {activity=='ratings' ?
         <p className='underline text-sm hover:cursor-pointer' onClick={()=>changePageView('doctors')}>View all doctors</p> :
