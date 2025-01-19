@@ -22,6 +22,7 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
   };
 
   const changePageView=(activity)=>{
+    console.log(isLoggedIn)
     if(activity=='ratings'){
       setActivity('ratings');
     } else if(activity=='doctors'){
