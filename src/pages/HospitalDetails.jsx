@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {DoctorCard} from "../components/Index";
 import { v4 as uuidv4 } from 'uuid';
@@ -168,7 +168,7 @@ const HospitalDetails = ({ data, isLoggedIn }) => {
 {/* Modal:form for submitting ratings  */}
 {isModalOpen && (
   <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
-    <div className="bg-white rounded-lg shadow-lg p-6 w-[90%] md:w-[600px]">
+    <div className="bg-white rounded-lg shadow-lg px-6 pt-3 w-[90%] h-[95vh] md:w-[600px] overflow-y-scroll">
       <h2 className="text-xl font-bold mb-4">Rate Hospital</h2>
       <form onSubmit={handleSubmit}>
         <label className="block mb-2">
