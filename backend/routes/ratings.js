@@ -1,5 +1,9 @@
+const express = require('express');
+const router = express.Router();
+const HospitalRating = require('../models/HospitalRating');
+
 // Fetching a hospital's ratings
-app.get('/api/ratings/:hospitalName', async (req, res) => {
+router.get('/:hospitalName', async (req, res) => {
     try {
       const ratings = await HospitalRating.find({ hospitalName: req.params.hospitalName });
       res.json(ratings);
@@ -9,7 +13,7 @@ app.get('/api/ratings/:hospitalName', async (req, res) => {
   });
   
 //   Adding a new rating
-  app.post('/ratings', async (req, res) => {
+  app.post('/', async (req, res) => {
     console.log('Rating API called');
     const { hospitalName, overallRating, facilities, location, safety, staff, cleanliness, comments } = req.body;
     try {
