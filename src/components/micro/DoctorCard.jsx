@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-const DoctorCard = ({ name, specialty, rating, hospitalName, department }) => {
+const DoctorCard = ({ name, specialty, rating, hospitalName, department, BASE_URL }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {

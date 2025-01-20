@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const HospitalCard = ({ name, rating }) => {
+const HospitalCard = ({ name, rating, BASE_URL  }) => {
   const [ratings, setRatings] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const HospitalCard = ({ name, rating }) => {
     return (
       <div className="p-4 border rounded shadow-md md:w-[700px] cursor-pointer" onClick={handleClick}>
         <h3 className="text-lg font-bold">{name}</h3>
-        <h3 className="text-lg font-bold">No. of ratings: {ratings.length} | Overal Quality: {averageRating} ⭐</h3>
+        <h3 className="text-lg font-bold">No. of ratings: {ratings.length} | Overal Quality: {ratings.length==0? 'Not rated': averageRating} ⭐</h3>
         {/* <p className="text-sm text-gray-600">Rating: {rating} ⭐</p> */}
       </div>
     );
