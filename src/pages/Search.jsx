@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import {DoctorCard, HospitalCard} from "../components/Index";
 
-const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, setSearchQuery, data}) => {
+const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, setSearchQuery, data, BASE_URL}) => {
   const [showMoreCount, setShowMoreCount] = useState(5);
   const navigate=useNavigate()
 
@@ -122,6 +122,7 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
                 hospitalName={doctor.hospitalName}
                 department={doctor.department}
                 specialty={doctor.specialty}
+                BASE_URL={BASE_URL}
                 // rating={doctor.rating}
               />
             ))
@@ -129,6 +130,7 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
             <HospitalCard
               key={uuidv4()} // Using hospitalName as a unique key
               name={hospital.name}
+              BASE_URL={BASE_URL}
               rating={hospital.rating || "N/A"}   // Default fallback for rating
             />
           ))}

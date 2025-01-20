@@ -5,7 +5,7 @@ import { FaSearch } from "react-icons/fa";
 
 import {DoctorCard, HospitalCard} from "../components/Index";
 
-const ResultsPage = () => {
+const ResultsPage = ({BASE_URL}) => {
   const navigate=useNavigate()
     const location = useLocation();
     const { results = [], searchType = "" } = location.state || {}; // Default values
@@ -23,6 +23,7 @@ console.log(results)
                 hospitalName={doctor.hospitalName}
                 department={doctor.department}
                 specialty={doctor.specialty}
+                BASE_URL={BASE_URL}
                   // rating={doctor.rating}
                 />
               ))
@@ -30,6 +31,7 @@ console.log(results)
                 <HospitalCard
                   key={uuidv4()}
                   name={hospital.name}
+                  BASE_URL={BASE_URL}
                   // location={hospital.location}
                   // rating={hospital.rating}
                 />
