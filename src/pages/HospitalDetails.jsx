@@ -96,6 +96,7 @@ const HospitalDetails = ({ data, isLoggedIn, BASE_URL }) => {
       .then((data) => {
         console.log('Submitted rating:', data);
         closeModal();
+        window.location.reload();
         // refreshRatings();
       })
       .catch((error) => console.error('Error submitting rating:', error));
@@ -222,6 +223,7 @@ console.log(isLoggedIn)
             type="number"
             min="1"
             max="5"
+            step="0.5"
             className="w-full p-2 border rounded"
             onChange={calculateOverallRating}
             required
@@ -234,6 +236,7 @@ console.log(isLoggedIn)
             type="number"
             min="1"
             max="5"
+            step="0.5"
             className="w-full p-2 border rounded"
             onChange={calculateOverallRating}
             required
@@ -246,6 +249,7 @@ console.log(isLoggedIn)
             type="number"
             min="1"
             max="5"
+            step="0.5"
             className="w-full p-2 border rounded"
             onChange={calculateOverallRating}
             required
@@ -258,6 +262,7 @@ console.log(isLoggedIn)
             type="number"
             min="1"
             max="5"
+            step="0.5"
             className="w-full p-2 border rounded"
             onChange={calculateOverallRating}
             required
@@ -270,6 +275,7 @@ console.log(isLoggedIn)
             type="number"
             min="1"
             max="5"
+            step="0.5"
             className="w-full p-2 border rounded"
             onChange={calculateOverallRating}
             required
