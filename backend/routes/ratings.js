@@ -13,7 +13,7 @@ router.get('/:hospitalName', async (req, res) => {
   });
   
 //   Adding a new rating
-  app.post('/', async (req, res) => {
+  router.post('/', async (req, res) => {
     console.log('Rating API called');
     const { hospitalName, overallRating, facilities, location, safety, staff, cleanliness, comments } = req.body;
     try {
@@ -34,3 +34,4 @@ router.get('/:hospitalName', async (req, res) => {
     }
   });
   
+  module.exports = router;

@@ -27,7 +27,7 @@ const HospitalDetails = ({ data, isLoggedIn, BASE_URL }) => {
   // };
 // fetching ratings when page loads
   useEffect(() => {
-    fetch(`/api/ratings/${hospitalName}`)
+    fetch(`${BASE_URL}/ratings/${hospitalName}`)
       .then((response) => response.json())
       .then((data) => setRatings(data))
       .catch((error) => console.error('Error fetching ratings:', error));
