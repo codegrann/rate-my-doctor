@@ -11,7 +11,6 @@ const DoctorCard = ({ name, specialty, rating, hospitalName, department }) => {
         <p className="text-sm text-gray-600">병원: {hospitalName}</p> {/*Hospital*/}
         <p className="text-sm text-gray-600">진료과: {department}</p> {/*Department*/}
         <p className="text-sm text-gray-600">전문분야: {specialty}</p> {/*Specialty*/}
-        {/*<p className="text-sm text-gray-600">평점: {rating} ⭐</p>*/} {/*Rating*/}
       </div>
     );
   };

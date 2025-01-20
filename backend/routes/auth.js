@@ -101,7 +101,6 @@ router.post('/google', async (req, res) => {
   }
 });
 
-module.exports = router;
 
 // Kakao auth route
 router.post('/kakao', async (req, res) => {
@@ -166,3 +165,6 @@ router.post('/kakao', async (req, res) => {
     res.status(401).json({ message: 'Invalid Kakao token' });
   }
 });
+
+module.exports = router;
+
