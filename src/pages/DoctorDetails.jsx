@@ -17,7 +17,6 @@ const DoctorDetails = ({ data }) => {
       <p className="text-sm text-gray-600">Hospital: {doctor.hospitalName}</p>
       <p className="text-sm text-gray-600">Department: {doctor.department}</p>
       <p className="text-sm text-gray-600">Specialty: {doctor.specialty}</p>
-      <p className="text-sm text-gray-600">Rating: {doctor.rating} ⭐</p>
     </div>
   );
 };

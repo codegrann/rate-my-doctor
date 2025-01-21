@@ -5,6 +5,7 @@ const cors = require('cors');
 
 const authRoutes = require('./routes/auth');
 const ratingsRoutes = require('./routes/ratings');
+const doctorRatingRoutes = require('/routes/doctorRatings')
 
 const CONNECTION_STRING=process.env.CONNECTION_STRING
 
@@ -18,6 +19,7 @@ mongoose.connect(CONNECTION_STRING)
 
 app.use('/auth', authRoutes);
 app.use('/ratings', ratingsRoutes);
+app.use('/doctor-ratings', doctorRatingRoutes);
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

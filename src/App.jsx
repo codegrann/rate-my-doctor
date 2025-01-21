@@ -76,7 +76,7 @@ function App() {
         <Route path="results" element={<ResultsPage searchType={searchType} setSearchType={setSearchType} BASE_URL={BASE_URL}/>} />
         <Route path="search" element={<SearchPage data={ddata} searchType={searchType} setSearchType={setSearchType} filteredItems={filteredItems} setFilteredItems={setFilteredItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery} BASE_URL={BASE_URL}/>} />
         <Route path="hospital/:hospitalName" element={<HospitalDetails data={ddata} isLoggedIn={isLoggedIn} BASE_URL={BASE_URL}/>} />
-        <Route path="doctor/:doctorName" element={<DoctorDetails data={ddata} />} />
+        <Route path="doctor/:doctorName" element={<DoctorDetails data={ddata} BASE_URL={BASE_URL}/>} />
         {/* <Route path="contact" element={<Contact />}> */}
             {/* <Route path="email" element={<EmailContact />} /> */}
             {/* <Route path="phone" element={<PhoneContact />} /> */}
