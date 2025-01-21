@@ -5,7 +5,7 @@ const cors = require('cors');
 
 const authRoutes = require('./routes/auth');
 const ratingsRoutes = require('./routes/ratings');
-const doctorRatingRoutes = require('/routes/doctorRatings')
+const doctorRatingRoutes = require('./routes/doctorRatings')
 
 const CONNECTION_STRING=process.env.CONNECTION_STRING
 

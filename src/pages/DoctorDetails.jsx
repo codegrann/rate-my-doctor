@@ -77,19 +77,34 @@ const DoctorDetails = ({ data, BASE_URL }) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+
+    const formDataToSubmit = {
+      ...formData,
+      doctorName: doctor.name,
+      hospitalName: doctor.hospitalName,
+      department: doctor.department,
+      specialty: doctor.specialty,
+    };
+    console.log('form data', formDataToSubmit)
+
     fetch(`${BASE_URL}/doctor-ratings`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(formDataToSubmit),
     })
-      .then((response) => response.json())
-      .then(() => {
+      .then((response) => {
+        response.json()
+      console.log('response', response)
+  })
+      .then((data) => {
+        console.log("received data", data)
         setIsModalOpen(false);
         alert('Rating submitted successfully!');
+        // window.location.reload();
       })
-      .catch((error) => console.error('Error submitting rating:', error));
+      .catch((error) => console.log('Error submitting rating:', error));
   };
 
   if (!doctor) {

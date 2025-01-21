@@ -14,11 +14,13 @@ router.get('/:doctorName', async (req, res) => {
 
 // Add a new rating
 router.post('/', async (req, res) => {
+    console.log('doctor api called')
   try {
     const rating = new DoctorRating(req.body);
     await rating.save();
     res.status(201).json(rating);
   } catch (error) {
+    console.log('error', error)
     res.status(500).json({ error: 'Failed to submit doctor rating' });
   }
 });
