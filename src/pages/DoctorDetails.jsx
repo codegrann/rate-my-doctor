@@ -123,10 +123,14 @@ const DoctorDetails = ({ data, BASE_URL }) => {
       <p className="text-sm text-gray-600">Department: {doctor.department}</p>
       <p className="text-sm text-gray-600">Specialty: {doctor.specialty}</p>
 
-    {isLoggedIn &&
+    {isLoggedIn ?
       <button onClick={toggleModal} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
         Rate Doctor
       </button>
+    :
+    <a onClick={()=>navigate('/login')} className="text-blue-500 underline cursor-pointer">
+          Login to rate the doctor
+    </a>
     }
 
       {isModalOpen && (
