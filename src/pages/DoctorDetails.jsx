@@ -141,7 +141,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
                 />
               </label>
               <label className="block mb-2">
-                Was Awesome (1-5):
+              Organized & presentable (1-5):
                 <input
                   type="number"
                   name="wasAwesome"
@@ -231,11 +231,11 @@ const DoctorDetails = ({ data, BASE_URL }) => {
           <div key={index} className="p-4 border rounded shadow">
             <p>Overall Rating: {rating.overallRating}</p>
             <p>Rated on: {new Date(rating.date).toLocaleDateString()}</p>
-            <p>Was Awesome: {rating.wasAwesome}/5</p>
+            <p>Organized & presentable: {rating.wasAwesome}/5</p>
             <p>Gentleness: {rating.gentleness}/5</p>
             <p>Would Recommend: {rating.wouldRecommend}</p>
             <p>Comments: {rating.comments}</p>
-            <p>Tags: {rating.tags.join(', ')}</p>
+            {rating.tags.length > 0 ? <p>Tags: {rating.tags.join(', ')}</p> : ''}
           </div>
         ))}
       </div>
