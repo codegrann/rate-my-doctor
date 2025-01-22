@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import {DoctorCard} from "../components/Index";
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+
+import {DoctorCard} from "../components/Index";
 
 import { useAuth } from '../hooks/AuthContext';
 
@@ -14,6 +16,8 @@ const HospitalDetails = ({ data, BASE_URL }) => {
   const [ratings, setRatings] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [overallRating, setOverallRating] = useState(0);
+
+  const navigate = useNavigate();
 
   const { isLoggedIn, logout } = useAuth();
 
@@ -102,7 +106,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
         closeModal();
         toast.success('Submitted rating!!');
         window.location.reload();
-        // refreshRatings();
+        toast.error('Submitted rating')
       })
       .catch((error) => console.error('Error submitting rating:', error));
   };
@@ -122,11 +126,14 @@ console.log(isLoggedIn)
   return (
     <div className="p-4 md:px-20">
       <h1 className="text-2xl font-bold mb-4">{hospitalName}</h1>
-      <p>fhgh {isLoggedIn}</p>
-      {isLoggedIn &&
+      {isLoggedIn ?
       <button
       onClick={openModal}
       className='block border px-8 py-1 rounded-3xl bg-blue-500 text-white'>Rate</button>
+      :
+      <a onClick={()=>navigate('/login')} className="text-blue-500 underline cursor-pointer">
+            Login to rate the hospital
+      </a>
       }
       <div className='flex gap-6 my-4'>
         {activity=='ratings' ?
