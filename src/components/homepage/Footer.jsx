@@ -32,7 +32,7 @@ const Footer = () => {
           </a>
         </div>
         <div className="text-sm">
-          © 2024 Rate My Doctors, LLC. All Rights Reserved.
+          © 2024 Rate My Doctor, LLC. All Rights Reserved.
         </div>
       </div>
     </footer>
