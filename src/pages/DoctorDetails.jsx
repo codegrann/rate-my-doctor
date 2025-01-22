@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { useAuth } from '../hooks/AuthContext';
+
 const DoctorDetails = ({ data, BASE_URL }) => {
   const { doctorName } = useParams();
   const doctor = data.find((doc) => doc.name === doctorName); // Retain doctor data structure
@@ -16,6 +18,8 @@ const DoctorDetails = ({ data, BASE_URL }) => {
     comments: '',
     tags: [],
   });
+
+  const { isLoggedIn, logout } = useAuth();
 
   useEffect(() => {
     fetch(`${BASE_URL}/doctor-ratings/${doctorName}`)
@@ -101,7 +105,8 @@ const DoctorDetails = ({ data, BASE_URL }) => {
       .then((data) => {
         console.log("received data", data)
         setIsModalOpen(false);
-        alert('Rating submitted successfully!');
+        // alert('Rating submitted successfully!');
+        toast.success('Submitted rating!!');
         window.location.reload();
       })
       .catch((error) => console.log('Error submitting rating:', error));
@@ -118,9 +123,11 @@ const DoctorDetails = ({ data, BASE_URL }) => {
       <p className="text-sm text-gray-600">Department: {doctor.department}</p>
       <p className="text-sm text-gray-600">Specialty: {doctor.specialty}</p>
 
+    {isLoggedIn &&
       <button onClick={toggleModal} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
         Rate Doctor
       </button>
+    }
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">

@@ -4,12 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import KakaoLogin from 'react-kakao-login';
 
+import { useAuth } from "../../hooks/AuthContext";
 
-const Login = ({BASE_URL, setIsLoggedIn}) => {
+const Login = ({BASE_URL}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const { isLoggedIn, login } = useAuth();
+
 
 // handle auth with email and password
   const handleSubmit = async (e) => {
@@ -41,12 +45,14 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
         console.log(localStorage.getItem('authToken'))
         console.log(localStorage.getItem('userEmail'))
         console.log(localStorage.getItem('userId'))
-        setIsLoggedIn(true)
+        login()
+        // setIsLoggedIn(true)
         // alert('Sign-in successful!');
-        toast.success('Sign-in successful!');
+        // toast.success('Sign-in successful!');
         navigate('/')
       } else {
         setError(data.message);
+        toast.error(error)
       }
     } catch (error) {
       console.error('Error:', error);
@@ -84,10 +90,11 @@ const Login = ({BASE_URL, setIsLoggedIn}) => {
         localStorage.setItem('authToken', data.token);
         localStorage.setItem('userEmail', data.email);
         localStorage.setItem('userId', data.userId);
-        setIsLoggedIn(true);
+        login();
+        // setIsLoggedIn(true);
         navigate('/');
-        console.log('Sign-in successful!');
-        toast.success('Sign-in successful!');
+        // console.log('Sign-in successful!');
+        // toast.success('Sign-in successful!');
       } else {
         // Handle failure
         console.log('Google Sign-in failed');
@@ -130,9 +137,10 @@ const handleKakaoSuccess = async (response) => {
       localStorage.setItem('authToken', data.token);
       localStorage.setItem('userEmail', data.email);
       localStorage.setItem('userId', data.userId);
-      setIsLoggedIn(true);
+      login();
+      // setIsLoggedIn(true);
       navigate('/');
-      toast.success('Sign-in successful!');
+      // toast.success('Sign-in successful!');
     } else {
       toast.error(data.message || 'Kakao Sign-in failed.');
     }
@@ -149,9 +157,6 @@ const handleKakaoSuccess = async (response) => {
   };
   
 
-  const handleSocialLogin = (provider) => {
-    console.log(`Login with ${provider}`);
-  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -219,11 +224,11 @@ const handleKakaoSuccess = async (response) => {
             buttonText="Login with Kakao"
           />
           {/* Naver Login */}
-          <button
+          {/* <button
             className="w-full flex items-center justify-center border py-2 rounded-md bg-green-500 text-white hover:bg-green-600"
           >
             Login with Naver
-          </button>
+          </button> */}
         </div>
         <p className="mt-4 text-center text-sm">
           Don’t have an account?{" "}

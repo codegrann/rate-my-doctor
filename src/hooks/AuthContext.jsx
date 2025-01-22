@@ -1,25 +1,31 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('authToken');
     setIsLoggedIn(!!token);
   }, []);
 
   const login = (token) => {
-    localStorage.setItem('token', token);
+    // localStorage.setItem('authToken', token);
     setIsLoggedIn(true);
+    // window.location.reload();
+    toast.success('Sign-in successful!');
+    console.log('Sign-in successful!');
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('authToken');
     setIsLoggedIn(false);
-    navigate('/')
-    window.location.reload();
+    // window.location.reload();
+    toast.success('Sign-out successful!');
     console.log('User logged out');
   };
 

@@ -5,7 +5,7 @@ import { Navbar, Footer } from './components/homepage/Index';
 function Layout({setIsLoggedIn, isLoggedIn}) {
   return (
     <div>
-      <Navbar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>
+      <Navbar/>
       <div className='min-h-[80vh]'>
       <Outlet /> {/* This renders the nested route components */}
       </div>

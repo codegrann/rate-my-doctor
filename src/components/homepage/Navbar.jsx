@@ -2,21 +2,27 @@ import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoLogOut } from "react-icons/io5";
 
+import { useAuth } from "../../hooks/AuthContext";
+
 
 import { FaInstagram, FaTwitter, FaTiktok } from "react-icons/fa";
 import { HiMenu } from "react-icons/hi";
 
-const Navbar = ({setIsLoggedIn, isLoggedIn}) => {
-  const navigate = useNavigate();
+const Navbar = () => {
+  // const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { isLoggedIn, logout } = useAuth();
+
 
   const handleLogout = () => {
     // localStorage.removeItem('token');
-    localStorage.clear();
-    setIsLoggedIn(false);
+    // localStorage.clear();
+    // setIsLoggedIn(false);
     setIsMenuOpen(false)
+    logout();
     navigate('/')
-    console.log('User logged out');
+    // console.log('User logged out');
   };
 
   return (

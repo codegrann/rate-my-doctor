@@ -3,8 +3,10 @@ import { useParams } from 'react-router-dom';
 import {DoctorCard} from "../components/Index";
 import { v4 as uuidv4 } from 'uuid';
 
+import { useAuth } from '../hooks/AuthContext';
 
-const HospitalDetails = ({ data, isLoggedIn, BASE_URL }) => {
+
+const HospitalDetails = ({ data, BASE_URL }) => {
   const { hospitalName } = useParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleDoctorsCount, setVisibleDoctorsCount] = useState(5);
@@ -12,6 +14,8 @@ const HospitalDetails = ({ data, isLoggedIn, BASE_URL }) => {
   const [ratings, setRatings] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [overallRating, setOverallRating] = useState(0);
+
+  const { isLoggedIn, logout } = useAuth();
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -96,6 +100,7 @@ const HospitalDetails = ({ data, isLoggedIn, BASE_URL }) => {
       .then((data) => {
         console.log('Submitted rating:', data);
         closeModal();
+        toast.success('Submitted rating!!');
         window.location.reload();
         // refreshRatings();
       })
@@ -118,11 +123,11 @@ console.log(isLoggedIn)
     <div className="p-4 md:px-20">
       <h1 className="text-2xl font-bold mb-4">{hospitalName}</h1>
       <p>fhgh {isLoggedIn}</p>
-      {/* {isLoggedIn && */}
+      {isLoggedIn &&
       <button
       onClick={openModal}
       className='block border px-8 py-1 rounded-3xl bg-blue-500 text-white'>Rate</button>
-      {/* } */}
+      }
       <div className='flex gap-6 my-4'>
         {activity=='ratings' ?
         <p className='underline text-sm hover:cursor-pointer' onClick={()=>changePageView('doctors')}>View all doctors</p> :
@@ -206,16 +211,6 @@ console.log(isLoggedIn)
     <div className="bg-white rounded-lg shadow-lg px-6 pt-4 w-[90%] h-[97vh] md:w-[600px] overflow-y-scroll">
       <h2 className="text-xl font-bold mb-2">Rate Hospital</h2>
       <form onSubmit={handleSubmit}>
-        {/* <label className="block mb-2">
-          <span className="text-gray-700">Overall Rating</span>
-          <input
-            type="number"
-            min="1"
-            max="5"
-            className="w-full p-2 border rounded mb-3"
-            required
-          />
-        </label> */}
         <label className="block mb-3">
           <span className="text-gray-700">Facilities (1-5)</span>
           <input

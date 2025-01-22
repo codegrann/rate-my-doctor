@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Link, Outlet} from 'react-route
 import Papa from 'papaparse';
 import * as XLSX from 'xlsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import * as Kakao from 'kakao-js-sdk'
 
 Kakao.init('6ec9fb4811670e4bd219a26028bb3e5e');
@@ -36,7 +38,7 @@ function App() {
   // console.log(import.meta.env.GOOGLE_CLIENT_ID);
 
   // Authentication state
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 
   useEffect(() => {
@@ -56,34 +58,35 @@ function App() {
   }, []);
 
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsLoggedIn(true);
-    } 
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem('token');
+  //   if (token) {
+  //     setIsLoggedIn(true);
+  //   } 
+  // }, []);
   
 
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
 
     <Router>
+      <ToastContainer />
       <Routes>
-        <Route path='/' element={<Layout setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>}>
-        <Route index element={<Homepage searchType={searchType} setSearchType={setSearchType} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>}/>
-        <Route path="login" element={<Login BASE_URL={BASE_URL} setIsLoggedIn={setIsLoggedIn}/>} />
-        <Route path="signup" element={<Signup BASE_URL={BASE_URL} setIsLoggedIn={setIsLoggedIn}/>} />
-        <Route path="results" element={<ResultsPage searchType={searchType} setSearchType={setSearchType} BASE_URL={BASE_URL}/>} />
-        <Route path="search" element={<SearchPage data={ddata} searchType={searchType} setSearchType={setSearchType} filteredItems={filteredItems} setFilteredItems={setFilteredItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery} BASE_URL={BASE_URL}/>} />
-        <Route path="hospital/:hospitalName" element={<HospitalDetails data={ddata} isLoggedIn={isLoggedIn} BASE_URL={BASE_URL}/>} />
-        <Route path="doctor/:doctorName" element={<DoctorDetails data={ddata} BASE_URL={BASE_URL}/>} />
-        {/* <Route path="contact" element={<Contact />}> */}
-            {/* <Route path="email" element={<EmailContact />} /> */}
-            {/* <Route path="phone" element={<PhoneContact />} /> */}
-        {/* </Route> */}
+        <Route path='/' element={<Layout />}>
+          <Route index element={<Homepage searchType={searchType} setSearchType={setSearchType} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>}/>
+          <Route path="login" element={<Login BASE_URL={BASE_URL}/>} />
+          <Route path="signup" element={<Signup BASE_URL={BASE_URL}/>} />
+          <Route path="results" element={<ResultsPage searchType={searchType} setSearchType={setSearchType} BASE_URL={BASE_URL}/>} />
+          <Route path="search" element={<SearchPage data={ddata} searchType={searchType} setSearchType={setSearchType} filteredItems={filteredItems} setFilteredItems={setFilteredItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery} BASE_URL={BASE_URL}/>} />
+          <Route path="hospital/:hospitalName" element={<HospitalDetails data={ddata} BASE_URL={BASE_URL}/>} />
+          <Route path="doctor/:doctorName" element={<DoctorDetails data={ddata} BASE_URL={BASE_URL}/>} />
+          {/* <Route path="contact" element={<Contact />}> */}
+              {/* <Route path="email" element={<EmailContact />} /> */}
+              {/* <Route path="phone" element={<PhoneContact />} /> */}
+          {/* </Route> */}
           
-        {/* 404 Route */}
-        <Route path="*" element={<NotFound />} />
+          {/* 404 Route */}
+          <Route path="*" element={<NotFound />} />      
         </Route>
       </Routes>
     </Router>
