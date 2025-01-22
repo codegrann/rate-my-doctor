@@ -52,14 +52,17 @@ const Signup = ({BASE_URL}) => {
       console.log(response)
       console.log(data)
       if (response.ok) {
-        // alert('Sign-up successful!');
-        // navigate('/login')
-      } else {
+        navigate('/login')
+        toast.success('Registeration successful!');
+      } else if(data.message=='User already exists'){
+          setError(data.message);
+          toast.error('Failed to sign in')            
+        
+      } else{
         // alert('Sign-up successful!');
         // window.location.reload();
         navigate('/login')
-        setError(data.message);
-        toast.error('Failed to sign in')
+        toast.success('Registeration successful!');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -255,7 +258,7 @@ const handleKakaoSuccess = async (response) => {
 
         <p className="mt-4 text-center text-sm">
           Already have an account?{" "}
-          <a href="/login" className="text-blue-500 hover:underline">
+          <a onClick={()=>navigate('/login')} className="text-blue-500 underline cursor-pointer">
             Log in here
           </a>
         </p>

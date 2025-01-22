@@ -232,7 +232,7 @@ const handleKakaoSuccess = async (response) => {
         </div>
         <p className="mt-4 text-center text-sm">
           Don’t have an account?{" "}
-          <a href="/signup" className="text-blue-500 hover:underline">
+          <a onClick={()=>navigate('/signup')} className="text-blue-500 underline cursor-pointer">
             Sign up here
           </a>
         </p>
