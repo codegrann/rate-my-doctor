@@ -97,6 +97,7 @@ const Login = ({BASE_URL}) => {
         // toast.success('Sign-in successful!');
       } else {
         // Handle failure
+        toast.error('Google Sign-in failed')
         console.log('Google Sign-in failed');
       }
     } catch (error) {

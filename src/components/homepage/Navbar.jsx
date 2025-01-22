@@ -9,7 +9,7 @@ import { FaInstagram, FaTwitter, FaTiktok } from "react-icons/fa";
 import { HiMenu } from "react-icons/hi";
 
 const Navbar = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { isLoggedIn, logout } = useAuth();
