@@ -102,7 +102,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
         console.log("received data", data)
         setIsModalOpen(false);
         alert('Rating submitted successfully!');
-        // window.location.reload();
+        window.location.reload();
       })
       .catch((error) => console.log('Error submitting rating:', error));
   };
@@ -223,6 +223,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
 
       <h2 className="text-xl font-semibold mt-6">Top Tags</h2>
       <p>{topTags.join(', ')}</p>
+      <p>No. of ratings: {ratings.length}</p>
 
       <h2 className="text-xl font-semibold mt-6">User Ratings</h2>
       <div className="space-y-4">
