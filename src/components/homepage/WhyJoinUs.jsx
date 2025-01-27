@@ -1,23 +1,28 @@
 import React from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 
+import { useAuth } from '../../hooks/AuthContext';
+
 function WhyJoinUs() {
   const navigate=useNavigate();
+  const { isLoggedIn } = useAuth();
+
+
   return (
     <section className="py-12 px-2 bg-gray-50">
             {/* Main Content */}
             <div className="text-center max-w-2xl mx-auto">
                 <h2 className="text-3xl font-bold md:text-4xl">
-                    Join the Doctor Haus family
+                    { isLoggedIn ? "Welcome back!" : "Join the Doctor Haus family"}
                 </h2>
                 <p className="mt-4 text-gray-700">
                     Your story and experience will become a new standard for medical care in Korea.
                 </p>
-                <button  className="mt-6 px-6 py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600">
+                { isLoggedIn && <button  className="mt-6 px-6 py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600">
                     <Link to={'/signup'}>
                         Join the Membership
                     </Link>
-                </button>
+                </button> }
             </div>
 
             {/* Reasons Section */}
