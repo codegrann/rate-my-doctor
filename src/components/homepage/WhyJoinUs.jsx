@@ -29,7 +29,7 @@ function WhyJoinUs() {
             </div>
 
             {/* Reasons Section */}
-            <div className="grid grid-cols-1 gap-6 lg:gap-2 mt-10 md:grid-cols-3 lg:w-[65vw] lg:mx-auto">
+            <div className="grid grid-cols-1 gap-6 lg:gap-2 mt-10 md:grid-cols-3 lg:w-[65vw] lg:mx-auto md:px-2">
                 {/* Reason 1 */}
                 <div className="text-center">
                     <img
@@ -37,9 +37,9 @@ function WhyJoinUs() {
                         alt="Reason 1"
                         className="w-48 h-48 lg:w-60 lg:h-60 mx-auto rounded-md"
                     />
-                    <p className="mt-4 font-medium text-gray-800">
+                    <p className="mt-4 font-medium text-gray-800 flex flex-col">
                         <span>당신의 평가는 항상 익명으로 처리됩니다</span>
-                        <span>모든 사용자의 평가는 익명으로 처리되며, 개인정보가 노출되지 않습니다</span>
+                        <span className="text-xs">모든 사용자의 평가는 익명으로 처리되며, 개인정보가 노출되지 않습니다</span>
                     </p>
                 </div>
                 {/* Reason 2 */}
@@ -51,7 +51,7 @@ function WhyJoinUs() {
                     />
                     <p className="mt-4 font-medium text-gray-800">
                     <span>평가에 공감하거나 공감하지 않을수 있습니다</span>
-                    <span>다른 사용자들이 남긴 평가를 좋아하거나 싫어하며 피드백을 제공하세요</span>
+                    <span className="text-xs">다른 사용자들이 남긴 평가를 좋아하거나 싫어하며 피드백을 제공하세요</span>
                     </p>
                 </div>
                 {/* Reason 3 */}
@@ -63,7 +63,7 @@ function WhyJoinUs() {
                     />
                     <p className="mt-4 font-medium text-gray-800">
                     <span>평가를 관리하고 수정할수 있습니다</span>
-                    <span>당신이 제공한 평가를 언제든지 확인하고, 필요에 따라 당신의 의견이 반영되게 합니다</span>
+                    <span className="text-xs">당신이 제공한 평가를 언제든지 확인하고, 필요에 따라 당신의 의견이 반영되게 합니다</span>
                     </p>
                 </div>
             </div>
