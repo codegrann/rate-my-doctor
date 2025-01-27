@@ -13,14 +13,17 @@ function WhyJoinUs() {
             {/* Main Content */}
             <div className="text-center max-w-2xl mx-auto">
                 <h2 className="text-3xl font-bold md:text-4xl">
-                    { isLoggedIn ? "Welcome back!" : "Join the Doctor Haus family"}
+                    { isLoggedIn ? "Welcome back!" : "Doctor Haus 가족이 되어주세요"}
+                    {/* { isLoggedIn ? "Welcome back!" : "Join the Doctor Haus family"} */}
                 </h2>
                 <p className="mt-4 text-gray-700">
-                    Your story and experience will become a new standard for medical care in Korea.
+                    당신의 이야기와 경험은 대한민국 의료의 새로운 기준이 됩니다
+                    {/* Your story and experience will become a new standard for medical care in Korea. */}
                 </p>
-                { isLoggedIn && <button  className="mt-6 px-6 py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600">
+                { !isLoggedIn && <button  className="mt-6 px-6 py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600">
                     <Link to={'/signup'}>
-                        Join the Membership
+                        회원가입
+                        {/* Join the Membership */}
                     </Link>
                 </button> }
             </div>
@@ -35,7 +38,8 @@ function WhyJoinUs() {
                         className="w-48 h-48 lg:w-60 lg:h-60 mx-auto rounded-md"
                     />
                     <p className="mt-4 font-medium text-gray-800">
-                        Trusted by Patients
+                        <span>당신의 평가는 항상 익명으로 처리됩니다</span>
+                        <span>모든 사용자의 평가는 익명으로 처리되며, 개인정보가 노출되지 않습니다</span>
                     </p>
                 </div>
                 {/* Reason 2 */}
@@ -46,7 +50,8 @@ function WhyJoinUs() {
                         className="w-48 h-48 lg:w-60 lg:h-60 mx-auto rounded-md"
                     />
                     <p className="mt-4 font-medium text-gray-800">
-                        Comprehensive Reviews
+                    <span>평가에 공감하거나 공감하지 않을수 있습니다</span>
+                    <span>다른 사용자들이 남긴 평가를 좋아하거나 싫어하며 피드백을 제공하세요</span>
                     </p>
                 </div>
                 {/* Reason 3 */}
@@ -57,7 +62,8 @@ function WhyJoinUs() {
                         className="w-48 h-48 lg:w-60 lg:h-60 mx-auto rounded-md"
                     />
                     <p className="mt-4 font-medium text-gray-800">
-                        Expert Medical Insights
+                    <span>평가를 관리하고 수정할수 있습니다</span>
+                    <span>당신이 제공한 평가를 언제든지 확인하고, 필요에 따라 당신의 의견이 반영되게 합니다</span>
                     </p>
                 </div>
             </div>

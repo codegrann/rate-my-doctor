@@ -26,7 +26,8 @@ const Hero = ({searchType, setSearchType, searchQuery, setSearchQuery}) => {
             <div className="relative z-10 text-white">
                 <h1 className="text-4xl font-bold md:text-6xl">DOCTOR HAUS</h1>
                 <p className="mt-4 text-lg md:text-xl">
-                    Your own medical map completed with your story
+                당신의 이야기로 완성되는 당신만의 의료지도
+                    {/* Your own medical map completed with your story */}
                 </p>
 
                 {/* Input Field */}
@@ -36,7 +37,7 @@ const Hero = ({searchType, setSearchType, searchQuery, setSearchQuery}) => {
                     </span>
                     <input
                         type="text"
-                        placeholder="Enter the hospital name"
+                        placeholder="병원 이름을 입력하세요" /*Enter the hospital name*/
                         className="w-full px-10 py-3 text-gray-700 placeholder-gray-400 rounded-lg shadow-lg md:w-96 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)} // Update query on input change
@@ -50,7 +51,8 @@ const Hero = ({searchType, setSearchType, searchQuery, setSearchQuery}) => {
                     onClick={()=>navigate('/search')}
                     className="block mt-4 text-sm text-blue-300 hover:cursor-pointer underline hover:text-blue-400"
                 >
-                    Search by doctor name
+                    의사 이름으로 검색하기
+                    {/* Search by doctor name */}
                 </p>
             </div>
         </section>

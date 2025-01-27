@@ -77,13 +77,13 @@ const Navbar = () => {
         to="/login"
         className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded hover:bg-gray-100"
       >
-        Log In
+        로그인  {/*Log In*/}
       </Link>
       <Link
         to="/signup"
         className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600"
       >
-        Join the Membership
+        회원가입 {/*Join the Membership*/}
       </Link>
       </div>
       
@@ -111,14 +111,16 @@ const Navbar = () => {
               className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
               onClick={() => setIsMenuOpen(false)}
             >
-              Log In
+              로그인
+              {/* Log In */}
             </Link>
             <Link
               to="/signup"
               className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-white bg-blue-500"
               onClick={() => setIsMenuOpen(false)}
             >
-              Join the Membership
+              회원가입
+              {/* Join the Membership */}
             </Link>
             
           </div>
