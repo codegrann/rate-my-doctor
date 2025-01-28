@@ -6,7 +6,7 @@ import { useAuth } from "../../hooks/AuthContext";
 
 
 import { FaInstagram, FaTwitter, FaTiktok } from "react-icons/fa";
-import { HiMenu } from "react-icons/hi";
+import { HiMenu, HiX } from "react-icons/hi";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -96,7 +96,7 @@ const Navbar = () => {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="text-gray-600 hover:text-blue-500"
         >
-          <HiMenu size={28} />
+          {isMenuOpen ? <HiX size={28}/> : <HiMenu size={28} />} 
         </button>
         {/* Dropdown menu (toggle visibility) */}
         {isMenuOpen && (
