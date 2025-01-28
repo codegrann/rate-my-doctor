@@ -32,7 +32,7 @@ const HospitalCard = ({ name, BASE_URL  }) => {
    // Determine the background color based on the rating range
    const getBgColor = (rating) => {
     if (rating >= 0 && rating <= 1) return "bg-gray-300";
-    if (rating > 1 && rating <= 2) return "bg-orange-400";
+    if (rating > 1 && rating <= 2) return "bg-orange-300";
     if (rating > 2 && rating <= 3) return "bg-yellow-300"; //yellow3
     if (rating > 3 && rating <= 4) return "bg-green-300";
     if (rating > 4 && rating <= 5) return "bg-green-500";
@@ -48,7 +48,6 @@ const HospitalCard = ({ name, BASE_URL  }) => {
       <div className="flex items-center gap-4 sm:gap-8 p-4 border rounded shadow-md md:w-[700px] cursor-pointer" onClick={handleClick}>
         <div className="text-[9pt] flex flex-col items-center px-2">  QUALITY <span className={`${ratings.length > 0 ? `${bgColor} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{ratings.length==0? 'Not rated': averageRating}</span> <span>{ratings.length} {ratings.length == 1 ? 'rating': 'ratings'} <span className='text-yellow-600'>⭐</span> </span> </div>
         <h3 className="text-lg font-bold">{name}</h3>
-        {/* <p className="text-sm text-gray-600">Rating: {rating} ⭐</p> */}
       </div>
     );
   };
