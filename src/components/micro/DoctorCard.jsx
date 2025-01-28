@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const DoctorCard = ({ name, specialty, rating, hospitalName, department, BASE_URL }) => {
+const DoctorCard = ({ name, specialty, hospitalName, department, BASE_URL }) => {
   const [ratings, setRatings] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
+  const [recommendationPercentage, setRecommendationPercentage] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -12,6 +13,7 @@ const DoctorCard = ({ name, specialty, rating, hospitalName, department, BASE_UR
       .then((data) => {
         setRatings(data);
         calculateAverageRating(data);
+        calculateRecommendationPercentage(data);
       })
       .catch((error) => console.error('Error fetching ratings:', error));
   }, [name]);
@@ -23,6 +25,17 @@ const DoctorCard = ({ name, specialty, rating, hospitalName, department, BASE_UR
     }
     const total = ratingsData.reduce((sum, rating) => sum + rating.overallRating, 0);
     setAverageRating((total / ratingsData.length).toFixed(1));
+  };
+
+  const calculateRecommendationPercentage = (ratingsData) => {
+    const totalRatings = ratingsData.length;
+    const recommendCount = ratingsData.filter(
+      (rating) => rating.wouldRecommend === "Yes"
+    ).length;
+
+    const percentage =
+      totalRatings > 0 ? Math.round((recommendCount / totalRatings) * 100) : 0;
+    setRecommendationPercentage(percentage);
   };
 
    // Determine the background color based on the rating range
@@ -46,9 +59,10 @@ const DoctorCard = ({ name, specialty, rating, hospitalName, department, BASE_UR
         <div className="text-[9pt] flex flex-col items-center px-2">  QUALITY <span className={`${ratings.length > 0 ? `${bgColor} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{ratings.length==0? 'Not rated': averageRating}</span> <span>{ratings.length} {ratings.length == 1 ? 'rating': 'ratings'} <span className='text-yellow-600'>⭐</span> </span> </div>
          <div>
             <h3 className="text-lg font-bold">{name}</h3>
-            <p className="text-[9pt] text-gray-600">진료과: {department}</p> {/*Department*/}
-            <p className="text-[9pt] text-gray-600">병원: {hospitalName}</p> {/*Hospital*/}
-            <p className="text-[9pt] text-gray-600">전문분야: {specialty}</p> {/*Specialty*/}        
+            <p className="text-[9pt] text-gray-500">진료과: {department}</p> {/*Department*/}
+            <p className="text-[9pt] text-gray-500">병원: {hospitalName}</p> {/*Hospital*/}
+            <p className="text-[9pt] text-gray-500">전문분야: {specialty}</p> {/*Specialty*/}        
+            <p className="text-[9pt] "><span className='font-semibold'>{recommendationPercentage}%</span> would take/visit again.</p>
         </div>
       
 
