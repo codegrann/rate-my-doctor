@@ -26,7 +26,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-white w-full fixed z-[1000]">
+    <nav className="flex items-center justify-between p-4 bg-white w-full fixed z-[1000] shadow-lg">
       {/* Left: Social Media Icons */}
       <div className="hidden sm:flex space-x-4">
         <a
