@@ -160,7 +160,7 @@ const handleKakaoSuccess = async (response) => {
 
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items- py-6 px-4 justify-center bg-gray-100">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
@@ -198,32 +198,31 @@ const handleKakaoSuccess = async (response) => {
         <p className="text-center text-gray-500">Or continue with</p>
 
           {/* Google login */}
-          <button
-            className="w-full flex items-center justify-center border py-2 mb-2 rounded-md hover:bg-gray-100"
-          >
-            
-          <GoogleLogin
-          // style={{width: "100%"}}
-          onSuccess={credentialResponse => {
-              handleGoogleSuccess(credentialResponse);
-            }}
-            onError={() => {
-              console.error('Login Failed');
-              toast.error('Google login failed');
-            }}
-          />
-          </button>
+          <div className="w-full mb-4 flex justify-center">            
+              <GoogleLogin
+              className="w-full px-4 py-2 border rounded-md hover:bg-gray-100 focus:outline-none"
+              onSuccess={credentialResponse => {
+                  handleGoogleSuccess(credentialResponse);
+                }}
+                onError={() => {
+                  console.error('Login Failed');
+                  toast.error('Google login failed');
+                }}
+              />
+          </div>
 
 
           {/* Kakao login */}
+          <div className="w-full flex justify-center">
             <KakaoLogin
             token="6ec9fb4811670e4bd219a26028bb3e5e"
             onSuccess={handleKakaoSuccess}
             onFail={handleKakaoFailure}
             onLogout={() => console.log('Logged out')}
-            className="w-full flex items-center justify-center border py-2 mb-2 bg-yellow-400 rounded-md hover:bg-yellow-500"
+            className="w-full px-4 py-2 border bg-yellow-400 text-center rounded-md hover:bg-yellow-500 focus:outline-none"
             buttonText="Login with Kakao"
           />
+          </div>
           {/* Naver Login */}
           {/* <button
             className="w-full flex items-center justify-center border py-2 rounded-md bg-green-500 text-white hover:bg-green-600"
