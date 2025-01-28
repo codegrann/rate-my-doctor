@@ -160,7 +160,7 @@ const handleKakaoSuccess = async (response) => {
 
 
   return (
-    <div className="min-h-screen flex items- py-6 px-4 justify-center bg-gray-100">
+    <div className="min-h-screen flex p-4 justify-center bg-gray-100">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
