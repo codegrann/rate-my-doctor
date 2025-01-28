@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../hooks/AuthContext';
 
@@ -18,6 +18,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
     comments: '',
     tags: [],
   });
+  const navigate = useNavigate();
 
   const { isLoggedIn, logout } = useAuth();
 
