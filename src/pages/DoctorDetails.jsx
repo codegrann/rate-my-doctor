@@ -126,7 +126,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
   };
 
   if (!doctor) {
-    return <p className="text-gray-600">Doctor not found.</p>;
+    return <p className="text-lg md:text-3xl text-gray-600">Doctor not found.</p>;
   }
 
   return (
@@ -134,12 +134,12 @@ const DoctorDetails = ({ data, BASE_URL }) => {
       <div className='border border-red-400 flex flex-col md:flex-row gap-6 md:gap-20'>
 
       <div className='border border-blue-400'>
-        <h1>{averageRating}/5</h1>
-      <p>Overall Quality Based on {ratings.length} ratings</p>
+        <h1><span className='text-4xl font-bold'>{averageRating}</span>/5</h1>
+      <p className='text-sm md:text-xl'>Overall Quality Based on <span className='underline'>{ratings.length} ratings</span></p>
       <h1 className="text-2xl font-bold mb-4">{doctor.name}</h1>
-      <p className="text-sm md:text-lg text-gray-600">병원: {doctor.hospitalName}</p>
-      <p className="text-sm md:text-lg text-gray-600">진료과: {doctor.department}</p>
-      <p className="text-sm md:text-lg text-gray-600">전문분야: {doctor.specialty}</p>
+      <p className="text-sm md:text-xl text-gray-600">병원: {doctor.hospitalName}</p>
+      <p className="text-sm md:text-xl text-gray-600">진료과: {doctor.department}</p>
+      <p className="text-sm md:text-xl text-gray-600">전문분야: {doctor.specialty}</p>
 
     {isLoggedIn ?
       <button onClick={toggleModal} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
