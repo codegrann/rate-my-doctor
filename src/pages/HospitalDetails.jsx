@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {DoctorCard} from "../components/Index";
 
 import { useAuth } from '../hooks/AuthContext';
+import { useModal } from '../hooks/ModalContext';
 
 
 const HospitalDetails = ({ data, BASE_URL }) => {
@@ -14,12 +15,14 @@ const HospitalDetails = ({ data, BASE_URL }) => {
   const [visibleDoctorsCount, setVisibleDoctorsCount] = useState(5);
   const [activity, setActivity]=useState('ratings')
   const [ratings, setRatings] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [overallRating, setOverallRating] = useState(0);
 
   const navigate = useNavigate();
 
   const { isLoggedIn, logout } = useAuth();
+  const { isModalOpen, setIsModalOpen } = useModal();
+  
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);

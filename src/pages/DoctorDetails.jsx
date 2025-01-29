@@ -137,7 +137,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="mt-12 bg-white px-6 py-2 rounded shadow-lg w-full max-w-md">
+          <div className="bg-white px-6 py-4 rounded shadow-lg w-full max-w-md">
             <h2 className="text-xl font-bold mb-4">Rate {doctor.name}</h2>
             <form onSubmit={handleFormSubmit} className='text-[11pt] md:text-[12pt]'>
               <label className="block mb-2">
