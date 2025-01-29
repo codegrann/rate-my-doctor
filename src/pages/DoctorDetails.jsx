@@ -143,7 +143,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
   }
 
   return (
-    <div className="p-4 md:px-20">
+    <div className="p-6 md:px-20">
       <div className='flex flex-col md:flex-row gap-6 md:gap-12'>
 
       <div className=' md:max-w-[50%] lg:max-w-md'>
@@ -156,10 +156,10 @@ const DoctorDetails = ({ data, BASE_URL }) => {
       {/* <p className="text-sm md:text-xl text-gray-600">진료과: {doctor.department}</p> */}
       {/* <p className="text-sm md:text-xl text-gray-600">전문분야: {doctor.specialty}</p> */}
 
-    <p className="text-sm md:text-xl flex flex-col mt-2"><span className='text-lg relative left-[10%]  font-bold'>{recommendationPercentage}%</span> would take/visit again.</p>
+    <p className="text-sm md:text-lg flex flex-col mt-2"><span className='text-lg md:text-3xl relative left-[10%]  font-bold'>{recommendationPercentage}%</span> would take/visit again.</p>
 
     {isLoggedIn ?
-      <button onClick={toggleModal} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
+      <button onClick={toggleModal} className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded">
         Rate Doctor
       </button>
     :
@@ -271,13 +271,14 @@ const DoctorDetails = ({ data, BASE_URL }) => {
         ))}
       </ul>
 
-      <h2 className="text-lg sm:text-xl font-semibold mt-6">Top Tags</h2>
-      <p className='text-[11pt] md:text-[13pt]'>{topTags.join(', ')}</p>
-      <p className='text-[11pt] md:text-[13pt]'>No. of ratings: {ratings.length}</p>
+      <h2 className="text-lg sm:text-xl font-semibold mt-6 mb-2">Top Tags</h2>
+      {/* <p className='text-[11pt] md:text-[13pt]'>{topTags.join(', ')}</p> */}
+      <p className='border border-red-400 max-w-xs sm:max-w-sm text-gray-500 text-[11pt] md:text-[13pt]'>{topTags.map(tag=><span className='bg-gray-300 p-2 mr-2 rounded-lg'>{tag}</span>)}</p>
+      {/* <p className='text-[11pt] md:text-[13pt]'>No. of ratings: {ratings.length}</p> */}
       </div>
       </div>
 
-      <h2 className="text-lg sm:text-xl font-semibold mt-6">User Ratings</h2>
+      <h2 className="text-lg sm:text-xl font-semibold mt-6 md:mt-12">User Ratings</h2>
       <div className="space-y-4 text-[11pt] md:text-[13pt]">
         {ratings.map((rating, index) => (
           <div key={index} className="p-4 border rounded shadow">
