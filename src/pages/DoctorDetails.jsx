@@ -136,9 +136,9 @@ const DoctorDetails = ({ data, BASE_URL }) => {
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded shadow-lg w-full max-w-md">
+          <div className="mt-10 bg-white p-6 rounded shadow-lg w-full max-w-md">
             <h2 className="text-xl font-bold mb-4">Rate {doctor.name}</h2>
-            <form onSubmit={handleFormSubmit}>
+            <form onSubmit={handleFormSubmit} className='text-[11pt] md:text-[11pt]'>
               <label className="block mb-2">
                 Rating Level (Awesome 5, Great 4, Good 3, Ok 2, Awful 1):
                 <input
@@ -229,16 +229,16 @@ const DoctorDetails = ({ data, BASE_URL }) => {
       <h2 className="text-lg sm:text-xl font-semibold mt-6">Rating Distribution</h2>
       <ul>
         {Object.entries(ratingDistribution).map(([level, count]) => (
-          <li key={level}>Level {level}: {count} ratings</li>
+          <li key={level} className='text-[11pt] md:text-[13pt]'>Level {level}: {count} ratings</li>
         ))}
       </ul>
 
       <h2 className="text-lg sm:text-xl font-semibold mt-6">Top Tags</h2>
-      <p>{topTags.join(', ')}</p>
-      <p>No. of ratings: {ratings.length}</p>
+      <p className='text-[11pt] md:text-[13pt]'>{topTags.join(', ')}</p>
+      <p className='text-[11pt] md:text-[13pt]'>No. of ratings: {ratings.length}</p>
 
       <h2 className="text-lg sm:text-xl font-semibold mt-6">User Ratings</h2>
-      <div className="space-y-4">
+      <div className="space-y-4 text-[11pt] md:text-[13pt]">
         {ratings.map((rating, index) => (
           <div key={index} className="p-4 border rounded shadow">
             <p>Overall Rating: {rating.overallRating}</p>
