@@ -168,7 +168,6 @@ const DoctorDetails = ({ data, BASE_URL }) => {
     </a>
     }
       </div>
-      <div className='border border-green-400'>
 
     
 
@@ -263,6 +262,8 @@ const DoctorDetails = ({ data, BASE_URL }) => {
           </div>
         </div>
       )}
+      <div className='border border-green-400'>
+
 
       <h2 className="text-lg sm:text-xl font-semibold">Rating Distribution</h2>
       <ul>
@@ -273,7 +274,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
 
       <h2 className="text-lg sm:text-xl font-semibold mt-6 mb-2">Top Tags</h2>
       {/* <p className='text-[11pt] md:text-[13pt]'>{topTags.join(', ')}</p> */}
-      <p className='border border-red-400 max-w-xs sm:max-w-sm text-gray-500 text-[11pt] md:text-[13pt]'>{topTags.map(tag=><span className='bg-gray-300 p-2 mr-2 rounded-lg'>{tag}</span>)}</p>
+      <p className='max-w-xs sm:max-w-sm md:max-w-md text-gray-500 text-[11pt] md:text-[13pt]'>{topTags.map(tag=><span className='bg-gray-300 p-2 mr-2 rounded-lg'>{tag}</span>)}</p>
       {/* <p className='text-[11pt] md:text-[13pt]'>No. of ratings: {ratings.length}</p> */}
       </div>
       </div>
