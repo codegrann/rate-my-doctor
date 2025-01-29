@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 const DoctorCard = ({ name, specialty, hospitalName, department, BASE_URL }) => {
   const [ratings, setRatings] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
   const [recommendationPercentage, setRecommendationPercentage] = useState(0);
   const navigate = useNavigate();
+
 
   useEffect(() => {
     fetch(`${BASE_URL}/doctor-ratings/${name}`)

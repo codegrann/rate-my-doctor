@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import { useModal } from '../hooks/ModalContext';
 import { useAuth } from '../hooks/AuthContext';
 
 const DoctorDetails = ({ data, BASE_URL }) => {
@@ -9,7 +10,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
   const [ratings, setRatings] = useState([]);
   const [ratingDistribution, setRatingDistribution] = useState({});
   const [topTags, setTopTags] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     overallRating: '',
     wasAwesome: 0,
@@ -19,7 +20,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
     tags: [],
   });
   const navigate = useNavigate();
-
+  const { isModalOpen, setIsModalOpen } = useModal();
   const { isLoggedIn, logout } = useAuth();
 
   useEffect(() => {
@@ -136,9 +137,9 @@ const DoctorDetails = ({ data, BASE_URL }) => {
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="mt-10 bg-white p-6 rounded shadow-lg w-full max-w-md">
+          <div className="mt-12 bg-white px-6 py-2 rounded shadow-lg w-full max-w-md">
             <h2 className="text-xl font-bold mb-4">Rate {doctor.name}</h2>
-            <form onSubmit={handleFormSubmit} className='text-[11pt] md:text-[11pt]'>
+            <form onSubmit={handleFormSubmit} className='text-[11pt] md:text-[12pt]'>
               <label className="block mb-2">
                 Rating Level (Awesome 5, Great 4, Good 3, Ok 2, Awful 1):
                 <input

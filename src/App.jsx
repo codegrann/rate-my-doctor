@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 Kakao.init('6ec9fb4811670e4bd219a26028bb3e5e');
 console.log('Kakao is inititialized:', Kakao.isInitialized())
 
+import { ModalProvider } from './hooks/ModalContext';
 
 import Homepage from './pages/Homepage'
 import Layout from './Layout';
@@ -68,7 +69,7 @@ function App() {
 
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-
+    <ModalProvider>
     <Router>
       <ToastContainer />
       <Routes>
@@ -90,6 +91,7 @@ function App() {
         </Route>
       </Routes>
     </Router>
+    </ModalProvider>
     </GoogleOAuthProvider>
   )
 }
