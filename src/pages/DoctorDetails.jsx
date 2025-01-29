@@ -64,6 +64,14 @@ const ratingLabels = {
   1: "Awful",
 };
 
+// Determine the max count to scale the bar width
+const maxCount = Math.max(...Object.values(ratingDistribution));
+
+ // Color shades based on the number of ratings (higher = darker blue)
+//  const getBarColor = (count) => {
+  // const intensity = Math.round((count / maxCount) * 255); // Scale intensity
+  // return `rgb(0, 0, ${intensity})`; // Varying blue shades
+// };
   const calculateAverageRating = (ratingsData) => {
     if (ratingsData.length === 0) {
       setAverageRating(0);
@@ -277,8 +285,20 @@ const ratingLabels = {
 
       <h2 className="text-lg sm:text-xl font-semibold">Rating Distribution</h2>
       <ul>
-        {Object.entries(ratingDistribution).map(([level, count]) => (
-          <li key={level} className='text-[11pt] md:text-[13pt]'>{ratingLabels[level]}: {count} ratings</li>
+        {Object.entries(ratingDistribution).sort(([a],[b])=>b-a).map(([level, count]) => (
+          <li key={level} className='text-[11pt] md:text-[13pt]'>
+            <span className="w-16 text-sm font-medium">
+                {ratingLabels[level]} {level}
+            </span>
+            <div
+                className="h-4 rounded-md transition-all"
+                style={{
+                  width: `${(count / maxCount) * 100}%`, // Adjust width dynamically
+                  backgroundColor: 'rgb(0, 0, 255)',
+                }}
+              ></div>
+            <span className="text-sm font-medium">{count}</span>
+            </li>
         ))}
       </ul>
 
