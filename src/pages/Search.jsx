@@ -76,7 +76,7 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
 };
 
   return (
-    <div className="p-4 py-10 md:px-20">
+    <div className="p-4 py-10 md:px-28">
       <div className="mb-4">
         {/* Dropdown */}
         <select
