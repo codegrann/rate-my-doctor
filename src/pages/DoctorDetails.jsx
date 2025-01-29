@@ -10,6 +10,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
   const [ratings, setRatings] = useState([]);
   const [ratingDistribution, setRatingDistribution] = useState({});
   const [averageRating, setAverageRating]=useState(0)
+  const [recommendationPercentage, setRecommendationPercentage] = useState(0);
   const [topTags, setTopTags] = useState([]);
   // const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -31,6 +32,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
         setRatings(data);
         calculateAverageRating(data);
         calculateRatingDistribution(data);
+        calculateRecommendationPercentage(data);
         extractTopTags(data);
       })
       .catch((error) => console.error('Error fetching doctor ratings:', error));
@@ -59,6 +61,17 @@ const DoctorDetails = ({ data, BASE_URL }) => {
     }
     const total = ratingsData.reduce((sum, rating) => sum + rating.overallRating, 0);
     setAverageRating((total / ratingsData.length).toFixed(1));
+  };
+
+  const calculateRecommendationPercentage = (ratingsData) => {
+    const totalRatings = ratingsData.length;
+    const recommendCount = ratingsData.filter(
+      (rating) => rating.wouldRecommend === "Yes"
+    ).length;
+
+    const percentage =
+      totalRatings > 0 ? Math.round((recommendCount / totalRatings) * 100) : 0;
+    setRecommendationPercentage(percentage);
   };
 
   const extractTopTags = (ratings) => {
@@ -131,9 +144,9 @@ const DoctorDetails = ({ data, BASE_URL }) => {
 
   return (
     <div className="p-4 md:px-20">
-      <div className='border border-red-400 flex flex-col md:flex-row gap-6 md:gap-12'>
+      <div className='flex flex-col md:flex-row gap-6 md:gap-12'>
 
-      <div className='border border-blue-400 md:max-w-[50%] lg:max-w-md'>
+      <div className=' md:max-w-[50%] lg:max-w-md'>
         <h1 className='flex'><span className='text-4xl font-bold'>{averageRating}</span><span className=''>/5</span></h1>
       <p className='text-sm md:text-xl mb-4'>Overall Quality Based on <b>{ratings.length} ratings</b></p>
       <h1 className="text-2xl md:text-3xl font-bold mb-4">{doctor.name}</h1>
@@ -142,6 +155,8 @@ const DoctorDetails = ({ data, BASE_URL }) => {
       {/* <p className="text-sm md:text-xl text-gray-600">병원: {doctor.hospitalName}</p> */}
       {/* <p className="text-sm md:text-xl text-gray-600">진료과: {doctor.department}</p> */}
       {/* <p className="text-sm md:text-xl text-gray-600">전문분야: {doctor.specialty}</p> */}
+
+    <p className="text-sm md:text-xl flex flex-col mt-2"><span className='text-lg relative left-[10%]  font-bold'>{recommendationPercentage}%</span> would take/visit again.</p>
 
     {isLoggedIn ?
       <button onClick={toggleModal} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
