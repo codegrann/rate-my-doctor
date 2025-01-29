@@ -166,9 +166,9 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
 
       <div className=' md:max-w-[50%] lg:max-w-md'>
         <h1 className='flex'><span className='text-4xl font-bold'>{averageRating}</span><span className=''>/5</span></h1>
-      <p className='text-sm md:text-xl mb-4'>Overall Quality Based on <b>{ratings.length} ratings</b></p>
+      <p className='text-sm md:text-lg mb-4'>Overall Quality Based on <b>{ratings.length} ratings</b></p>
       <h1 className="text-2xl md:text-3xl font-bold mb-4">{doctor.name}</h1>
-      <p className="text-sm md:text-xl">Doctor in the <b>{doctor.department} department</b> at <b>{doctor.hospitalName}.</b> Specializes in <b>{doctor.specialty}.</b></p>
+      <p className="text-sm md:text-lg">Doctor in the <b>{doctor.department} department</b> at <b>{doctor.hospitalName}.</b> Specializes in <b>{doctor.specialty}.</b></p>
 
       {/* <p className="text-sm md:text-xl text-gray-600">병원: {doctor.hospitalName}</p> */}
       {/* <p className="text-sm md:text-xl text-gray-600">진료과: {doctor.department}</p> */}
@@ -280,18 +280,18 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
           </div>
         </div>
       )}
-      <div className='border border-green-400'>
+      <div className='md:min-w-[350px] min-h-[350px] border bg-gray-200'>
 
 
-      <h2 className="text-lg sm:text-xl font-semibold">Rating Distribution</h2>
-      <ul className='space-y-2'>
+      <h2 className="text-lg sm:text-xl font-semibold p-4">Rating Distribution</h2>
+      <ul className='space-y-2 mt-2'>
         {Object.entries(ratingDistribution).sort(([a],[b])=>b-a).map(([level, count]) => (
-          <li key={level} className='max-w-sm text-[11pt] md:text-[13pt] grid grid-cols-[1.4fr,4fr,0.5fr] gap-1 border border-red-400'>
-            <span className="justify-self-end text-sm font-medium">
-                {ratingLabels[level]} {level}
+          <li key={level} className='max-w-sm text-[11pt] md:text-[13pt] grid grid-cols-[1.8fr,4fr,0.5fr] gap-1 items-center'>
+            <span className="justify-self-end text-sm md:text-[12pt] font-medium">
+                {ratingLabels[level]} <b>{level}</b>
             </span>
             <div
-                className="h-4 rounded-md transition-all"
+                className="h-2 md:h-5 rounded-md md:rounded-none transition-all"
                 style={{
                   width: `${(count / maxCount) * 100}%`, // Adjust width dynamically
                   backgroundColor: 'rgb(0, 0, 255)',
@@ -302,9 +302,9 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
         ))}
       </ul>
 
-      <h2 className="text-lg sm:text-xl font-semibold mt-6 mb-2">Top Tags</h2>
+      <h2 className="text-lg sm:text-xl font-semibold mt-6 mb-2 pl-4">Top Tags</h2>
       {/* <p className='text-[11pt] md:text-[13pt]'>{topTags.join(', ')}</p> */}
-      <p className='max-w-xs sm:max-w-sm md:max-w-md text-gray-500 text-[11pt] md:text-[13pt]'>{topTags.map((tag, index)=><span key={index} className='bg-gray-300 p-2 mr-2 rounded-lg'>{tag}</span>)}</p>
+      <p className='max-w-xs sm:max-w-sm md:max-w-md p pl-4 text-gray-500 text-[11pt] md:text-[13pt]'>{topTags.map((tag, index)=><span key={index} className='bg-gray-300 p-2 mr-2 rounded-lg'>{tag}</span>)}</p>
       {/* <p className='text-[11pt] md:text-[13pt]'>No. of ratings: {ratings.length}</p> */}
       </div>
       </div>
