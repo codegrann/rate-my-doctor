@@ -9,6 +9,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
   const doctor = data.find((doc) => doc.name === doctorName); // Retain doctor data structure
   const [ratings, setRatings] = useState([]);
   const [ratingDistribution, setRatingDistribution] = useState({});
+  const [averageRating, setAverageRating]=useState(0)
   const [topTags, setTopTags] = useState([]);
   // const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -28,6 +29,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
       .then((response) => response.json())
       .then((data) => {
         setRatings(data);
+        calculateAverageRating(data);
         calculateRatingDistribution(data);
         extractTopTags(data);
       })
@@ -48,6 +50,15 @@ const DoctorDetails = ({ data, BASE_URL }) => {
       }
     });
     setRatingDistribution(distribution);
+  };
+
+  const calculateAverageRating = (ratingsData) => {
+    if (ratingsData.length === 0) {
+      setAverageRating(0);
+      return;
+    }
+    const total = ratingsData.reduce((sum, rating) => sum + rating.overallRating, 0);
+    setAverageRating((total / ratingsData.length).toFixed(1));
   };
 
   const extractTopTags = (ratings) => {
@@ -120,6 +131,11 @@ const DoctorDetails = ({ data, BASE_URL }) => {
 
   return (
     <div className="p-4 md:px-20">
+      <div className='border border-red-400 flex flex-col md:flex-row gap-6 md:gap-20'>
+
+      <div className='border border-blue-400'>
+        <h1>{averageRating}/5</h1>
+      <p>Overall Quality Based on {ratings.length} ratings</p>
       <h1 className="text-2xl font-bold mb-4">{doctor.name}</h1>
       <p className="text-sm md:text-lg text-gray-600">병원: {doctor.hospitalName}</p>
       <p className="text-sm md:text-lg text-gray-600">진료과: {doctor.department}</p>
@@ -134,6 +150,10 @@ const DoctorDetails = ({ data, BASE_URL }) => {
           Login to rate the doctor
     </a>
     }
+      </div>
+      <div className='border border-green-400'>
+
+    
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
@@ -227,7 +247,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
         </div>
       )}
 
-      <h2 className="text-lg sm:text-xl font-semibold mt-6">Rating Distribution</h2>
+      <h2 className="text-lg sm:text-xl font-semibold">Rating Distribution</h2>
       <ul>
         {Object.entries(ratingDistribution).map(([level, count]) => (
           <li key={level} className='text-[11pt] md:text-[13pt]'>Level {level}: {count} ratings</li>
@@ -237,6 +257,8 @@ const DoctorDetails = ({ data, BASE_URL }) => {
       <h2 className="text-lg sm:text-xl font-semibold mt-6">Top Tags</h2>
       <p className='text-[11pt] md:text-[13pt]'>{topTags.join(', ')}</p>
       <p className='text-[11pt] md:text-[13pt]'>No. of ratings: {ratings.length}</p>
+      </div>
+      </div>
 
       <h2 className="text-lg sm:text-xl font-semibold mt-6">User Ratings</h2>
       <div className="space-y-4 text-[11pt] md:text-[13pt]">
