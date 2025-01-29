@@ -120,16 +120,16 @@ const DoctorDetails = ({ data, BASE_URL }) => {
   return (
     <div className="p-4 md:px-20">
       <h1 className="text-2xl font-bold mb-4">{doctor.name}</h1>
-      <p className="text-sm text-gray-600">Hospital: {doctor.hospitalName}</p>
-      <p className="text-sm text-gray-600">Department: {doctor.department}</p>
-      <p className="text-sm text-gray-600">Specialty: {doctor.specialty}</p>
+      <p className="text-sm md:text-lg text-gray-600">병원: {doctor.hospitalName}</p>
+      <p className="text-sm md:text-lg text-gray-600">진료과: {doctor.department}</p>
+      <p className="text-sm md:text-lg text-gray-600">전문분야: {doctor.specialty}</p>
 
     {isLoggedIn ?
       <button onClick={toggleModal} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
         Rate Doctor
       </button>
     :
-    <a onClick={()=>navigate('/login')} className="text-blue-500 underline cursor-pointer">
+    <a onClick={()=>navigate('/login')} className="text-blue-500 text-sm md:text-lg underline cursor-pointer">
           Login to rate the doctor
     </a>
     }
@@ -226,18 +226,18 @@ const DoctorDetails = ({ data, BASE_URL }) => {
         </div>
       )}
 
-      <h2 className="text-xl font-semibold mt-6">Rating Distribution</h2>
+      <h2 className="text-lg sm:text-xl font-semibold mt-6">Rating Distribution</h2>
       <ul>
         {Object.entries(ratingDistribution).map(([level, count]) => (
           <li key={level}>Level {level}: {count} ratings</li>
         ))}
       </ul>
 
-      <h2 className="text-xl font-semibold mt-6">Top Tags</h2>
+      <h2 className="text-lg sm:text-xl font-semibold mt-6">Top Tags</h2>
       <p>{topTags.join(', ')}</p>
       <p>No. of ratings: {ratings.length}</p>
 
-      <h2 className="text-xl font-semibold mt-6">User Ratings</h2>
+      <h2 className="text-lg sm:text-xl font-semibold mt-6">User Ratings</h2>
       <div className="space-y-4">
         {ratings.map((rating, index) => (
           <div key={index} className="p-4 border rounded shadow">
