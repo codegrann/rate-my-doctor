@@ -284,10 +284,10 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
 
 
       <h2 className="text-lg sm:text-xl font-semibold">Rating Distribution</h2>
-      <ul>
+      <ul className='space-y-2'>
         {Object.entries(ratingDistribution).sort(([a],[b])=>b-a).map(([level, count]) => (
-          <li key={level} className='text-[11pt] md:text-[13pt]'>
-            <span className="w-16 text-sm font-medium">
+          <li key={level} className='max-w-sm text-[11pt] md:text-[13pt] grid grid-cols-[1.4fr,4fr,0.5fr] gap-1 border border-red-400'>
+            <span className="justify-self-end text-sm font-medium">
                 {ratingLabels[level]} {level}
             </span>
             <div
