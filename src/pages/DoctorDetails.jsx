@@ -161,7 +161,7 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
   }
 
   return (
-    <div className="p-6 md:px-20">
+    <div className="p-6 md:px-20 md:pt-12">
       <div className='flex flex-col md:flex-row gap-6 md:gap-12'>
 
       <div className=' md:max-w-[50%] lg:max-w-md'>
@@ -280,7 +280,7 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
           </div>
         </div>
       )}
-      <div className='md:min-w-[350px] min-h-[350px] border bg-gray-200'>
+      <div className='md:min-w-[350px] lg:min-w-[450px] min-h-[350px] border bg-gray-200 rounded-md'>
 
 
       <h2 className="text-lg sm:text-xl font-semibold p-4">Rating Distribution</h2>
@@ -312,7 +312,7 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
       <h2 className="text-lg sm:text-xl font-semibold mt-6 md:mt-12">User Ratings</h2>
       <div className="space-y-4 text-[11pt] md:text-[13pt]">
         {ratings.map((rating, index) => (
-          <div key={index} className="p-4 border rounded shadow">
+          <div key={index} className="p-4 border rounded shadow bg-gray-200 lg:max-w-[70vw]">
             <p>Overall Rating: {rating.overallRating}</p>
             <p>Rated on: {new Date(rating.date).toLocaleDateString()}</p>
             <p>Organized & presentable: {rating.wasAwesome}/5</p>
