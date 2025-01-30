@@ -128,7 +128,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
   };
 console.log(isLoggedIn)
   return (
-    <div className="p-4 md:px-20">
+    <div className="p-6 md:px-20 md:pt-12">
       <h1 className="text-2xl font-bold mb-4">{hospitalName}</h1>
       {isLoggedIn ?
       <button
