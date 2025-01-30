@@ -13,8 +13,8 @@ function WhyJoinUs() {
             {/* Main Content */}
             <div className="text-center max-w-2xl mx-auto">
                 <h2 className="text-3xl font-bold md:text-4xl">
-                    { isLoggedIn ? "Welcome back!" : "Doctor Haus 가족이 되어주세요"}
-                    {/* { isLoggedIn ? "Welcome back!" : "Join the Doctor Haus family"} */}
+                    { isLoggedIn ? "다시 오신 것을 환영합니다!" : "Doctor Haus 가족이 되어주세요"}
+                    {/* { isLoggedIn ? "다시 오신 것을 환영합니다!" : "Join the Doctor Haus family"} */}
                 </h2>
                 <p className="mt-4 text-gray-700 px-3">
                     당신의 이야기와 경험은 대한민국 의료의 새로운 기준이 됩니다
