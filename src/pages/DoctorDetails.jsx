@@ -349,7 +349,7 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
       <h2 className="text-lg sm:text-xl font-semibold mt-6 md:mt-12">User Ratings</h2>
       <div className="space-y-4 text-[11pt] md:text-[13pt]">
         {ratings.map((rating, index) => (
-          <div key={index} className="flex items-center p-4 border rounded shadow bg-gray-200 lg:max-w-[70vw]">
+          <div key={index} className="flex items-center md:gap-4 px-2 py-4 md:p-4 border rounded shadow bg-gray-200 lg:max-w-[70vw]">
             <div className="text-[9pt] md:text-[11pt] flex flex-col items-center px-2">  QUALITY <span className={`${ratings.length > 0 ? `${getBgColor(rating.overallRating)} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{rating.overallRating}.0</span></div>
             <div className='text-[9pt] md:text-[11pt]'>
             <p>{formatDate(new Date(rating.date).toLocaleDateString())}</p>
@@ -359,7 +359,7 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
             <p>Would Recommend: {rating.wouldRecommend}</p>
             <p>Comments: {rating.comments}</p>
             {/* {rating.tags.length > 0 ? <p>Tags: {rating.tags.join(', ')}</p> : ''} */}
-            {rating.tags.length > 0 ?<p className='flex items-start flex-wrap text-gray-500 '>{rating.tags.map((tag, index)=><span key={index} className='bg-gray-300 p-2 mr-1 md:mr-2 rounded-lg'>{tag}</span>)}</p>: ''}
+            {rating.tags.length > 0 ?<p className='flex flex-wrap gap-1 md:gap-2 text-gray-500 '>{rating.tags.map((tag, index)=><span key={index} className='bg-gray-300 p-1 md:px-2 mr-1 md:mr-2 rounded-lg'>{tag}</span>)}</p>: ''}
           </div>
           </div>
         ))}
