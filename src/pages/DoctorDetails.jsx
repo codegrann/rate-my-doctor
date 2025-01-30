@@ -351,14 +351,15 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
         {ratings.map((rating, index) => (
           <div key={index} className="flex items-center p-4 border rounded shadow bg-gray-200 lg:max-w-[70vw]">
             <div className="text-[9pt] md:text-[11pt] flex flex-col items-center px-2">  QUALITY <span className={`${ratings.length > 0 ? `${getBgColor(rating.overallRating)} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{rating.overallRating}.0</span></div>
-            <div>
-            <p className=''>{formatDate(new Date(rating.date).toLocaleDateString())}</p>
+            <div className='text-[9pt] md:text-[11pt]'>
+            <p>{formatDate(new Date(rating.date).toLocaleDateString())}</p>
             {/* <p>Overall Rating: {rating.overallRating}</p> */}
             <p>Organized & presentable: {rating.wasAwesome}/5</p>
             <p>Gentleness: {rating.gentleness}/5</p>
             <p>Would Recommend: {rating.wouldRecommend}</p>
             <p>Comments: {rating.comments}</p>
-            {rating.tags.length > 0 ? <p>Tags: {rating.tags.join(', ')}</p> : ''}
+            {/* {rating.tags.length > 0 ? <p>Tags: {rating.tags.join(', ')}</p> : ''} */}
+            {rating.tags.length > 0 ?<p className='flex items-start flex-wrap text-gray-500 '>{rating.tags.map((tag, index)=><span key={index} className='bg-gray-300 p-2 mr-1 md:mr-2 rounded-lg'>{tag}</span>)}</p>: ''}
           </div>
           </div>
         ))}
