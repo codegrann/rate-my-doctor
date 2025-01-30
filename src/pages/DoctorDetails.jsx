@@ -172,6 +172,31 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
   
     // const bgColor = getBgColor(averageRating);
 
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+    
+      // Map of month names
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    
+      // Get the day, month, and year
+      const day = date.getDate();
+      const month = months[date.getMonth()];
+      const year = date.getFullYear();
+    
+      // Determine the suffix for the day
+      const suffix =
+        day % 10 === 1 && day !== 11
+          ? "st"
+          : day % 10 === 2 && day !== 12
+          ? "nd"
+          : day % 10 === 3 && day !== 13
+          ? "rd"
+          : "th";
+    
+      // Return the formatted date
+      return `${month} ${day}${suffix}, ${year}`;
+    }
+
   return (
     <div className="p-6 md:px-20 md:pt-12">
       <div className='flex flex-col md:flex-row gap-6 md:gap-12'>
@@ -324,16 +349,17 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
       <h2 className="text-lg sm:text-xl font-semibold mt-6 md:mt-12">User Ratings</h2>
       <div className="space-y-4 text-[11pt] md:text-[13pt]">
         {ratings.map((rating, index) => (
-          <div key={index} className="p-4 border rounded shadow bg-gray-200 lg:max-w-[70vw]">
+          <div key={index} className="flex items-center p-4 border rounded shadow bg-gray-200 lg:max-w-[70vw]">
             <div className="text-[9pt] md:text-[11pt] flex flex-col items-center px-2">  QUALITY <span className={`${ratings.length > 0 ? `${getBgColor(rating.overallRating)} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{rating.overallRating}.0</span></div>
-
-            <p>Overall Rating: {rating.overallRating}</p>
-            <p>Rated on: {new Date(rating.date).toLocaleDateString()}</p>
+            <div>
+            <p className=''>{formatDate(new Date(rating.date).toLocaleDateString())}</p>
+            {/* <p>Overall Rating: {rating.overallRating}</p> */}
             <p>Organized & presentable: {rating.wasAwesome}/5</p>
             <p>Gentleness: {rating.gentleness}/5</p>
             <p>Would Recommend: {rating.wouldRecommend}</p>
             <p>Comments: {rating.comments}</p>
             {rating.tags.length > 0 ? <p>Tags: {rating.tags.join(', ')}</p> : ''}
+          </div>
           </div>
         ))}
       </div>
