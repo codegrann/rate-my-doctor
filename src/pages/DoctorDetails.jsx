@@ -160,6 +160,18 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
     return <p className="text-lg md:text-3xl text-gray-600">Doctor not found.</p>;
   }
 
+     // Determine the background color based on the rating range
+     const getBgColor = (rating) => {
+      if (rating >= 0 && rating <= 1) return "bg-gray-300";
+      if (rating > 1 && rating <= 2) return "bg-orange-300";
+      if (rating > 2 && rating <= 3) return "bg-yellow-300"; //yellow3
+      if (rating > 3 && rating <= 4) return "bg-green-300";
+      if (rating > 4 && rating <= 5) return "bg-green-500";
+      return "bg-gray-200"; // Fallback color
+    };
+  
+    // const bgColor = getBgColor(averageRating);
+
   return (
     <div className="p-6 md:px-20 md:pt-12">
       <div className='flex flex-col md:flex-row gap-6 md:gap-12'>
@@ -313,6 +325,8 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
       <div className="space-y-4 text-[11pt] md:text-[13pt]">
         {ratings.map((rating, index) => (
           <div key={index} className="p-4 border rounded shadow bg-gray-200 lg:max-w-[70vw]">
+            <div className="text-[9pt] md:text-[11pt] flex flex-col items-center px-2">  QUALITY <span className={`${ratings.length > 0 ? `${getBgColor(rating.overallRating)} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{rating.overallRating}.0</span></div>
+
             <p>Overall Rating: {rating.overallRating}</p>
             <p>Rated on: {new Date(rating.date).toLocaleDateString()}</p>
             <p>Organized & presentable: {rating.wasAwesome}/5</p>
