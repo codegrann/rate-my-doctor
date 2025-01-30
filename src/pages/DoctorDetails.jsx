@@ -349,15 +349,15 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
       <h2 className="text-lg sm:text-xl font-semibold mt-6 md:mt-12">User Ratings</h2>
       <div className="space-y-4 text-[11pt] md:text-[13pt]">
         {ratings.map((rating, index) => (
-          <div key={index} className="flex items-center md:gap-4 px-2 py-4 md:p-4 border rounded shadow bg-gray-200 lg:max-w-[70vw]">
+          <div key={index} className="relative flex items-center md:gap-4 px-2 py-6 md:p-4 rounded shadow bg-gray-200 lg:max-w-[70vw]">
             <div className="text-[9pt] md:text-[11pt] flex flex-col items-center px-2">  QUALITY <span className={`${ratings.length > 0 ? `${getBgColor(rating.overallRating)} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{rating.overallRating}.0</span></div>
-            <div className='text-[9pt] md:text-[11pt] border border-red-400'>
-            <p className='text-right'>{formatDate(new Date(rating.date).toLocaleDateString())}</p>
+            <div className='text-[9pt] md:text-[11pt]'>
+            <p className='absolute right-3 top-2'>{formatDate(new Date(rating.date).toLocaleDateString())}</p>
             {/* <p>Overall Rating: {rating.overallRating}</p> */}
-            <p>Organized & presentable: {rating.wasAwesome}/5</p>
-            <p>Gentleness: {rating.gentleness}/5</p>
-            <p>Would Recommend: {rating.wouldRecommend}</p>
-            <p>Comments: {rating.comments}</p>
+            <p><span className='text-[12pt] md:font-bold'>O</span>rganized & presentable: <span className='text-orange-400'>{rating.wasAwesome}/5</span></p>
+            <p><span className='text-[12pt] md:font-bold'>G</span>entleness: <span className='text-orange-400'>{rating.gentleness}/5</span></p>
+            <p><span className='text-[12pt] md:font-bold'>W</span>ould Recommend: <span className='text-green-500'>{rating.wouldRecommend}</span></p>
+            <p className='mt-2'>{rating.comments}</p>
             {/* {rating.tags.length > 0 ? <p>Tags: {rating.tags.join(', ')}</p> : ''} */}
             {rating.tags.length > 0 ?<p className='flex flex-wrap gap-1 md:gap-2 text-gray-500 '>{rating.tags.map((tag, index)=><span key={index} className='bg-gray-300 p-1 md:px-2 mr-1 md:mr-2 rounded-lg'>{tag}</span>)}</p>: ''}
           </div>
