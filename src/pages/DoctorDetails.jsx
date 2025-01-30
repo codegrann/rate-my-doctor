@@ -13,6 +13,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
   const [averageRating, setAverageRating]=useState(0)
   const [recommendationPercentage, setRecommendationPercentage] = useState(0);
   const [topTags, setTopTags] = useState([]);
+  const [visibleRatings, setVisibleRatings]=useState(5);
   // const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     overallRating: '',
@@ -197,6 +198,11 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
       return `${month} ${day}${suffix}, ${year}`;
     }
 
+    // Load ratings in bunch of 5's
+    const handleShowMore = () => {
+      setVisibleRatings((prev) => prev + 5);
+    };
+
   return (
     <div className="p-6 md:px-20 md:pt-12">
       <div className='flex flex-col md:flex-row gap-6 md:gap-12'>
@@ -348,7 +354,7 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
 
       <h2 className="text-lg sm:text-xl font-semibold mt-6 md:mt-12">User Ratings</h2>
       <div className="space-y-4 text-[11pt] md:text-[13pt]">
-        {ratings.map((rating, index) => (
+        {ratings.slice(0, visibleRatings).map((rating, index) => (
           <div key={index} className="relative flex items-center md:gap-4 px-2 py-6 md:p-4 rounded shadow bg-gray-200 lg:max-w-[70vw]">
             <div className="text-[9pt] md:text-[11pt] flex flex-col items-center px-2">  QUALITY <span className={`${ratings.length > 0 ? `${getBgColor(rating.overallRating)} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{rating.overallRating}.0</span></div>
             <div className='text-[9pt] md:text-[11pt]'>
@@ -364,6 +370,13 @@ const maxCount = Math.max(...Object.values(ratingDistribution));
           </div>
         ))}
       </div>
+       {/* Show More Button */}
+       <button
+        onClick={handleShowMore}
+        className="mt-4 p-2 bg-blue-500 text-white rounded"
+      >
+        Show More
+      </button>
     </div>
   );
 };
