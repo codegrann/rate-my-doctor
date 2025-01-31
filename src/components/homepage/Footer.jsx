@@ -4,7 +4,7 @@ import { FaInstagram, FaTwitter, FaTiktok } from 'react-icons/fa';
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white py-6 px-2 md:px-4 font-montserrat">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex gap-6 justify-between items-center">
         <div className="flex space-x-4">
           <a
             href="https://www.instagram.com"
