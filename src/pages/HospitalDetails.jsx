@@ -130,11 +130,11 @@ const HospitalDetails = ({ data, BASE_URL }) => {
   console.log(isLoggedIn)
   return (
     <div className="p-6 md:px-20 md:pt-12">
-      <h1 className="text-2xl font-bold mb-4">{hospitalName}</h1>
+      <h1 className="text-2xl md:text-4xl font-bold mb-4">{hospitalName}</h1>
       {isLoggedIn ?
         <button
           onClick={openModal}
-          className='block border px-8 py-1 rounded-3xl bg-blue-500 text-white'>Rate</button>
+          className='block border px-8 py-1 md:py-3 md:px-12 rounded-3xl bg-blue-500 text-white'>Rate</button>
         :
         <a onClick={() => navigate('/login')} className="text-blue-500 underline cursor-pointer">
           Login to rate the hospital
@@ -142,15 +142,15 @@ const HospitalDetails = ({ data, BASE_URL }) => {
       }
       <div className='flex gap-6 my-4'>
         {activity == 'ratings' ?
-          <p className='underline text-sm hover:cursor-pointer' onClick={() => changePageView('doctors')}>View all doctors</p> :
-          <p className='underline text-sm hover:cursor-pointer' onClick={() => changePageView('ratings')}>View ratings</p>
+          <p className='underline text-sm md:text-lg hover:cursor-pointer' onClick={() => changePageView('doctors')}>View all doctors</p> :
+          <p className='underline text-sm md:text-lg hover:cursor-pointer' onClick={() => changePageView('ratings')}>View ratings</p>
         }
 
       </div>
 
       {activity == 'ratings' && (
         <>
-          <div className=''>
+          <div className='text-customBlack'>
             <div className='flex flex-col md:flex-row'>
               {/* <h2 className="text-xl font-bold">General Ratings</h2> */}
               {ratings.length > 0 && (
@@ -167,7 +167,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
                         <FaTools className="text-blue-500 md:text-3xl" />
                         <span className='text-sm md:text-lg'>Facilities</span>
                       </div>
-                      <span className="font-bold text-blue-600">{average(ratings.map((r) => r.facilities))}</span>
+                      <span className="font-bold text-blue-600 md:text-2xl bg-customGreen px-2 py-[1px] md:px-4 md:py-2">{average(ratings.map((r) => r.facilities))}</span>
                     </div>
                     {/* Location */}
                     <div className="flex items-center justify-between">
@@ -175,7 +175,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
                         <FaMapMarkerAlt className="text-blue-500 md:text-3xl" />
                         <span className='text-sm md:text-lg'>Location</span>
                       </div>
-                      <span className="font-bold text-blue-600">{average(ratings.map((r) => r.location))}</span>
+                      <span className="font-bold text-blue-600 md:text-2xl bg-customGreen px-2 py-[1px] md:px-4 md:py-2">{average(ratings.map((r) => r.location))}</span>
                     </div>
                     {/* Safety */}
                     <div className="flex items-center justify-between">
@@ -183,7 +183,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
                         <FaShieldAlt className="text-blue-500 md:text-3xl" />
                         <span className='text-sm md:text-lg'>Safety</span>
                       </div>
-                      <span className="font-bold text-blue-600">{average(ratings.map((r) => r.safety))}</span>
+                      <span className="font-bold text-blue-600 md:text-2xl bg-customGreen px-2 py-[1px] md:px-4 md:py-2">{average(ratings.map((r) => r.safety))}</span>
                     </div>
                     {/* Staff */}
                     <div className="flex items-center justify-between">
@@ -191,7 +191,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
                         <FaUserMd className="text-blue-500 md:text-3xl" />
                         <span className='text-sm md:text-lg'>Staff</span>
                       </div>
-                      <span className="font-bold text-blue-600">{average(ratings.map((r) => r.staff))}</span>
+                      <span className="font-bold text-blue-600 md:text-2xl bg-customGreen px-2 py-[1px] md:px-4 md:py-2">{average(ratings.map((r) => r.staff))}</span>
                     </div>
                     {/* Cleanliness */}
                     <div className="flex items-center justify-between md:gap-4">
@@ -199,7 +199,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
                         <FaBroom className="text-blue-500 md:text-3xl"/>
                         <span className='text-sm md:text-lg'>Cleanliness</span>
                       </div>
-                      <span className="font-bold text-blue-600">{average(ratings.map((r) => r.cleanliness))}</span>
+                      <span className="font-bold text-blue-600 md:text-2xl bg-customGreen px-2 py-[1px] md:px-4 md:py-2">{average(ratings.map((r) => r.cleanliness))}</span>
                     </div>
                   </div>
                 </div>
