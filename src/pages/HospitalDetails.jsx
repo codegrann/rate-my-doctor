@@ -187,7 +187,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
           if (value < 3) return "bg-red-300";
           if (value < 4) return "bg-yellow-300";
           if (value < 5) return "bg-green-300";          
-          return "bg-green-500";
+          return "bg-green-300";
         }
         const classes = `
           ${isFilled ? getbgColor() : "bg-gray-200"}
@@ -284,29 +284,29 @@ const HospitalDetails = ({ data, BASE_URL }) => {
               <div className="space-y-4">
                 {ratings.slice(0, visibleDoctorsCount).map((rating, index) => (
                   <div key={index} className="relative flex md:gap-4 px- py-6 md:p-4 rounded bg-gray-100 lg:max-w-[70vw] text-[9pt] md:text-[11pt]">
-                    <div className="text-[9pt] md:text-[11pt] flex flex-col items-center px-2 max-[350px]:px-[6px] max-[350px]:border border-red-400">  Quality <span className={`${ratings.length > 0 ? `${getBgColor(rating.overallRating)} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{rating.overallRating}</span></div>
+                    <div className="text-[9pt] md:text-[11pt] flex flex-col items-center px-2 max-[350px]:px-[6px]">  Quality <span className={`${ratings.length > 0 ? `${getBgColor(rating.overallRating)} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{rating.overallRating}</span></div>
                     <div className='md:py-2'>
                       <p className='absolute right-3 top-2 text-gray-500'>{formatDate(new Date(rating.dateAdded).toLocaleDateString())}</p>
                       <p>{rating.comments}</p>
                       <div>
                         <div className="flex space-x-1 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center justify-between space-x-2">
                             <p className="font-semibold">Facilities:</p>
                             <div className="flex space-x-[3px] max-[350px]:space-x-[1px] rounded">{renderBoxes(rating.facilities)}</div>
                           </div>
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center justify-between space-x-2">
                             <p className="font-semibold">Location:</p>
                             <div className="flex space-x-[3px] max-[350px]:space-x-[1px]">{renderBoxes(rating.location)}</div>
                           </div>
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center justify-between space-x-2">
                             <p className="font-semibold">Safety:</p>
                             <div className="flex space-x-[3px] max-[350px]:space-x-[1px]">{renderBoxes(rating.safety)}</div>
                           </div>
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center justify-between space-x-2">
                             <p className="font-semibold">Staff:</p>
                             <div className="flex space-x-[3px] max-[350px]:space-x-[1px]">{renderBoxes(rating.staff)}</div>
                           </div>
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center justify-between space-x-2">
                             <p className="font-semibold">Cleanliness:</p>
                             <div className="flex space-x-[3px] max-[350px]:space-x-[1px]">{renderBoxes(rating.cleanliness)}</div>
                           </div>
