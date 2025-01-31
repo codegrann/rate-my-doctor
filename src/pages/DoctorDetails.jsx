@@ -204,13 +204,13 @@ const DoctorDetails = ({ data, BASE_URL }) => {
   };
 
   return (
-    <div className="p-6 md:px-20 md:pt-12">
+    <div className="p-6 md:px-20 md:pt-12 font-montserrat">
       <div className='flex flex-col md:flex-row gap-6 md:gap-12'>
 
         <div className=' md:max-w-[50%] lg:max-w-md'>
           <h1 className='flex'><span className='text-4xl font-bold'>{averageRating}</span><span className=''>/5</span></h1>
           <p className='text-sm md:text-lg mb-4'>Overall Quality Based on <b>{ratings.length} ratings</b></p>
-          <h1 className="text-2xl md:text-3xl font-bold mb-4">{doctor.name}</h1>
+          <h1 className="text-2xl md:text-3xl font-sans font-bold mb-4">{doctor.name}</h1>
           <p className="text-sm md:text-lg">Doctor in the <b>{doctor.department} department</b> at <b>{doctor.hospitalName}.</b> Specializes in <b>{doctor.specialty}.</b></p>
 
           {/* <p className="text-sm md:text-xl text-gray-600">병원: {doctor.hospitalName}</p> */}
