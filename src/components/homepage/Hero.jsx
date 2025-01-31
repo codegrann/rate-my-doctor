@@ -33,12 +33,12 @@ const Hero = ({searchType, setSearchType, searchQuery, setSearchQuery}) => {
                 {/* Input Field */}
                 <div className="relative mt-6">
                     <span className="absolute inset-y-0 left-3 md:left-16 flex items-center text-gray-900 text-2xl w-[22px]">
-                        <FaStethoscope className="font-montserrat"/>
+                        <FaStethoscope/>
                     </span>
                     <input
                         type="text"
                         placeholder="병원 이름을 입력하세요" /*Enter the hospital name*/
-                        className="font-montserrat w-full px-10 py-3 text-gray-700 placeholder-gray-400 rounded-lg shadow-lg md:w-96 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full px-10 py-3 text-gray-700 placeholder-gray-400 rounded-lg shadow-lg md:w-96 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)} // Update query on input change
                         onKeyDown={handleKeyDown} // Trigger search on Enter key press
@@ -49,7 +49,7 @@ const Hero = ({searchType, setSearchType, searchQuery, setSearchQuery}) => {
                 <p
                     // href="/search"
                     onClick={()=>navigate('/search')}
-                    className="font-montserrat block mt-4 text-sm md:text-lg text-blue-300 hover:cursor-pointer underline hover:text-blue-400"
+                    className="block mt-4 text-sm md:text-lg text-blue-300 hover:cursor-pointer underline hover:text-blue-400"
                 >
                     의사 이름으로 검색하기
                     {/* Search by doctor name */}
