@@ -167,10 +167,10 @@ const HospitalDetails = ({ data, BASE_URL }) => {
     // Helper function to render the boxes dynamically
     const renderBoxes = (value) => {
       const filledBoxes = Array.from({ length: value }, (_, i) => (
-        <div key={i} className="bg-green-400 w-4 h-4 rounded-md"></div>
+        <div key={i} className="bg-green-400 w-6 max-[320px]:w-4 h-2 md:h-4"></div>
       ));
       const emptyBoxes = Array.from({ length: 5 - value }, (_, i) => (
-        <div key={i} className="bg-gray-200 w-4 h-4 rounded-md"></div>
+        <div key={i} className="bg-gray-200 w-6 max-[320px]:w-4 h-2 md:h-4"></div>
       ));
       return [...filledBoxes, ...emptyBoxes];
     };
@@ -178,7 +178,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
     console.log(isLoggedIn)
 
     return (
-      <div className="p-6 md:px-20 md:pt-12">
+      <div className="p-6 max-[350px]:px-4 md:px-20 md:pt-12">
         <h1 className="text-2xl md:text-4xl font-bold mb-4">{hospitalName}</h1>
         {isLoggedIn ?
           <button
@@ -257,39 +257,34 @@ const HospitalDetails = ({ data, BASE_URL }) => {
               <h3 className='mt-4 font-bold md:text-xl'>{ratings.length} Ratings</h3>
               <div className="space-y-4">
                 {ratings.slice(0, visibleDoctorsCount).map((rating, index) => (
-                  <div key={index} className="relative flex md:gap-4 px-2 py-6 md:p-4 rounded bg-gray-100 lg:max-w-[70vw] text-[9pt] md:text-[12pt]">
-                    <div className="text-[9pt] md:text-[11pt] flex flex-col items-center px-2">  Quality <span className={`${ratings.length > 0 ? `${getBgColor(rating.overallRating)} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{rating.overallRating}</span></div>
+                  <div key={index} className="relative flex md:gap-4 px- py-6 md:p-4 rounded bg-gray-100 lg:max-w-[70vw] text-[9pt] md:text-[11pt]">
+                    <div className="text-[9pt] md:text-[11pt] flex flex-col items-center px-2 max-[350px]:px-[6px] max-[350px]:border border-red-400">  Quality <span className={`${ratings.length > 0 ? `${getBgColor(rating.overallRating)} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{rating.overallRating}</span></div>
                     <div className='md:py-2'>
                       <p className='absolute right-3 top-2 text-gray-500'>{formatDate(new Date(rating.dateAdded).toLocaleDateString())}</p>
                       <p>{rating.comments}</p>
                       <div>
-                        <p className="font-semibold">{rating.title}:</p>
-                        <div className="flex space-x-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="flex space-x-1 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
                           <div className="flex items-center space-x-2">
                             <p className="font-semibold">Facilities:</p>
-                            <div className="flex space-x-1">{renderBoxes(rating.facilities)}</div>
+                            <div className="flex space-x-1 max-[350px]:space-x-[1px] rounded">{renderBoxes(rating.facilities)}</div>
                           </div>
                           <div className="flex items-center space-x-2">
                             <p className="font-semibold">Location:</p>
-                            <div className="flex space-x-1">{renderBoxes(rating.location)}</div>
+                            <div className="flex space-x-1 max-[350px]:space-x-[1px]">{renderBoxes(rating.location)}</div>
                           </div>
                           <div className="flex items-center space-x-2">
                             <p className="font-semibold">Safety:</p>
-                            <div className="flex space-x-1">{renderBoxes(rating.safety)}</div>
+                            <div className="flex space-x-1 max-[350px]:space-x-[1px]">{renderBoxes(rating.safety)}</div>
                           </div>
                           <div className="flex items-center space-x-2">
                             <p className="font-semibold">Staff:</p>
-                            <div className="flex space-x-1">{renderBoxes(rating.staff)}</div>
+                            <div className="flex space-x-1 max-[350px]:space-x-[1px]">{renderBoxes(rating.staff)}</div>
                           </div>
                           <div className="flex items-center space-x-2">
                             <p className="font-semibold">Cleanliness:</p>
-                            <div className="flex space-x-1">{renderBoxes(rating.cleanliness)}</div>
+                            <div className="flex space-x-1 max-[350px]:space-x-[1px]">{renderBoxes(rating.cleanliness)}</div>
                           </div>
-                          <p><strong>Facilities:</strong> {rating.facilities} / 5</p>
-                          <p><strong>Location:</strong> {rating.location} / 5</p>
-                          <p><strong>Safety:</strong> {rating.safety} / 5</p>
-                          <p><strong>Staff:</strong> {rating.staff} / 5</p>
-                          <p><strong>Cleanliness:</strong> {rating.cleanliness} / 5</p>
+                         
                         </div>
                       </div>
                     </div>
