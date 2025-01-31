@@ -127,6 +127,45 @@ const HospitalDetails = ({ data, BASE_URL }) => {
     const average = (facilities + location + safety + staff + cleanliness) / 5;
     setOverallRating(parseFloat(average.toFixed(1))); // Rounded to one decimal
   };
+
+  // Determine the background color based on the rating range
+  const getBgColor = (rating) => {
+    if (rating >= 0 && rating <= 1) return "bg-gray-300";
+    if (rating > 1 && rating <= 2) return "bg-orange-300";
+    if (rating > 2 && rating <= 3) return "bg-yellow-300"; //yellow3
+    if (rating > 3 && rating <= 4) return "bg-green-300";
+    if (rating > 4 && rating <= 5) return "bg-green-500";
+    return "bg-gray-200"; // Fallback color
+  };
+
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+
+    // Map of month names
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    // Get the day, month, and year
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+
+    // Determine the suffix for the day
+    const suffix =
+      day % 10 === 1 && day !== 11
+        ? "st"
+        : day % 10 === 2 && day !== 12
+          ? "nd"
+          : day % 10 === 3 && day !== 13
+            ? "rd"
+            : "th";
+
+    // Return the formatted date
+    return `${month} ${day}${suffix}, ${year}`;
+  }
+
+
+
   console.log(isLoggedIn)
   return (
     <div className="p-6 md:px-20 md:pt-12">
@@ -161,7 +200,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
                   </div>
                   {/* <p className='flex flex-col text-center'><span className='text-4xl font-bold'>{average(ratings.map(r => r.overallRating))}</span><span className='text-gray-400'>Overall Rating</span></p> */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6">
-       
+
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 md:gap-6">
                         <FaTools className="text-blue-500 md:text-3xl" />
@@ -196,7 +235,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
                     {/* Cleanliness */}
                     <div className="flex items-center justify-between md:gap-4">
                       <div className="flex items-center gap-2 md:gap-6">
-                        <FaBroom className="text-blue-500 md:text-3xl"/>
+                        <FaBroom className="text-blue-500 md:text-3xl" />
                         <span className='text-sm md:text-lg'>Cleanliness</span>
                       </div>
                       <span className="font-bold text-blue-600 md:text-2xl bg-customGreen px-2 py-[1px] md:px-4 md:py-2">{average(ratings.map((r) => r.cleanliness))}</span>
@@ -205,19 +244,29 @@ const HospitalDetails = ({ data, BASE_URL }) => {
                 </div>
               )}
             </div>
-            <h3>{ratings.length} Ratings</h3>
-            {ratings.map((rating, index) => (
-              <div key={index} className="border p-4 mb-4">
-                <p><strong>Overall Rating:</strong> {rating.overallRating} / 5</p>
-                <p><strong>Date:</strong> {new Date(rating.dateAdded).toLocaleDateString()}</p>
-                <p><strong>Facilities:</strong> {rating.facilities} / 5</p>
-                <p><strong>Location:</strong> {rating.location} / 5</p>
-                <p><strong>Safety:</strong> {rating.safety} / 5</p>
-                <p><strong>Staff:</strong> {rating.staff} / 5</p>
-                <p><strong>Cleanliness:</strong> {rating.cleanliness} / 5</p>
-                <p><strong>Comment:</strong> {rating.comments}</p>
+            <h3 className='mt-4 font-bold md:text-xl'>{ratings.length} Ratings</h3>
+            <div className="space-y-4">
+            {ratings.slice(0, visibleDoctorsCount).map((rating, index) => (
+              <div key={index} className="relative flex items-center md:gap-4 px-2 py-6 md:p-4 rounded bg-gray-100 lg:max-w-[70vw] text-[9pt] md:text-[12pt]">
+                <div className="text-[9pt] md:text-[11pt] flex flex-col items-center px-2">  Quality <span className={`${ratings.length > 0 ? `${getBgColor(rating.overallRating)} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{rating.overallRating}</span></div>
+                <div>
+                  <p className='absolute right-3 top-2'>{formatDate(new Date(rating.dateAdded).toLocaleDateString())}</p>
+                  <p><strong>Facilities:</strong> {rating.facilities} / 5</p>
+                  <p><strong>Location:</strong> {rating.location} / 5</p>
+                  <p><strong>Safety:</strong> {rating.safety} / 5</p>
+                  <p><strong>Staff:</strong> {rating.staff} / 5</p>
+                  <p><strong>Cleanliness:</strong> {rating.cleanliness} / 5</p>
+                  <p><strong>Comment:</strong> {rating.comments}</p>
+                </div>
               </div>
             ))}
+            </div>
+            <button
+              onClick={handleShowMore}
+              className="mt-4 p-2 bg-blue-500 text-white rounded w-[100px]"
+            >
+              Show More
+            </button>
           </div>
         </>
       )
