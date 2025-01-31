@@ -182,8 +182,15 @@ const HospitalDetails = ({ data, BASE_URL }) => {
     const renderBoxes = (value) => {
       return Array.from({ length: 5 }, (_, i) => {
         const isFilled = i < value; // Determine if the box is filled
+        const getbgColor=()=>{
+          if (value < 2) return "bg-red-300";
+          if (value < 3) return "bg-red-300";
+          if (value < 4) return "bg-yellow-300";
+          if (value < 5) return "bg-green-300";          
+          return "bg-green-500";
+        }
         const classes = `
-          ${isFilled ? "bg-green-400" : "bg-gray-200"}
+          ${isFilled ? getbgColor() : "bg-gray-200"}
           w-6 max-[320px]:w-4 md:w-8 h-2 md:h-4
           ${i === 0 ? "rounded-l-lg" : ""} 
           ${i === 4 ? "rounded-r-lg" : ""}
