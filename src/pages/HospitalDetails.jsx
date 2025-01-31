@@ -151,58 +151,53 @@ const HospitalDetails = ({ data, BASE_URL }) => {
       {activity == 'ratings' && (
         <>
           <div className=''>
-            <div className='border border-red-500 flex flex-col md:flex-row'>
+            <div className='flex flex-col md:flex-row'>
               {/* <h2 className="text-xl font-bold">General Ratings</h2> */}
               {ratings.length > 0 && (
-                <div className="p-4 border border-gray-200 rounded-lg shadow-md bg-white">
+                <div className="max-md:max-w-[330px] md:flex md:items-center md:gap-16 p-4 md:p-8 border border-gray-200 rounded-lg shadow-md bg-white">
                   <div className="text-center mb-6"> {/*flex flex-col*/}
-                    <h2 className="text-4xl font-bold">{average(ratings.map((r) => r.overallRating))}</h2>
+                    <h2 className="text-4xl md:text-8xl font-bold">{average(ratings.map((r) => r.overallRating))}</h2>
                     <p className="text-gray-400">Overall Quality</p>
                   </div>
                   {/* <p className='flex flex-col text-center'><span className='text-4xl font-bold'>{average(ratings.map(r => r.overallRating))}</span><span className='text-gray-400'>Overall Rating</span></p> */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* <p>Facilities: {average(ratings.map(r => r.facilities))} / 5</p>
-                    <p>Location: {average(ratings.map(r => r.location))} / 5</p>
-                    <p>Safety: {average(ratings.map(r => r.safety))} / 5</p>
-                    <p>Staff: {average(ratings.map(r => r.staff))} / 5</p>
-                    <p>Cleanliness: {average(ratings.map(r => r.cleanliness))} / 5</p> */}
-
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6">
+       
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <FaTools className="text-blue-500" />
-                        <span>Facilities</span>
+                      <div className="flex items-center gap-2 md:gap-6">
+                        <FaTools className="text-blue-500 md:text-3xl" />
+                        <span className='text-sm md:text-lg'>Facilities</span>
                       </div>
                       <span className="font-bold text-blue-600">{average(ratings.map((r) => r.facilities))}</span>
                     </div>
                     {/* Location */}
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <FaMapMarkerAlt className="text-blue-500" />
-                        <span>Location</span>
+                      <div className="flex items-center gap-2 md:gap-6">
+                        <FaMapMarkerAlt className="text-blue-500 md:text-3xl" />
+                        <span className='text-sm md:text-lg'>Location</span>
                       </div>
                       <span className="font-bold text-blue-600">{average(ratings.map((r) => r.location))}</span>
                     </div>
                     {/* Safety */}
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <FaShieldAlt className="text-blue-500" />
-                        <span>Safety</span>
+                      <div className="flex items-center gap-2 md:gap-6">
+                        <FaShieldAlt className="text-blue-500 md:text-3xl" />
+                        <span className='text-sm md:text-lg'>Safety</span>
                       </div>
                       <span className="font-bold text-blue-600">{average(ratings.map((r) => r.safety))}</span>
                     </div>
                     {/* Staff */}
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <FaUserMd className="text-blue-500" />
-                        <span>Staff</span>
+                      <div className="flex items-center gap-2 md:gap-6">
+                        <FaUserMd className="text-blue-500 md:text-3xl" />
+                        <span className='text-sm md:text-lg'>Staff</span>
                       </div>
                       <span className="font-bold text-blue-600">{average(ratings.map((r) => r.staff))}</span>
                     </div>
                     {/* Cleanliness */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <FaBroom className="text-blue-500" />
-                        <span>Cleanliness</span>
+                    <div className="flex items-center justify-between md:gap-4">
+                      <div className="flex items-center gap-2 md:gap-6">
+                        <FaBroom className="text-blue-500 md:text-3xl"/>
+                        <span className='text-sm md:text-lg'>Cleanliness</span>
                       </div>
                       <span className="font-bold text-blue-600">{average(ratings.map((r) => r.cleanliness))}</span>
                     </div>
