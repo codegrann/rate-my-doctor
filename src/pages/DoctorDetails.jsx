@@ -355,10 +355,10 @@ const DoctorDetails = ({ data, BASE_URL }) => {
       <h2 className="text-lg sm:text-xl font-semibold mt-6 md:mt-12">User Ratings</h2>
       <div className="space-y-4 text-[11pt] md:text-[13pt]">
         {ratings.slice(0, visibleRatings).map((rating, index) => (
-          <div key={index} className="relative flex items-center md:gap-4 px-2 py-6 md:p-4 rounded shadow bg-gray-100 lg:max-w-[70vw]">
+          <div key={index} className="relative flex md:gap-4 px-2 py-6 md:p-4 rounded shadow bg-gray-100 lg:max-w-[70vw]">
             <div className="text-[9pt] md:text-[11pt] flex flex-col items-center px-2">  QUALITY <span className={`${ratings.length > 0 ? `${getBgColor(rating.overallRating)} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{rating.overallRating}.0</span></div>
             <div className='text-[9pt] md:text-[11pt]'>
-              <p className='absolute right-3 top-2'>{formatDate(new Date(rating.date).toLocaleDateString())}</p>
+              <p className='absolute right-3 top-2 text-gray-500'>{formatDate(new Date(rating.date).toLocaleDateString())}</p>
               {/* <p>Overall Rating: {rating.overallRating}</p> */}
               <p><span className='text-[12pt] md:font-bold'>O</span>rganized & presentable: <span className='text-orange-400'>{rating.wasAwesome}/5</span></p>
               <p><span className='text-[12pt] md:font-bold'>G</span>entleness: <span className='text-orange-400'>{rating.gentleness}/5</span></p>

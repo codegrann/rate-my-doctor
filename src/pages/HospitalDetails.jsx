@@ -247,16 +247,16 @@ const HospitalDetails = ({ data, BASE_URL }) => {
             <h3 className='mt-4 font-bold md:text-xl'>{ratings.length} Ratings</h3>
             <div className="space-y-4">
             {ratings.slice(0, visibleDoctorsCount).map((rating, index) => (
-              <div key={index} className="relative flex items-center md:gap-4 px-2 py-6 md:p-4 rounded bg-gray-100 lg:max-w-[70vw] text-[9pt] md:text-[12pt]">
+              <div key={index} className="relative flex md:gap-4 px-2 py-6 md:p-4 rounded bg-gray-100 lg:max-w-[70vw] text-[9pt] md:text-[12pt]">
                 <div className="text-[9pt] md:text-[11pt] flex flex-col items-center px-2">  Quality <span className={`${ratings.length > 0 ? `${getBgColor(rating.overallRating)} font-bold text-lg w-[60px] h-14 flex justify-center items-center` : 'font-normal text-[8pt] text-gray-400 my-2 w-full flex justify-center items-center'}`}>{rating.overallRating}</span></div>
-                <div>
-                  <p className='absolute right-3 top-2'>{formatDate(new Date(rating.dateAdded).toLocaleDateString())}</p>
+                <div className='md:py-2'>
+                  <p className='absolute right-3 top-2 text-gray-500'>{formatDate(new Date(rating.dateAdded).toLocaleDateString())}</p>
+                  <p>{rating.comments}</p>
                   <p><strong>Facilities:</strong> {rating.facilities} / 5</p>
                   <p><strong>Location:</strong> {rating.location} / 5</p>
                   <p><strong>Safety:</strong> {rating.safety} / 5</p>
                   <p><strong>Staff:</strong> {rating.staff} / 5</p>
                   <p><strong>Cleanliness:</strong> {rating.cleanliness} / 5</p>
-                  <p><strong>Comment:</strong> {rating.comments}</p>
                 </div>
               </div>
             ))}
