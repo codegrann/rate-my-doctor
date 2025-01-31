@@ -7,7 +7,7 @@ import { useModal } from './hooks/ModalContext';
 function Layout({setIsLoggedIn, isLoggedIn}) {
   const {isModalOpen}=useModal();
   return (
-    <div className='overflow-x-hidden'>
+    <div className='overflow-x-hidden text-customBlack'>
       {!isModalOpen &&<div className='h-[65px] bg-white shadow-lg'><Navbar/></div>}
       <div className='min-h-[80vh]'>
       <Outlet /> {/* This renders the nested route components */}

@@ -289,7 +289,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
                       <p className='absolute right-3 top-2 text-gray-500'>{formatDate(new Date(rating.dateAdded).toLocaleDateString())}</p>
                       <p>{rating.comments}</p>
                       <div>
-                        <div className="flex space-x-1 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
+                        <div className="flex space-x-1 grid grid-cols-1 md:grid-cols-2 gap-1 md:gap-4 mt-2">
                           <div className="flex items-center justify-between space-x-2">
                             <p className="font-semibold">Facilities:</p>
                             <div className="flex space-x-[3px] max-[350px]:space-x-[1px] rounded">{renderBoxes(rating.facilities)}</div>

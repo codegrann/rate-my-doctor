@@ -8,7 +8,9 @@ module.exports = {
       colors:{
         customGreen: 'rgb(127, 246, 195)',
         customBlack: 'rgb(21, 21, 21)',
-      }
+      },
+      fontFamily: {
+        montserrat: ['Montserrat', 'serif'],      },
     },
   },
   plugins: [],
