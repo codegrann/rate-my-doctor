@@ -20,7 +20,7 @@ function WhyJoinUs() {
                     당신의 이야기와 경험은 대한민국 의료의 새로운 기준이 됩니다
                     {/* Your story and experience will become a new standard for medical care in Korea. */}
                 </p>
-                { !isLoggedIn && <button  className="mt-6 px-6 py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600">
+                { !isLoggedIn && <button  className="font-sans mt-6 px-6 py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600">
                     <Link to={'/signup'}>
                         회원가입
                         {/* Join the Membership */}

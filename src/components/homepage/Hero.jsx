@@ -32,7 +32,7 @@ const Hero = ({searchType, setSearchType, searchQuery, setSearchQuery}) => {
 
                 {/* Input Field */}
                 <div className="relative mt-6">
-                    <span className="absolute inset-y-0 left-3 md:left-16 flex items-center text-gray-900 text-2xl w-[22px]">
+                    <span className="absolute inset-y-0 left-3 md:left-14 flex items-center text-gray-900 text-2xl w-[22px]">
                         <FaStethoscope/>
                     </span>
                     <input

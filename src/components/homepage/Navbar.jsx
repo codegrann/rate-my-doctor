@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoLogOut } from "react-icons/io5";
 
@@ -66,66 +66,66 @@ const Navbar = () => {
       </div>
 
       {/* Right: Buttons */}
-      { isLoggedIn ? 
-         <div title="logout" className="hidden sm:flex space-x-2 hover:cursor-pointer">
-         <IoLogOut className="my-auto" size={24} onClick={handleLogout}/>
- 
-       </div>
-       :
-      <div className="hidden sm:flex space-x-2">
-      <Link
-        title="login"
-        to="/login"
-        className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded hover:bg-gray-100"
-      >
-        로그인  {/*Log In*/}
-      </Link>
-      <Link
-        title="sign up"
-        to="/signup"
-        className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600"
-      >
-        회원가입 {/*Join the Membership*/}
-      </Link>
-      </div>
-      
+      {isLoggedIn ?
+        <div title="logout" className="hidden sm:flex space-x-2 hover:cursor-pointer">
+          <IoLogOut className="my-auto" size={24} onClick={handleLogout} />
+
+        </div>
+        :
+        <div className="hidden sm:flex space-x-2 font-sans">
+          <Link
+            title="login"
+            to="/login"
+            className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded hover:bg-gray-100"
+          >
+            로그인  {/*Log In*/}
+          </Link>
+          <Link
+            title="sign up"
+            to="/signup"
+            className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600"
+          >
+            회원가입 {/*Join the Membership*/}
+          </Link>
+        </div>
+
       }
-  
-        
+
+
       {/* Hamburger Menu (visible on small screens only) */}
       <div className="sm:hidden">
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="text-gray-600 hover:text-blue-500"
         >
-          {isMenuOpen ? <HiX size={28}/> : <HiMenu size={28} />} 
+          {isMenuOpen ? <HiX size={28} /> : <HiMenu size={28} />}
         </button>
         {/* Dropdown menu (toggle visibility) */}
         {isMenuOpen && (
           isLoggedIn ?
-          <div className="absolute right-0 top-16 z-[100] flex flex-col gap-4 bg-white shadow-lg rounded p-4">
-          <IoLogOut className="my-auto" size={24} onClick={handleLogout}/>
-          </div>
-          :
-          <div className="absolute right-0 top-16 z-[100] flex flex-col gap-4 bg-white shadow-lg rounded p-4">
-            <Link
-              to="/login"
-              className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              로그인
-              {/* Log In */}
-            </Link>
-            <Link
-              to="/signup"
-              className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-white bg-blue-500"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              회원가입
-              {/* Join the Membership */}
-            </Link>
-            
-          </div>
+            <div className="absolute right-0 top-16 z-[100] flex flex-col gap-4 bg-white shadow-lg rounded p-4">
+              <IoLogOut className="my-auto" size={24} onClick={handleLogout} />
+            </div>
+            :
+            <div className="font-sans absolute right-0 top-16 z-[100] flex flex-col gap-4 bg-white shadow-lg rounded p-4">
+              <Link
+                to="/login"
+                className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                로그인
+                {/* Log In */}
+              </Link>
+              <Link
+                to="/signup"
+                className="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded text-white bg-blue-500"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                회원가입
+                {/* Join the Membership */}
+              </Link>
+
+            </div>
         )}
       </div>
     </nav>

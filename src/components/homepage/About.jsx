@@ -25,7 +25,7 @@ function About() {
                 <div className="md:w-1/2 md:pr-8 text-center md:text-left">
                     <h3 className="text-2xl font-bold">Our Mission</h3>
                     <p className="mt-4 text-gray-800">
-                    병원을 찾는 모든 사람들이 Doctor Haus (닥터하우스)를 통해 올바른 의료 선택을 하고, 투명한 의료 정보에 대한 접근 권리를 보장받을 수 있다고 믿습니다. 이를 실현하는 것이 저희의 사명이자 미션입니다.
+                    병원을 찾는 모든 사람들이 Doctor Haus <span className='font-sans'>(닥터하우스)</span>를 통해 올바른 의료 선택을 하고, 투명한 의료 정보에 대한 접근 권리를 보장받을 수 있다고 믿습니다. 이를 실현하는 것이 저희의 사명이자 미션입니다.
                         {/* Our mission is to revolutionize medical care through transparency, trust, and community-driven feedback. By connecting patients with hospitals and doctors they can trust, we aim to set a new standard for healthcare services. */}
                     </p>
                 </div>
