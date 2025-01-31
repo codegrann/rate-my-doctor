@@ -167,10 +167,10 @@ const HospitalDetails = ({ data, BASE_URL }) => {
     // Helper function to render the boxes dynamically
     const renderBoxes = (value) => {
       const filledBoxes = Array.from({ length: value }, (_, i) => (
-        <div key={i} className="bg-green-400 w-6 max-[320px]:w-4 h-2 md:h-4"></div>
+        <div key={i} className="bg-green-400 w-6 max-[320px]:w-4 md:w-8 h-2 md:h-4"></div>
       ));
       const emptyBoxes = Array.from({ length: 5 - value }, (_, i) => (
-        <div key={i} className="bg-gray-200 w-6 max-[320px]:w-4 h-2 md:h-4"></div>
+        <div key={i} className="bg-gray-200 w-6 max-[320px]:w-4 md:w-8 h-2 md:h-4"></div>
       ));
       return [...filledBoxes, ...emptyBoxes];
     };

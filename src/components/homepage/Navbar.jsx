@@ -67,19 +67,21 @@ const Navbar = () => {
 
       {/* Right: Buttons */}
       { isLoggedIn ? 
-         <div className="hidden sm:flex space-x-2 hover:cursor-pointer">
+         <div title="logout" className="hidden sm:flex space-x-2 hover:cursor-pointer">
          <IoLogOut className="my-auto" size={24} onClick={handleLogout}/>
  
        </div>
        :
       <div className="hidden sm:flex space-x-2">
       <Link
+        title="login"
         to="/login"
         className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded hover:bg-gray-100"
       >
         로그인  {/*Log In*/}
       </Link>
       <Link
+        title="sign up"
         to="/signup"
         className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded hover:bg-blue-600"
       >
