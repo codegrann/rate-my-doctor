@@ -165,15 +165,34 @@ const HospitalDetails = ({ data, BASE_URL }) => {
   }
 
     // Helper function to render the boxes dynamically
+    // const renderBoxes = (value) => {
+    //   const filledBoxes = Array.from({ length: value }, (_, i) => (
+    //     <div key={`filled-${i}`} className={`bg-green-400 w-6 max-[320px]:w-4 md:w-8 h-2 md:h-4 ${
+    //       i === 0 ? "rounded-l-lg" : i === value - 1 ? "rounded-r-lg" : ""
+    //     }`}></div>
+    //   ));
+    //   const emptyBoxes = Array.from({ length: 5 - value }, (_, i) => (
+    //     <div key={`empty-${i}`} className={`bg-gray-200 w-6 max-[320px]:w-4 md:w-8 h-2 md:h-4 ${
+    //       i === 0 && value === 0 ? "rounded-l-lg" : i === 4 - value ? "rounded-r-lg" : ""
+    //     }`}></div>
+    //   ));
+    //   return [...filledBoxes, ...emptyBoxes];
+    // };
+
     const renderBoxes = (value) => {
-      const filledBoxes = Array.from({ length: value }, (_, i) => (
-        <div key={i} className="bg-green-400 w-6 max-[320px]:w-4 md:w-8 h-2 md:h-4"></div>
-      ));
-      const emptyBoxes = Array.from({ length: 5 - value }, (_, i) => (
-        <div key={i} className="bg-gray-200 w-6 max-[320px]:w-4 md:w-8 h-2 md:h-4"></div>
-      ));
-      return [...filledBoxes, ...emptyBoxes];
+      return Array.from({ length: 5 }, (_, i) => {
+        const isFilled = i < value; // Determine if the box is filled
+        const classes = `
+          ${isFilled ? "bg-green-400" : "bg-gray-200"}
+          w-6 max-[320px]:w-4 md:w-8 h-2 md:h-4
+          ${i === 0 ? "rounded-l-lg" : ""} 
+          ${i === 4 ? "rounded-r-lg" : ""}
+        `;
+    
+        return <div key={i} className={classes}></div>;
+      });
     };
+    
 
     console.log(isLoggedIn)
 
@@ -266,23 +285,23 @@ const HospitalDetails = ({ data, BASE_URL }) => {
                         <div className="flex space-x-1 grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-2">
                           <div className="flex items-center space-x-2">
                             <p className="font-semibold">Facilities:</p>
-                            <div className="flex space-x-1 max-[350px]:space-x-[1px] rounded">{renderBoxes(rating.facilities)}</div>
+                            <div className="flex space-x-[3px] max-[350px]:space-x-[1px] rounded">{renderBoxes(rating.facilities)}</div>
                           </div>
                           <div className="flex items-center space-x-2">
                             <p className="font-semibold">Location:</p>
-                            <div className="flex space-x-1 max-[350px]:space-x-[1px]">{renderBoxes(rating.location)}</div>
+                            <div className="flex space-x-[3px] max-[350px]:space-x-[1px]">{renderBoxes(rating.location)}</div>
                           </div>
                           <div className="flex items-center space-x-2">
                             <p className="font-semibold">Safety:</p>
-                            <div className="flex space-x-1 max-[350px]:space-x-[1px]">{renderBoxes(rating.safety)}</div>
+                            <div className="flex space-x-[3px] max-[350px]:space-x-[1px]">{renderBoxes(rating.safety)}</div>
                           </div>
                           <div className="flex items-center space-x-2">
                             <p className="font-semibold">Staff:</p>
-                            <div className="flex space-x-1 max-[350px]:space-x-[1px]">{renderBoxes(rating.staff)}</div>
+                            <div className="flex space-x-[3px] max-[350px]:space-x-[1px]">{renderBoxes(rating.staff)}</div>
                           </div>
                           <div className="flex items-center space-x-2">
                             <p className="font-semibold">Cleanliness:</p>
-                            <div className="flex space-x-1 max-[350px]:space-x-[1px]">{renderBoxes(rating.cleanliness)}</div>
+                            <div className="flex space-x-[3px] max-[350px]:space-x-[1px]">{renderBoxes(rating.cleanliness)}</div>
                           </div>
                          
                         </div>
