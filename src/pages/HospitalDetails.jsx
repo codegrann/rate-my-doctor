@@ -204,8 +204,8 @@ const HospitalDetails = ({ data, BASE_URL }) => {
     console.log(isLoggedIn)
 
     return (
-      <div className="p-6 max-[350px]:px-4 md:px-20 md:pt-12">
-        <h1 className="text-2xl md:text-4xl font-bold mb-4">{hospitalName}</h1>
+      <div className="p-6 max-[350px]:px-4 md:px-20 lg:px-28 md:pt-12 font-montserrat">
+        <h1 className="text-2xl md:text-4xl font-bold mb-4 font-sans">{hospitalName}</h1>
         {isLoggedIn ?
           <button
             onClick={openModal}
@@ -319,7 +319,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
               </div>
               <button
                 onClick={handleShowMore}
-                className="mt-4 p-2 bg-blue-500 text-white rounded w-[100px]"
+                className="mt-4 p-2 bg-blue-500 text-white rounded"
               >
                 Show More
               </button>
@@ -353,7 +353,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
                 {visibleDoctorsCount < filteredDoctors.length && (
                   <button
                     onClick={handleShowMore}
-                    className="mt-4 p-2 bg-blue-500 text-white rounded w-[100px]"
+                    className="mt-4 p-2 bg-blue-500 text-white rounded w-[120px]"
                   >
                     Show More
                   </button>

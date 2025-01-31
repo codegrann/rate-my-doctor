@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 
-import {DoctorCard, HospitalCard} from "../components/Index";
+import { DoctorCard, HospitalCard } from "../components/Index";
 
-const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, setSearchQuery, data, BASE_URL}) => {
+const SearchPage = ({ searchType, setSearchType, items, setItems, searchQuery, setSearchQuery, data, BASE_URL }) => {
   const [showMoreCount, setShowMoreCount] = useState(5);
-  const navigate=useNavigate()
+  const navigate = useNavigate()
 
 
   const handleSearchTypeChange = (e) => {
@@ -27,7 +27,7 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
 
   const getHospitalsFromDoctors = (doctors) => {
     const hospitalSet = new Set();
-  
+
     // Create a unique list of hospitals
     const hospitals = doctors.reduce((acc, doctor) => {
       if (!hospitalSet.has(doctor.hospitalName)) {
@@ -39,31 +39,33 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
       }
       return acc;
     }, []);
-  
+
     return hospitals;
   };
 
-   // Extract unique hospitals
-   const hospitalsData = getHospitalsFromDoctors(data);
+  // Extract unique hospitals
+  const hospitalsData = getHospitalsFromDoctors(data);
 
   //  console.log(hospitalsData)
-  
+
 
   const handleSearch = () => {
     let filteredResults;
 
-  if (searchType === "Doctor") {
-    // Filter doctors by name
-    filteredResults = data.filter((doctor) =>
-      doctor.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  } else if (searchType === "Hospital") {
+    if(!searchQuery) return;
 
-    // Filter hospitals by name
-    filteredResults = hospitalsData.filter((hospital) =>
-      hospital.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }
+    if (searchType === "Doctor") {
+      // Filter doctors by name
+      filteredResults = data.filter((doctor) =>
+        doctor.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    } else if (searchType === "Hospital") {
+
+      // Filter hospitals by name
+      filteredResults = hospitalsData.filter((hospital) =>
+        hospital.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
 
     // Navigate to results page with filtered results
     navigate("/results", { state: { results: filteredResults, searchType } });
@@ -71,12 +73,12 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-        handleSearch();
+      handleSearch();
     }
-};
+  };
 
   return (
-    <div className="p-4 py-10 md:px-28">
+    <div className="p-4 py-10 md:px-28 lg:px-[200px] font-montserrat">
       <div className="mb-4">
         {/* Dropdown */}
         <select
@@ -92,22 +94,23 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
       {/* Search Input */}
       <div className="flex gap-2">
         <div className="mb-4 w-[60%]">
-            <input
+          <input
             type="text"
             value={searchQuery}
             onChange={handleSearchChange}
             placeholder={`Search ${searchType}`}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded font-sans"
             onKeyDown={handleKeyDown}
-            />
+            required
+          />
         </div>
 
         {/* Search Button */}
         <button
-            onClick={handleSearch} // Call the search logic
-            className="px-2 h-10 bg-blue-500 text-white rounded"
+          onClick={handleSearch} // Call the search logic
+          className="px-2 h-10 bg-blue-500 text-white rounded"
         >
-            Search
+          Search
         </button>
 
       </div>
@@ -116,16 +119,16 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
       <div className="grid gap-4">
         {searchType === "Doctor"
           ? data.slice(0, showMoreCount).map((doctor) => (
-              <DoctorCard
-                key={uuidv4()}
-                name={doctor.name}
-                hospitalName={doctor.hospitalName}
-                department={doctor.department}
-                specialty={doctor.specialty}
-                BASE_URL={BASE_URL}
-                // rating={doctor.rating}
-              />
-            ))
+            <DoctorCard
+              key={uuidv4()}
+              name={doctor.name}
+              hospitalName={doctor.hospitalName}
+              department={doctor.department}
+              specialty={doctor.specialty}
+              BASE_URL={BASE_URL}
+            // rating={doctor.rating}
+            />
+          ))
           : hospitalsData.slice(0, showMoreCount).map((hospital) => (
             <HospitalCard
               key={uuidv4()} // Using hospitalName as a unique key
@@ -134,7 +137,7 @@ const SearchPage = ({searchType, setSearchType, items, setItems, searchQuery, se
               rating={hospital.rating || "N/A"}   // Default fallback for rating
             />
           ))}
-    
+
       </div>
 
       {/* Show More Button */}

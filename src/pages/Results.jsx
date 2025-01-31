@@ -11,8 +11,8 @@ const ResultsPage = ({BASE_URL}) => {
     const { results = [], searchType = "" } = location.state || {}; // Default values
 console.log(results)
   return (
-    <div className="p-4 py-10 md:px-28">
-      <h1 className="flex gap-4 items-center text-2xl font-bold mb-4">Search Results <a onClick={()=>navigate('/search')}><FaSearch className="text-gray-500 w-6 h-6 cursor-pointer"/></a></h1>
+    <div className="font-montserrat p-4 py-10 md:px-28 lg:px-[200px]">
+      <h1 className="flex gap-4 items-center text-2xl font-bold mb-4">Search Results <a onClick={()=>navigate('/search')}><FaSearch className="text-blue-500 w-6 h-6 cursor-pointer pb-[1px] border-b border-blue-600"/></a></h1>
       {results.length > 0 ? (
         <div className="grid gap-4">
           {searchType === "Doctor"
