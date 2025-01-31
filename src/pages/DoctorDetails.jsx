@@ -208,7 +208,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
       <div className='flex flex-col md:flex-row gap-6 md:gap-12'>
 
         <div className=' md:max-w-[50%] lg:max-w-md'>
-          <h1 className='flex'><span className='text-4xl font-bold'>{averageRating}</span><span className=''>/5</span></h1>
+          <h1 className='flex items-start'><span className='text-4xl font-bold'>{averageRating}</span><span className=''>/5</span></h1>
           <p className='text-sm md:text-lg mb-4'>Overall Quality Based on <b>{ratings.length} ratings</b></p>
           <h1 className="text-2xl md:text-3xl font-sans font-bold mb-4">{doctor.name}</h1>
           <p className="text-sm md:text-lg">Doctor in the <b>{doctor.department} department</b> at <b>{doctor.hospitalName}.</b> Specializes in <b>{doctor.specialty}.</b></p>

@@ -335,7 +335,7 @@ const HospitalDetails = ({ data, BASE_URL }) => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search doctors"
-              className="w-[60%] p-2 border rounded mb-4"
+              className="w-[60%] p-2 border rounded mb-4 font-sans"
             />
             {filteredDoctors.length > 0 ? (
               <div className="grid gap-4">
