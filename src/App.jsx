@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, Outlet} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link, Outlet} from 'react-router-dom';
 import Papa from 'papaparse';
 import * as XLSX from 'xlsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import * as Kakao from 'kakao-js-sdk'
 
+import { useAuth } from './hooks/AuthContext';
 Kakao.init('6ec9fb4811670e4bd219a26028bb3e5e');
 console.log('Kakao is inititialized:', Kakao.isInitialized())
 
@@ -39,7 +40,7 @@ function App() {
   // console.log(import.meta.env.GOOGLE_CLIENT_ID);
 
   // Authentication state
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, logout } = useAuth();
 
 
   useEffect(() => {
@@ -75,8 +76,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Homepage searchType={searchType} setSearchType={setSearchType} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>}/>
-          <Route path="login" element={<Login BASE_URL={BASE_URL}/>} />
-          <Route path="signup" element={<Signup BASE_URL={BASE_URL}/>} />
+          <Route path="login" element={isLoggedIn ? <Navigate to="/" replace /> :<Login BASE_URL={BASE_URL}/>} />
+          <Route path="signup" element={isLoggedIn ? <Navigate to="/" replace /> :<Signup BASE_URL={BASE_URL}/>} />
           <Route path="results" element={<ResultsPage searchType={searchType} setSearchType={setSearchType} BASE_URL={BASE_URL}/>} />
           <Route path="search" element={<SearchPage data={ddata} searchType={searchType} setSearchType={setSearchType} filteredItems={filteredItems} setFilteredItems={setFilteredItems} searchQuery={searchQuery} setSearchQuery={setSearchQuery} BASE_URL={BASE_URL}/>} />
           <Route path="hospital/:hospitalName" element={<HospitalDetails data={ddata} BASE_URL={BASE_URL}/>} />
