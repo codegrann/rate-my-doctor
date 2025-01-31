@@ -16,7 +16,7 @@ const Hero = ({searchType, setSearchType, searchQuery, setSearchQuery}) => {
 
     return (
         <section
-            className="relative flex flex-col items-center justify-center h-[75vh] text-center bg-cover bg-center px-2"
+            className="relative flex flex-col items-center justify-center h-[75vh] text-center bg-cover bg-center px-2 font-montserrat"
             style={{ backgroundImage: `url('/banner.jpg')`}} // Replace with your image URL
         >
             {/* Overlay for better text visibility */}
@@ -31,9 +31,9 @@ const Hero = ({searchType, setSearchType, searchQuery, setSearchQuery}) => {
                 </p>
 
                 {/* Input Field */}
-                <div className="relative mt-6">
+                <div className="relative mt-6 font-sans">
                     <span className="absolute inset-y-0 left-3 md:left-10 flex items-center text-gray-900 text-2xl w-[22px]">
-                        <FaStethoscope />
+                        <FaStethoscope className="border border-red-400"/>
                     </span>
                     <input
                         type="text"
