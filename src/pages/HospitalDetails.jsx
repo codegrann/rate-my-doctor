@@ -149,11 +149,12 @@ console.log(isLoggedIn)
 
       {activity=='ratings' && (
         <>
-        <div>
-          <h2 className="text-xl font-bold">General Ratings</h2>
+        <div className=''>
+          <div className='border border-red-500 flex flex-col md:flex-row'>
+          {/* <h2 className="text-xl font-bold">General Ratings</h2> */}
           {ratings.length > 0 && (
             <>
-              <p>Overall Rating: {average(ratings.map(r => r.overallRating))} / 5</p>
+              <p className='flex flex-col text-center'><span className='text-4xl font-bold'>{average(ratings.map(r => r.overallRating))}</span><span className='text-gray-400'>Overall Rating</span></p>
               <p>Facilities: {average(ratings.map(r => r.facilities))} / 5</p>
               <p>Location: {average(ratings.map(r => r.location))} / 5</p>
               <p>Safety: {average(ratings.map(r => r.safety))} / 5</p>
@@ -161,6 +162,7 @@ console.log(isLoggedIn)
               <p>Cleanliness: {average(ratings.map(r => r.cleanliness))} / 5</p>
             </>
           )}
+          </div>
           <h3>{ratings.length} Ratings</h3>
           {ratings.map((rating, index) => (
             <div key={index} className="border p-4 mb-4">
