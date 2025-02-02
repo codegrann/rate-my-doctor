@@ -26,9 +26,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-white w-full fixed z-[1000] shadow-lg font-montserrat">
+    <nav className="relative flex items-center justify-between p-4 bg-white w-full fixed z-[1000] shadow-lg font-montserrat">
       {/* Left: Social Media Icons */}
-      <div className="hidden sm:flex space-x-4">
+      {/*<div className="hidden sm:flex space-x-4">
         <a
           href="https://instagram.com"
           target="_blank"
@@ -53,7 +53,7 @@ const Navbar = () => {
         >
           <FaTiktok size={20} />
         </a>
-      </div>
+      </div> */ }
 
       {/* Center: Logo */}
       <div>
@@ -61,7 +61,8 @@ const Navbar = () => {
           to="/"
           className="text-2xl font-bold text-blue-500 hover:text-blue-600"
         >
-          RMD
+          {/*RMD*/}
+          <img src="/rmdLogo.png" className="border border-red-400 w-36 h- absolute"/>
         </Link>
       </div>
 
