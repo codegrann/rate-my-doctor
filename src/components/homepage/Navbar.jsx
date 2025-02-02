@@ -62,7 +62,7 @@ const Navbar = () => {
           className="text-2xl font-bold text-blue-500 hover:text-blue-600"
         >
           {/*RMD*/}
-          <img src="/rmdLogo.png" className="border border-red-400 w-36 h- absolute"/>
+          <img src="/rmdLogo.png" className="w-40 h- absolute top-[-28px] left-[-5px] rounded-b-full"/>
         </Link>
       </div>
 
