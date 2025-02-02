@@ -26,7 +26,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="relative flex items-center justify-between p-4 bg-white w-full fixed z-[1000] shadow-lg font-montserrat">
+    <nav className="fixed top-0 flex items-center justify-between p-4 bg-white w-full fixed z-[1000] shadow-lg font-montserrat">
       {/* Left: Social Media Icons */}
       {/*<div className="hidden sm:flex space-x-4">
         <a
@@ -62,7 +62,9 @@ const Navbar = () => {
           className="text-2xl font-bold text-blue-500 hover:text-blue-600"
         >
           {/*RMD*/}
-          <img src="/rmdLogo.png" className="w-32 md:w-40 absolute top-[-20px] md:top-[-28px] left-[-5px] rounded-b-full"/>
+          {/*<img src="/logo.png" className="w-32 md:w-40 absolute top-[-25px] md:top-[-28px] left-[-5px] rounded-b-full z-1000"/>*/}
+          <img src="/logo.png" className=" w-28 md:w-32 absolute top-[-2px] md:top-[5px] left-[-5px] md:left-[2px] rounded-r-[40px]"/>
+	{/*<div className="w-28 md:w-40 h-8 drop-shadow-[0_10px_10px_rgba(0,0,0,0.4)] rounded-b-full bg-white absolute top-16 md:top-[] left-[5px] z-0"></div>*/}
         </Link>
       </div>
 
