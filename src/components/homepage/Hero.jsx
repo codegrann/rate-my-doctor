@@ -16,7 +16,7 @@ const Hero = ({searchType, setSearchType, searchQuery, setSearchQuery}) => {
 
     return (
         <section
-            className="border border-green-500 font-montserrat relative flex flex-col items-center justify-center h-[90vh] text-center bg-cover bg-center px-2"
+            className="font-montserrat relative flex flex-col items-center justify-center h-[90vh] text-center bg-cover bg-center px-2"
             style={{ backgroundImage: `url('/banner.jpg')`}} // Replace with your image URL
         >
             {/* Overlay for better text visibility */}
