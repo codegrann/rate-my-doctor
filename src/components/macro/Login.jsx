@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types'
 import { GoogleLogin } from '@react-oauth/google';
 import KakaoLogin from 'react-kakao-login';
 
@@ -12,7 +13,7 @@ const Login = ({BASE_URL}) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const { isLoggedIn, login } = useAuth();
+  const { login } = useAuth();
 
 
 // handle auth with email and password
@@ -239,6 +240,10 @@ const handleKakaoSuccess = async (response) => {
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  BASE_URL: PropTypes.string.isRequired,
 };
 
 export default Login;
