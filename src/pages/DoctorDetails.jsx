@@ -68,11 +68,6 @@ const DoctorDetails = ({ data, BASE_URL }) => {
   // Determine the max count to scale the bar width
   const maxCount = Math.max(...Object.values(ratingDistribution));
 
-  // Color shades based on the number of ratings (higher = darker blue)
-  //  const getBarColor = (count) => {
-  // const intensity = Math.round((count / maxCount) * 255); // Scale intensity
-  // return `rgb(0, 0, ${intensity})`; // Varying blue shades
-  // };
   const calculateAverageRating = (ratingsData) => {
     if (ratingsData.length === 0) {
       setAverageRating(0);
@@ -134,7 +129,6 @@ const DoctorDetails = ({ data, BASE_URL }) => {
       department: doctor.department,
       specialty: doctor.specialty,
     };
-    console.log('form data', formDataToSubmit)
 
     fetch(`${BASE_URL}/doctor-ratings`, {
       method: 'POST',
@@ -145,12 +139,9 @@ const DoctorDetails = ({ data, BASE_URL }) => {
     })
       .then((response) => {
         response.json()
-        console.log('response', response)
       })
-      .then((data) => {
-        console.log("received data", data)
+      .then(() => {
         setIsModalOpen(false);
-        // alert('Rating submitted successfully!');
         toast.success('Submitted rating!!');
         window.location.reload();
       })
