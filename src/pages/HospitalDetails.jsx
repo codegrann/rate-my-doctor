@@ -17,28 +17,18 @@ const HospitalDetails = ({ data, BASE_URL }) => {
   const [visibleDoctorsCount, setVisibleDoctorsCount] = useState(5);
   const [activity, setActivity] = useState('ratings')
   const [ratings, setRatings] = useState([]);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [overallRating, setOverallRating] = useState(0);
 
   const navigate = useNavigate();
 
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, } = useAuth();
   const { isModalOpen, setIsModalOpen } = useModal();
 
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  // const refreshRatings = () => {
-  //   fetch(`/api/ratings?hospitalName=${hospitalName}`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       const sortedRatings = data.sort((a, b) => new Date(b.date) - new Date(a.date));  // Sort by latest date first
-  //       setRatings(sortedRatings); 
-  //     })
-  //     .catch((error) => console.error('Error fetching ratings:', error));
-  // };
-  // fetching ratings when page loads
+
   useEffect(() => {
     fetch(`${BASE_URL}/ratings/${hospitalName}`)
       .then((response) => response.json())
@@ -61,7 +51,6 @@ const HospitalDetails = ({ data, BASE_URL }) => {
 
   // alternate between doctors and ratings of a hospital
   const changePageView = (activity) => {
-    console.log(isLoggedIn)
     if (activity == 'ratings') {
       setActivity('ratings');
     } else if (activity == 'doctors') {
@@ -92,8 +81,6 @@ const HospitalDetails = ({ data, BASE_URL }) => {
       overallRating,
     };
 
-    console.log('form data', formData)
-    console.log('rating data', ratingData)
 
     fetch(`${BASE_URL}/ratings`, {
       method: 'POST',
@@ -103,11 +90,9 @@ const HospitalDetails = ({ data, BASE_URL }) => {
       body: JSON.stringify(ratingData),
     })
       .then((response) => {
-        console.log(response);
         response.json()
       })
-      .then((data) => {
-        console.log('Submitted rating:', data);
+      .then(() => {
         closeModal();
         toast.success('Submitted rating!!');
         window.location.reload();
@@ -164,20 +149,6 @@ const HospitalDetails = ({ data, BASE_URL }) => {
     return `${month} ${day}${suffix}, ${year}`;
   }
 
-    // Helper function to render the boxes dynamically
-    // const renderBoxes = (value) => {
-    //   const filledBoxes = Array.from({ length: value }, (_, i) => (
-    //     <div key={`filled-${i}`} className={`bg-green-400 w-6 max-[320px]:w-4 md:w-8 h-2 md:h-4 ${
-    //       i === 0 ? "rounded-l-lg" : i === value - 1 ? "rounded-r-lg" : ""
-    //     }`}></div>
-    //   ));
-    //   const emptyBoxes = Array.from({ length: 5 - value }, (_, i) => (
-    //     <div key={`empty-${i}`} className={`bg-gray-200 w-6 max-[320px]:w-4 md:w-8 h-2 md:h-4 ${
-    //       i === 0 && value === 0 ? "rounded-l-lg" : i === 4 - value ? "rounded-r-lg" : ""
-    //     }`}></div>
-    //   ));
-    //   return [...filledBoxes, ...emptyBoxes];
-    // };
 
     const renderBoxes = (value) => {
       return Array.from({ length: 5 }, (_, i) => {
@@ -201,7 +172,6 @@ const HospitalDetails = ({ data, BASE_URL }) => {
     };
     
 
-    console.log(isLoggedIn)
 
     return (
       <div className="p-6 max-[350px]:px-4 md:px-20 lg:px-28 md:pt-12 font-montserrat">
