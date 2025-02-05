@@ -1,11 +1,11 @@
-﻿import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, Link, Outlet} from 'react-router-dom';
+﻿import { React, useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Papa from 'papaparse';
-import * as XLSX from 'xlsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import * as Kakao from 'kakao-js-sdk'
+
 
 import { useAuth } from './hooks/AuthContext';
 Kakao.init('6ec9fb4811670e4bd219a26028bb3e5e');
@@ -40,7 +40,7 @@ function App() {
   // console.log(import.meta.env.GOOGLE_CLIENT_ID);
 
   // Authentication state
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn } = useAuth();
 
 
   useEffect(() => {
@@ -59,13 +59,6 @@ function App() {
       });
   }, []);
 
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token');
-  //   if (token) {
-  //     setIsLoggedIn(true);
-  //   } 
-  // }, []);
   
 
   return (

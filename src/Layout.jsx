@@ -4,7 +4,7 @@ import { Navbar, Footer } from './components/homepage/Index';
 
 import { useModal } from './hooks/ModalContext';
 
-function Layout({setIsLoggedIn, isLoggedIn}) {
+function Layout() {
   const {isModalOpen}=useModal();
   return (
     <div className='overflow-x-hidden text-customBlack'>
