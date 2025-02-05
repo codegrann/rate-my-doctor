@@ -21,8 +21,6 @@ const Login = ({BASE_URL}) => {
     e.preventDefault();
     setError("");
 
-    // console.log("Login attempted with", { email, password });
-
     if (!email || !password) {
       setError("Please fill out all fields");
       return;
@@ -35,28 +33,20 @@ const Login = ({BASE_URL}) => {
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
-      console.log(response)
-      console.log(data);
 
       if (response.ok) {
         const { token, email, userId } = data;
         localStorage.setItem('authToken', token);
         localStorage.setItem('userEmail', email); 
         localStorage.setItem('userId', userId); 
-        console.log(localStorage.getItem('authToken'))
-        console.log(localStorage.getItem('userEmail'))
-        console.log(localStorage.getItem('userId'))
         login()
-        // setIsLoggedIn(true)
-        // alert('Sign-in successful!');
-        // toast.success('Sign-in successful!');
         navigate('/')
       } else {
         setError(data.message);
         toast.error(error)
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.log('');
     }
     
   };
@@ -64,11 +54,9 @@ const Login = ({BASE_URL}) => {
   // handle auth with google
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
-      console.log('Google login successful', credentialResponse);
       const { credential } = credentialResponse;
   
       if (!credential) {
-        console.log('Google login failed: No credential found');
         return;
       }
   
@@ -82,9 +70,6 @@ const Login = ({BASE_URL}) => {
       });
   
       const data = await response.json();
-      console.log(response);
-      console.log(data)
-      console.log(data.token)
   
       if (response.ok && data.token) {
         // Handle successful login
@@ -92,36 +77,29 @@ const Login = ({BASE_URL}) => {
         localStorage.setItem('userEmail', data.email);
         localStorage.setItem('userId', data.userId);
         login();
-        // setIsLoggedIn(true);
         navigate('/');
-        // console.log('Sign-in successful!');
-        // toast.success('Sign-in successful!');
       } else {
         // Handle failure
         toast.error('Google Sign-in failed')
         console.log('Google Sign-in failed');
       }
     } catch (error) {
-      console.error('Error:', error);
-      console.log('An error occurred');
+      console.log('');
     }
   };
 
 // handle auth with kakao
 const handleKakaoSuccess = async (response) => {
   try {
-    console.log('Kakao login successful', response);
     
     // Extract the access token from the response
     const { response: kakaoResponse } = response;
     const accessToken = kakaoResponse?.access_token;
 
     if (!accessToken) {
-      console.log('Failed to retrieve access token.');
       return;
     }
     
-    console.log('Access Token:', accessToken);
     
     // Send the access token to your backend for verification
     const res = await fetch(`${BASE_URL}/auth/kakao`, {
@@ -133,28 +111,22 @@ const handleKakaoSuccess = async (response) => {
     });
 
     const data = await res.json();
-    console.log("res", res)
-    console.log("data", data)
     if (res.ok && data.token) {
       localStorage.setItem('authToken', data.token);
       localStorage.setItem('userEmail', data.email);
       localStorage.setItem('userId', data.userId);
       login();
-      // setIsLoggedIn(true);
       navigate('/');
-      // toast.success('Sign-in successful!');
     } else {
       toast.error(data.message || 'Kakao Sign-in failed.');
     }
   } catch (error) {
-    console.error('Kakao login error:', error);
     toast.error('Kakao login error.');
   }
 };
 
   
   const handleKakaoFailure = (error) => {
-    console.log('Kakao login failed:', error);
     toast.error('Kakao login failed');
   };
   

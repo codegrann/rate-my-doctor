@@ -25,7 +25,7 @@ const DoctorDetails = ({ data, BASE_URL }) => {
   });
   const navigate = useNavigate();
   const { isModalOpen, setIsModalOpen } = useModal();
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
     fetch(`${BASE_URL}/doctor-ratings/${doctorName}`)
