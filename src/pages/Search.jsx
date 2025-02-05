@@ -5,14 +5,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { DoctorCard, HospitalCard } from "../components/Index";
 
-const SearchPage = ({ searchType, setSearchType, items, setItems, searchQuery, setSearchQuery, data, BASE_URL }) => {
+const SearchPage = ({ searchType, setSearchType, searchQuery, setSearchQuery, data, BASE_URL }) => {
   const [showMoreCount, setShowMoreCount] = useState(5);
   const navigate = useNavigate()
 
 
   const handleSearchTypeChange = (e) => {
     setSearchType(e.target.value);
-    // setItems([]); // Reset items when type changes
     setShowMoreCount(5); // Reset showMoreCount
   };
 
