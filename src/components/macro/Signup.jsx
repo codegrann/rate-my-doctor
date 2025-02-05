@@ -50,8 +50,7 @@ const Signup = ({BASE_URL}) => {
       });
       const data = await response.json();
 
-      console.log(response)
-      console.log(data)
+      
       if (response.ok) {
         navigate('/login')
         toast.success('Registeration successful!');
@@ -60,13 +59,10 @@ const Signup = ({BASE_URL}) => {
           toast.error('Failed to sign in')            
         
       } else{
-        // alert('Sign-up successful!');
-        // window.location.reload();
         navigate('/login')
         toast.success('Registeration successful!');
       }
     } catch (error) {
-      console.error('Error:', error);
       toast.error(error)
     }
   };
@@ -74,11 +70,9 @@ const Signup = ({BASE_URL}) => {
    // handle auth with google
    const handleGoogleSuccess = async (credentialResponse) => {
     try {
-      console.log('Google login successful', credentialResponse);
       const { credential } = credentialResponse;
   
       if (!credential) {
-        console.log('Google login failed: No credential found');
         return;
       }
   
@@ -92,9 +86,6 @@ const Signup = ({BASE_URL}) => {
       });
   
       const data = await response.json();
-      console.log(response);
-      console.log(data)
-      console.log(data.token)
   
       if (response.ok && data.token) {
         // Handle successful login
@@ -102,18 +93,13 @@ const Signup = ({BASE_URL}) => {
         localStorage.setItem('userEmail', data.email);
         localStorage.setItem('userId', data.userId);
         login();
-        // setIsLoggedIn(true);
         navigate('/');
-        // console.log('Sign-in successful!');
-        // toast.success('Sign-in successful!');
       } else {
         // Handle failure
-        console.log('Google Sign-in failed');
         toast.error('Google Sign-in failed')
       }
     } catch (error) {
       console.error('Error:', error);
-      console.log('An error occurred');
       toast.error(error);
     }
   };
@@ -121,18 +107,15 @@ const Signup = ({BASE_URL}) => {
   // handle auth with kakao
 const handleKakaoSuccess = async (response) => {
   try {
-    console.log('Kakao login successful', response);
     
     // Extract the access token from the response
     const { response: kakaoResponse } = response;
     const accessToken = kakaoResponse?.access_token;
 
     if (!accessToken) {
-      console.log('Failed to retrieve access token.');
       return;
     }
     
-    console.log('Access Token:', accessToken);
     
     // Send the access token to your backend for verification
     const res = await fetch(`${BASE_URL}/auth/kakao`, {
@@ -144,35 +127,25 @@ const handleKakaoSuccess = async (response) => {
     });
 
     const data = await res.json();
-    console.log("res", res)
-    console.log("data", data)
     if (res.ok && data.token) {
       localStorage.setItem('authToken', data.token);
       localStorage.setItem('userEmail', data.email);
       localStorage.setItem('userId', data.userId);
       login();
-      // setIsLoggedIn(true);
       navigate('/');
-      // toast.success('Sign-in successful!');
     } else {
       toast.error(data.message || 'Kakao Sign-in failed.');
     }
   } catch (error) {
-    console.error('Kakao login error:', error);
     toast.error('Kakao login error.');
   }
 };
 
   
   const handleKakaoFailure = (error) => {
-    console.log('Kakao login failed:', error);
     toast.error('Kakao login failed');
   };
 
-  // const handleSocialSignUp = (provider) => {
-  //   // Placeholder for third-party sign-up integration
-  //   console.log(`Sign-Up with ${provider}`);
-  // };
 
   return (
     <div className="min-h-screen flex p-4 justify-center bg-gray-100 font-montserrat">
