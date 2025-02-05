@@ -13,8 +13,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoggedIn(!!token);
   }, []);
 
-  const login = (token) => {
-    // localStorage.setItem('authToken', token);
+  const login = () => {
     setIsLoggedIn(true);
     // window.location.reload();
     toast.success('Sign-in successful!');
