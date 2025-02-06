@@ -10,8 +10,22 @@ const SessionTimeout = () => {
   // const MAX_IDLE_TIME = 15 * 60 * 1000; // 15 minutes
   const MAX_IDLE_TIME = 1 * 60 * 1000; // 1 minutes
 
+    // Function to check if the session has expired
+    const checkSessionExpiry = () => {
+      const lastActiveTime = localStorage.getItem("lastActiveTime");
+      if (lastActiveTime) {
+        const elapsedTime = Date.now() - parseInt(lastActiveTime, 10);
+        if (elapsedTime >= MAX_IDLE_TIME) {
+          handleSessionExpiry();
+        }
+      }
+    };
+
+
   // Reset timer on user activity
   const resetTimer = () => {
+    localStorage.setItem("lastActiveTime", Date.now().toString()); // Store last active time
+
    if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
@@ -25,6 +39,7 @@ const SessionTimeout = () => {
   const handleSessionExpiry = () => {
     // Clear the session data (e.g., token)
     localStorage.removeItem('authToken');
+    localStorage.removeItem("lastActiveTime");
     // sessionStorage.removeItem('authToken');
 
     // Redirect to login page
@@ -35,10 +50,15 @@ const SessionTimeout = () => {
 
   // Track user activity (mouse move, click, keypress)
   useEffect(() => {
-      const handleActivity = () => resetTimer();
+    // Check session expiry when the user comes back to the tab
+    checkSessionExpiry();
+
+    const handleActivity = () => resetTimer();
     window.addEventListener('mousemove', handleActivity);
     window.addEventListener('keydown', handleActivity);
     window.addEventListener('click', handleActivity);
+    window.addEventListener("focus", checkSessionExpiry); // Check expiry when tab is focused again
+
 
     // Initialize the timer on component mount
     resetTimer();
@@ -48,6 +68,7 @@ const SessionTimeout = () => {
       window.removeEventListener('mousemove', handleActivity);
       window.removeEventListener('keydown', handleActivity);
       window.removeEventListener('click', handleActivity);
+      window.removeEventListener("focus", checkSessionExpiry);
       clearTimeout(timerRef.current);
     };
   }, []);
