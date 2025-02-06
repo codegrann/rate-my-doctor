@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SessionTimeout = () => {
-  const [timer, setTimer] = useState(null);
+  // const [timer, setTimer] = useState(null);
+    const timerRef = useRef(null);
   const navigate = useNavigate();
 
   // Define the maximum idle time before logout (in milliseconds)
@@ -11,16 +12,13 @@ const SessionTimeout = () => {
 
   // Reset timer on user activity
   const resetTimer = () => {
-    if (timer) {
-      clearTimeout(timer);
+   if (timerRef.current) {
+      clearTimeout(timerRef.current);
     }
 
-    // Set the new timer
-    const newTimer = setTimeout(() => {
+   timerRef.current = setTimeout(() => {
       handleSessionExpiry();
     }, MAX_IDLE_TIME);
-
-    setTimer(newTimer);
   };
 
   // Handle session expiry (logout user)
@@ -31,26 +29,28 @@ const SessionTimeout = () => {
 
     // Redirect to login page
     navigate('login');
-    alert('Session expired. Please log in again.');
+    window.location.reload();
+    // alert('Session expired. Please log in again.');
   };
 
   // Track user activity (mouse move, click, keypress)
   useEffect(() => {
-    window.addEventListener('mousemove', resetTimer);
-    window.addEventListener('keydown', resetTimer);
-    window.addEventListener('click', resetTimer);
+      const handleActivity = () => resetTimer();
+    window.addEventListener('mousemove', handleActivity);
+    window.addEventListener('keydown', handleActivity);
+    window.addEventListener('click', handleActivity);
 
     // Initialize the timer on component mount
     resetTimer();
 
     // Cleanup event listeners on unmount
     return () => {
-      window.removeEventListener('mousemove', resetTimer);
-      window.removeEventListener('keydown', resetTimer);
-      window.removeEventListener('click', resetTimer);
-      clearTimeout(timer);
+      window.removeEventListener('mousemove', handleActivity);
+      window.removeEventListener('keydown', handleActivity);
+      window.removeEventListener('click', handleActivity);
+      clearTimeout(timerRef.current);
     };
-  }, [timer]);
+  }, []);
 
   return null;
 };

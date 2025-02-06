@@ -6,10 +6,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import * as Kakao from 'kakao-js-sdk'
 
+Kakao.init('6ec9fb4811670e4bd219a26028bb3e5e');
+console.log('kakao initialized', Kakao.isInitialized)
+
 
 import { useAuth } from './hooks/AuthContext';
-Kakao.init('6ec9fb4811670e4bd219a26028bb3e5e');
-
 import { ModalProvider } from './hooks/ModalContext';
 
 import Homepage from './pages/Homepage'
