@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SessionTimeout = () => {
   const [timer, setTimer] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // Define the maximum idle time before logout (in milliseconds)
-  const MAX_IDLE_TIME = 15 * 60 * 1000; // 15 minutes
+  // const MAX_IDLE_TIME = 15 * 60 * 1000; // 15 minutes
+  const MAX_IDLE_TIME = 1 * 60 * 1000; // 1 minutes
 
   // Reset timer on user activity
   const resetTimer = () => {
@@ -26,10 +27,10 @@ const SessionTimeout = () => {
   const handleSessionExpiry = () => {
     // Clear the session data (e.g., token)
     localStorage.removeItem('authToken');
-    sessionStorage.removeItem('authToken');
+    // sessionStorage.removeItem('authToken');
 
     // Redirect to login page
-    history.push('/login');
+    navigate('login');
     alert('Session expired. Please log in again.');
   };
 

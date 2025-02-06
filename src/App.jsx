@@ -9,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { useAuth } from './hooks/AuthContext';
 Kakao.init('6ec9fb4811670e4bd219a26028bb3e5e');
-console.log('Kakao is inititialized:', Kakao.isInitialized())
 
 import { ModalProvider } from './hooks/ModalContext';
 
@@ -21,6 +20,7 @@ import ResultsPage from './pages/Results';
 import SearchPage from './pages/Search';
 import HospitalDetails from './pages/HospitalDetails';
 import DoctorDetails from './pages/DoctorDetails';
+import SessionTimeout from './utilities/SessionTimeout';
 
 function App() {
   const [ddata, setDdata] = useState([]);
@@ -66,6 +66,7 @@ function App() {
     <ModalProvider>
     <Router>
       <ToastContainer />
+      <SessionTimeout />
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Homepage searchType={searchType} setSearchType={setSearchType} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>}/>
