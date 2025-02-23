@@ -7,8 +7,8 @@ const SessionTimeout = () => {
   const navigate = useNavigate();
 
   // Define the maximum idle time before logout (in milliseconds)
-  // const MAX_IDLE_TIME = 15 * 60 * 1000; // 15 minutes
-  const MAX_IDLE_TIME = 1 * 60 * 1000; // 1 minutes
+  const MAX_IDLE_TIME = 15 * 60 * 1000; // 15 minutes
+  // const MAX_IDLE_TIME = 1 * 60 * 1000; // 1 minutes
 
     // Function to check if the session has expired
     const checkSessionExpiry = () => {
